@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	define("WEBAPP", 'ams');
+	define("WEBAPP", 'Asset Management System');
 	//$_SESSION[WEBAPP]=array();
 	function __autoload($class)
 	{
@@ -16,7 +16,6 @@
 	    $qEncoded      = base64_encode( mcrypt_encrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), $q, MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ) );
 	    return( $qEncoded );
 	}
-
 	function decryptIt( $q ) {
 	    $cryptKey  = 'JPB0rGtIn5UB1xG03efyCp';
 	    $qDecoded      = rtrim( mcrypt_decrypt( MCRYPT_RIJNDAEL_256, md5( $cryptKey ), base64_decode( $q ), MCRYPT_MODE_CBC, md5( md5( $cryptKey ) ) ), "\0");
@@ -64,7 +63,7 @@
 
 	function makeOptions($array,$placeholder){
 		$options="";
-		$options.="<option>{$placeholder}</option>";
+		$options.="<option value=''>{$placeholder}</option>";
 		foreach ($array as $row) {
 			list($value,$display) = array_values($row);
 				$options.="<option value='{$value}'>{$display}</option>";

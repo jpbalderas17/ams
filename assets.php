@@ -99,7 +99,7 @@
     $(document).ready(function() {
         $('#dataTables').DataTable({
                  "scrollY": true,
-                "scrollX": '600px'
+                "scrollX": true
         });
     });
     </script>
