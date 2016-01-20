@@ -61,12 +61,21 @@
 		require_once 'template/foot.php';
 	}
 
-	function makeOptions($array,$placeholder){
+	function makeOptions($array,$placeholder="",$checked_value=NULL){
 		$options="";
-		$options.="<option value=''>{$placeholder}</option>";
+		// if(!empty($placeholder)){
+			$options.="<option value=''>{$placeholder}</option>";
+		// }
 		foreach ($array as $row) {
 			list($value,$display) = array_values($row);
-				$options.="<option value='{$value}'>{$display}</option>";
+				if($checked_value!=NULL && $checked_value==$value){
+
+					$options.="<option value='".htmlspecialchars($value)."' checked>".htmlspecialchars($display)."</option>";
+				}
+				else
+				{
+					$options.="<option value='".htmlspecialchars($value)."'>".htmlspecialchars($display)."</option>";
+				}
 		}
 		return $options;
 	}

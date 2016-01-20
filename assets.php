@@ -57,7 +57,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $assets=$con->myQuery("SELECT asset_tag,serial_number,asset_name,model,asset_status,location,category,eol,notes,order_number,check_out_date,expected_check_in_date,id FROM qry_assets")->fetchAll(PDO::FETCH_ASSOC);
+                                            $assets=$con->myQuery("SELECT asset_tag,serial_number,asset_name,model,asset_status,location,category,eol,notes,order_number,check_out_date,expected_check_in_date,id FROM qry_assets WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
 
                                             foreach ($assets as $asset):
                                         ?>
@@ -67,8 +67,29 @@
                                                     if($key=='id'):
                                                 ?>
                                                     <td>
-                                                        <button class='btn btn-sm btn-warning'><span class='fa fa-pencil'></span></button>
-                                                        <button class='btn btn-sm btn-danger'><span class='fa fa-trash'></span></button>
+                                                        <?php
+                                                            if(empty($asset['check_out_date']) || $asset['check_out_date']=="0000-00-00"):
+                                                        ?>
+                                                            <a class='btn btn-sm btn-info' href='check_asset.php?id=<?php echo $value;?>&type=out'><span class='fa fa-arrow-right'></span> Check Out</a>
+                                                        <?php
+                                                            else:
+                                                        ?>
+                                                            <a class='btn btn-sm btn-info' href='check_asset.php?id=<?php echo $value;?>&type=in'><span class='fa fa-arrow-left'></span> Check In</a>
+                                                        <?php
+                                                            endif;
+                                                        ?>
+                                                        <a class='btn btn-sm btn-warning' href='frm_assets.php?id=<?php echo $value;?>'><span class='fa fa-pencil'></span></a>
+                                                        <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $value?>&t=a' onclick='return confirm("This asset will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                    </td>
+                                                <?php
+                                                    elseif($key=="check_out_date" || $key=="expected_check_in_date"):
+                                                ?>
+                                                    <td>
+                                                        <?php
+                                                            if($value!="0000-00-00"){
+                                                                echo htmlspecialchars($value);                                                                
+                                                            }
+                                                        ?>
                                                     </td>
                                                 <?php
                                                     else:
@@ -104,5 +125,6 @@
     });
     </script>
 <?php
+    Modal();
 	makeFoot();
 ?>

@@ -132,14 +132,16 @@
                             <a href="#" ><i class="fa fa-barcode fa-fw"></i> Assets<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level" >
                             	<?php
-                            		$asset_statuses=$con->myQuery("SELECT name FROM asset_status_labels ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
-                            		foreach ($asset_statuses as  $asset):
+                            		$navbar_asset_statuses=$con->myQuery("SELECT name FROM asset_status_labels ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
+                            		foreach ($navbar_asset_statuses as  $navbar_asset):
                             	?>
                             		<li>
-                                    	<a href="assets.php?status=<?php echo urlencode(htmlspecialchars($asset['name'])) ?>"><?php echo htmlspecialchars(($asset['name'])) ?></a>
+                                    	<a href="assets.php?status=<?php echo urlencode(htmlspecialchars($navbar_asset['name'])) ?>"><?php echo htmlspecialchars(($navbar_asset['name'])) ?></a>
                                 	</li>
                             	<?php
                             		endforeach;
+                                    unset($navbar_asset);
+                                    unset($navbar_asset_statuses);
                             	?>
                                 <li>
                                     <a href="assets.php">List All</a>

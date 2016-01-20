@@ -1,6 +1,4 @@
-<!-- Bootstrap Core JavaScript -->
-    
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
     <!-- Metis Menu Plugin JavaScript -->
     <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
@@ -14,7 +12,14 @@
     <script src="dist/js/sb-admin-2.js"></script>
 
 	<script type="text/javascript">
-  $('select').select2();
+  $('select').select2({
+        placeholder:$(this).data("placeholder")
+  });
+  $('select').each(function(index,element){
+    if(typeof $(element).data("selected") !== "undefined"){
+    $(element).val($(element).data("selected")).trigger("change");
+    }
+  });
 </script>
 </body>
 </html>

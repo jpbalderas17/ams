@@ -5,7 +5,22 @@
 		toLogin();
 		die();
 	}
-
+	if($_POST['type']<>"out" && $_POST['type']<>"in"){
+		redirect("assets.php");
+	}
+	switch ($_POST['type']) {
+		case 'out':
+			# code...
+			break;
+		case 'in':
+			# code...
+			break;
+		default:
+			# code...
+			break;
+	}
+	var_dump($_POST);
+	die;
 	if(!empty($_POST)){
 		//Validate form inputs
 		$inputs=$_POST;
