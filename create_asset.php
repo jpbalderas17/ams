@@ -17,9 +17,6 @@
 		if (empty($inputs['asset_status_id'])){
 			$errors.="Select a status for the asset. <br/>";
 		}
-		if (empty($inputs['asset_status_id'])){
-			$errors.="Select a status for the asset. <br/>";
-		} 
 
 		if( empty($inputs['purchase_cost'])){
 			$inputs['purchase_cost']=0;

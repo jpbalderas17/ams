@@ -73,20 +73,26 @@
                     <!-- /.dropdown-alerts -->
                 </li>
                 <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-plus fa-fw"></i>Create New  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-barcode fa-fw"></i> Asset</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-tint fa-fw"></i> Consumable</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-create new -->
-                </li>
+                <?php
+                    if($_SESSION[WEBAPP]['user']['user_type']==1 || $_SESSION[WEBAPP]['user']['user_type']==2):
+                ?>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-plus fa-fw"></i>Create New  <i class="fa fa-caret-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="frm_assets.php"><i class="fa fa-barcode fa-fw"></i> Asset</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-tint fa-fw"></i> Consumable</a>
+                            </li>
+                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User</a>
+                            </li>
+                        </ul>
+                        <!-- /.dropdown-create new -->
+                    </li>
+                <?php
+                    endif;
+                ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>Welcome, <?php echo $_SESSION[WEBAPP]['user']['first_name']?>  <i class="fa fa-caret-down"></i>
@@ -102,14 +108,23 @@
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
+                <?php
+                    if($_SESSION[WEBAPP]['user']['user_type']==1):
+                ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-wrench fa-fw"></i> Admin <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Admin Settings</a>
+                        <li><a href="asset_models.php"><i class="fa fa-user fa-fw"></i> Asset Models</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        <li><a href="asset_status_labels.php"><i class="fa fa-user fa-fw"></i> Asset Status Labels</a>
+                        </li>
+                        <li><a href="categories.php"><i class="fa fa-gear fa-fw"></i> Categories</a>
+                        </li>
+                        <li><a href="departments.php"><i class="fa fa-gear fa-fw"></i> Departments</a>
+                        </li>
+                        <li><a href="deprecations.php"><i class="fa fa-gear fa-fw"></i> Deprecations</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -117,6 +132,9 @@
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
+                <?php
+                    endif;
+                ?>
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
@@ -128,9 +146,15 @@
                         <li>
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+                        <?php
+                            if($_SESSION[WEBAPP]['user']['user_type']==1 || $_SESSION[WEBAPP]['user']['user_type']==2):
+                        ?>
                         <li >
                             <a href="#" ><i class="fa fa-barcode fa-fw"></i> Assets<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level" >
+                                    <li>
+                                        <a href="assets.php?status=Deployed">Deployed</a>
+                                    </li>
                             	<?php
                             		$navbar_asset_statuses=$con->myQuery("SELECT name FROM asset_status_labels ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
                             		foreach ($navbar_asset_statuses as  $navbar_asset):
@@ -146,6 +170,18 @@
                                 <li>
                                     <a href="assets.php">List All</a>
                                 </li>
+                                <li>
+                                    <a href="asset_models.php">Asset Models</a>
+                                </li>
+                                <li>
+                                    <a href="categories.php">Categories</a>
+                                </li>
+                                <li>
+                                    <a href="deleted_assets.php">Deleted</a>
+                                </li>
+                                <li>
+                                    <a href="asset_maintenances.php">Asset Maintenances</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -155,6 +191,13 @@
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> People</a>
                         </li>
+                        <?php
+                            endif;
+                        ?>
+
+                        <?php
+                            if($_SESSION[WEBAPP]['user']['user_type']!=4):
+                        ?>
                         <li>
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Reports<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -173,7 +216,9 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        
+                        <?php
+                            endif;
+                        ?>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

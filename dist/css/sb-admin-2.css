@@ -227,6 +227,13 @@ body {
 .dataTables_wrapper {
     position: relative;
     clear: both;
+
+}
+#dataTables{
+    width: 100% !important;
+}
+.dataTables_scrollHeadInner{
+    width: 100% !important;
 }
 
 table.dataTable thead .sorting,

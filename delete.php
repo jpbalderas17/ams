@@ -17,7 +17,10 @@
 				$table="assets";
 				$page="assets.php";
 				break;
-			
+			case 'c':
+				$table="categories";
+				$page="categories.php";
+				break;
 			default:
 				# code...
 				break;

@@ -87,7 +87,7 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Checkout To</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control' name='current_user_id' data-placeholder="Select User" >
+                                        <select class='form-control' name='user_id' data-placeholder="Select User" >
                                             <?php
                                                 echo makeOptions($users);
                                             ?>
@@ -103,7 +103,7 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Expected Checkin Date</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <input type='date' name='expected_checkout_date' class='form-control' value=''>
+                                        <input type='date' name='expected_checkin_date' class='form-control' value=''>
                                     </div>
                                 </div>
                                 <?php

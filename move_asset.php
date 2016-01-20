@@ -5,21 +5,102 @@
 		toLogin();
 		die();
 	}
-	if($_POST['type']<>"out" && $_POST['type']<>"in"){
+	if($_POST['type']<>"out" && $_POST['type']<>"in" || (empty($_POST['id']))){
 		redirect("assets.php");
 	}
-	switch ($_POST['type']) {
+	
+	$inputs=$_POST;
+
+	switch ($inputs['type']) {
 		case 'out':
-			# code...
+			# Checkout
+			# Validate input
+			$error_msg="";
+			if(empty($inputs['user_id'])){
+				$error_msg.="Select a user.<br/>";
+			}
+
+			if(empty($inputs['checkout_date'])){
+				$error_msg.="Select checkout date.<br/>";
+			}
+
+
+			if(!empty($error_msg)){
+				Alert("You have the following errors: <br/>".$error_msg,"danger");
+				redirect("check_asset.php?id=".$inputs['id']."&type=".$inputs['type']);
+				die;
+			}
+			else
+			{
+				#Okay for Saving
+				// $selected_user=$con->myQuery("SELECT id,location_id FROM users WHERE id=?",array($inputs['user_id']))->fetch(PDO::FETCH_ASSOC);
+				#Validate if there is a selected user
+				$asset_inputs['id']=$inputs['id'];
+				$asset_inputs['asset_name']=$inputs['asset_name'];
+				$asset_inputs['user_id']=$inputs['user_id'];
+				$asset_inputs['check_out_date']=$inputs['checkout_date'];
+				$asset_inputs['expected_check_in_date']=$inputs['expected_checkin_date'];
+				
+				#transaction here
+
+				$con->myQuery("UPDATE assets SET user_id=:user_id,asset_name=:asset_name,check_out_date=:check_out_date,expected_check_in_date=:expected_check_in_date WHERE id=:id",$asset_inputs);
+
+				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
+				$activity_input['user_id']=$inputs['user_id'];
+				$activity_input['notes']=$inputs['notes'];
+				$activity_input['category_type_id']=1;
+				$activity_input['item_id']=$inputs['id'];
+
+				$con->myQuery("INSERT INTO activities(admin_id,user_id,action,notes,action_date,category_type_id,item_id) VALUES(:admin_id,:user_id,'Asset Checkout',:notes,NOW(),:category_type_id,:item_id)",$activity_input);
+				
+				#end of transaction 
+			}
 			break;
 		case 'in':
-			# code...
+			# Checkin
+			# Validate input
+
+			$error_msg="";
+
+			if(empty($inputs['asset_status_id'])){
+				$error_msg.="Select asset status.<br/>";
+			}
+
+
+			if(!empty($error_msg)){
+				Alert("You have the following errors: <br/>".$error_msg,"danger");
+				redirect("check_asset.php?id=".$inputs['id']."&type=".$inputs['type']);
+				die;
+			}
+			else
+			{
+				#Okay for Saving
+				$asset_inputs['id']=$inputs['id'];
+				$asset_inputs['asset_name']=$inputs['asset_name'];
+				
+				#transaction here
+
+				$con->myQuery("UPDATE assets SET user_id=0,asset_name=:asset_name,check_out_date='0000-00-00',expected_check_in_date='0000-00-00' WHERE id=:id",$asset_inputs);
+
+				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
+				$activity_input['user_id']="NULL";
+				$activity_input['notes']=$inputs['notes'];
+				$activity_input['category_type_id']=1;
+				$activity_input['item_id']=$inputs['id'];
+
+				// echo "INSERT INTO activities(admin_id,user_id,action,notes,action_date,category_type_id,item_id) VALUES({$activity_input['admin_id']},{$activity_input['user_id']},'Asset Checkin',{$activity_input['notes']},NOW(),{$activity_input['category_type_id']},{$activity_input['item_id']})";
+
+				$con->myQuery("INSERT INTO activities(admin_id,user_id,action,notes,action_date,category_type_id,item_id) VALUES(:admin_id,:user_id,'Asset Checkin',:notes,NOW(),:category_type_id,:item_id)",$activity_input);
+				
+				#end of transaction 
+			}
 			break;
 		default:
-			# code...
+			redirect("assets.php");
 			break;
 	}
-	var_dump($_POST);
+	Alert("Asset checked in.","success");
+	redirect("assets.php");
 	die;
 	if(!empty($_POST)){
 		//Validate form inputs
