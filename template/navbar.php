@@ -186,10 +186,10 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-tint fa-fw"></i> Consumables</a>
+                            <a href="consumables.php"><i class="fa fa-tint fa-fw"></i> Consumables</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-edit fa-fw"></i> People</a>
+                            <a href="user.php"><i class="fa fa-edit fa-fw"></i> People</a>
                         </li>
                         <?php
                             endif;
