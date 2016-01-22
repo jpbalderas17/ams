@@ -50,7 +50,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $assets=$con->myQuery("SELECT name,order_number,purchase_date,purchase_cost, quantity,id FROM consumables")->fetchAll(PDO::FETCH_ASSOC);
+                                            $assets=$con->myQuery("SELECT name,order_number,purchase_date,purchase_cost, quantity,id FROM consumables where is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
 
                                             foreach ($assets as $asset):
                                         ?>
@@ -60,9 +60,10 @@
                                                     if($key=='id'):
                                                 ?>
                                                     <td>
-                                                        <button class='btn btn-sm btn-warning'><a href='items.php?id=<?= $item['ID']?>'><span class='fa fa-pencil'></span></a></button>
-                                                        <button  class='btn btn-sm btn-danger'> <a href='delete_consumables.php?id=<?= $asset['ID']?>' onclick="return confirm('Are you sure you want to delete this item?') class='btn btn-xs btn-danger'"><span  class='fa fa-trash'></span></a></button>&nbsp;
-                                                    </td>
+                                                        <a class='btn btn-sm btn-info' href='check_consumables.php?id=<?php echo $value;?>&type=out'><span class='fa fa-arrow-right'></span> Check Out</a>
+                                                        <a class='btn btn-sm btn-warning' href='frm_consumables.php?id=<?php echo $value;?>'><span class='fa fa-pencil'></span></a>
+                                                        <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $value?>&t=c' onclick='return confirm("This consumable will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                                                                            </td>
                                                 <?php
                                                     else:
                                                 ?>
