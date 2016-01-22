@@ -116,18 +116,15 @@
                         <i class="fa fa-wrench fa-fw"></i> Admin <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="asset_models.php"><i class="fa fa-user fa-fw"></i> Asset Models</a>
+                        <li><a href="asset_models.php"><i class="fa fa-th fa-fw"></i> Asset Models</a>
                         </li>
-                        <li><a href="asset_status_labels.php"><i class="fa fa-user fa-fw"></i> Asset Status Labels</a>
+                        <li><a href="asset_status_labels.php"><i class="fa fa-list fa-fw"></i> Asset Status Labels</a>
                         </li>
-                        <li><a href="categories.php"><i class="fa fa-gear fa-fw"></i> Categories</a>
+                        <li><a href="categories.php"><i class="fa fa-check fa-fw"></i></i> Categories</a>
                         </li>
-                        <li><a href="departments.php"><i class="fa fa-gear fa-fw"></i> Departments</a>
+                        <li><a href="departments.php"><i class="fa fa-building-o fa-fw"></i></i> Departments</a>
                         </li>
-                        <li><a href="deprecations.php"><i class="fa fa-gear fa-fw"></i> Deprecations</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="deprecations.php"><i class="fa fa-arrow-down fa-fw"></i></i> Deprecations</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -143,12 +140,31 @@
                 <div class="sidebar-nav navbar-collapse">
 
                     <ul class="nav" id="side-menu">
+                        
                         <li>
                             <a href="index.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+
                         <?php
                             if($_SESSION[WEBAPP]['user']['user_type']==1 || $_SESSION[WEBAPP]['user']['user_type']==2):
                         ?>
+
+                        <li class="sidebar-search">
+
+                            <div class="input-group custom-search-form">
+                                <!-- <form class='form' method='get' action='view_asset.php'> -->
+                                    <div class='form-group'>
+                                        <div class="input-group">
+                                          <input type="text" class="form-control" placeholder="Enter Asset Tag" name='asset_tag' style=''>
+                                          <span class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+                                          </span>
+                                        </div>
+                                    </div>
+                                <!-- </form> -->
+                            </div>
+                            <!-- /input-group -->
+                        </li>
                         <li >
                             <a href="#" ><i class="fa fa-barcode fa-fw"></i> Assets<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level" >
@@ -168,7 +184,7 @@
                                     unset($navbar_asset_statuses);
                             	?>
                                 <li>
-                                    <a href="assets.php">List All</a>
+                                    <a href="assets.php?status=All">List All</a>
                                 </li>
                                 <li>
                                     <a href="asset_models.php">Asset Models</a>
@@ -202,7 +218,10 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Reports<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Activity Report</a>
+                                    <a href="#">Consumable Activity Report</a>
+                                </li>
+                                <li>
+                                    <a href="#">Asset Activity Report</a>
                                 </li>
                                 <li>
                                     <a href="#">Depreciation Report</a>

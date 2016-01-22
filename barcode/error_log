@@ -1,0 +1,35 @@
+[29-Sep-2015 14:55:57 Asia/Manila] PHP Warning:  require_once(class/BCGcode39.php): failed to open stream: No such file or directory in /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/jpb.php on line 6
+[29-Sep-2015 14:55:57 Asia/Manila] PHP Fatal error:  require_once(): Failed opening required 'class/BCGcode39.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/jpb.php on line 6
+[29-Sep-2015 14:56:18 Asia/Manila] PHP Warning:  require_once(class/BCGcode128.php): failed to open stream: No such file or directory in /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/jpb.php on line 6
+[29-Sep-2015 14:56:18 Asia/Manila] PHP Fatal error:  require_once(): Failed opening required 'class/BCGcode128.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/jpb.php on line 6
+[29-Sep-2015 14:56:51 Asia/Manila] PHP Fatal error:  Uncaught exception 'BCGArgumentException' with message 'The font path is incorrect.' in /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/class/BCGFontFile.php:34
+Stack trace:
+#0 /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/jpb.php(11): BCGFontFile->__construct('./class/font/Ar...', 18)
+#1 {main}
+  thrown in /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/class/BCGFontFile.php on line 34
+[29-Sep-2015 14:59:44 Asia/Manila] PHP Fatal error:  Uncaught exception 'BCGParseException' with message 'The character ''' is not allowed.' in /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/class/BCGcode39.barcode.php:154
+Stack trace:
+#0 /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/class/BCGBarcode1D.php(135): BCGcode39->validate()
+#1 /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/class/BCGcode39.barcode.php(91): BCGBarcode1D->parse('IT'S FREE')
+#2 /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/jpb.php(19): BCGcode39->parse('It's Free')
+#3 {main}
+  thrown in /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/class/BCGcode39.barcode.php on line 154
+[05-Oct-2015 15:23:49 Asia/Manila] PHP Parse error:  syntax error, unexpected '}' in /home/hrbeacon/public_html/jpb/register/barcodegen.1d-php5.v5.2.1/jpb.php on line 32
+[06-Oct-2015 10:08:55 Asia/Manila] PHP Fatal error:  Can't use method return value in write context in /home/hrbeacon/public_html/jpb/register/barcode/jpb.php on line 16
+[06-Oct-2015 10:09:48 Asia/Manila] PHP Fatal error:  Call to a member function fetch() on a non-object in /home/hrbeacon/public_html/jpb/register/barcode/jpb.php on line 16
+[06-Oct-2015 10:13:25 Asia/Manila] PHP Catchable fatal error:  Argument 1 passed to BCGDrawing::setBarcode() must be an instance of BCGBarcode, string given, called in /home/hrbeacon/public_html/jpb/register/barcode/jpb.php on line 25 and defined in /home/hrbeacon/public_html/jpb/register/barcode/class/BCGDrawing.php on line 103
+[06-Oct-2015 10:23:56 Asia/Manila] PHP Catchable fatal error:  Argument 1 passed to BCGDrawing::setBarcode() must be an instance of BCGBarcode, string given, called in /home/hrbeacon/public_html/jpb/register/barcode/jpb.php on line 28 and defined in /home/hrbeacon/public_html/jpb/register/barcode/class/BCGDrawing.php on line 103
+[15-Oct-2015 19:09:25 Asia/Manila] PHP Parse error:  syntax error, unexpected '$code' (T_VARIABLE) in /home/hrbeacon/public_html/jpb/register/barcode/download.php on line 17
+[15-Oct-2015 19:10:08 Asia/Manila] PHP Catchable fatal error:  Object of class BCGDrawing could not be converted to string in /home/hrbeacon/public_html/jpb/register/barcode/download.php on line 31
+[15-Oct-2015 19:10:51 Asia/Manila] PHP Catchable fatal error:  Object of class BCGDrawing could not be converted to string in /home/hrbeacon/public_html/jpb/register/barcode/download.php on line 31
+[15-Oct-2015 19:11:50 Asia/Manila] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/hrbeacon/public_html/jpb/register/barcode/class/drawer/BCGDrawPNG.php:63) in /home/hrbeacon/public_html/jpb/register/barcode/download.php on line 31
+[15-Oct-2015 19:14:24 Asia/Manila] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/hrbeacon/public_html/jpb/register/barcode/class/drawer/BCGDrawPNG.php:63) in /home/hrbeacon/public_html/jpb/register/barcode/download.php on line 31
+[15-Oct-2015 19:14:44 Asia/Manila] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/hrbeacon/public_html/jpb/register/barcode/class/drawer/BCGDrawPNG.php:63) in /home/hrbeacon/public_html/jpb/register/barcode/download.php on line 31
+[15-Oct-2015 19:20:14 Asia/Manila] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/hrbeacon/public_html/jpb/register/barcode/class/drawer/BCGDrawPNG.php:63) in /home/hrbeacon/public_html/jpb/register/barcode/download.php on line 32
+[15-Oct-2015 19:23:15 Asia/Manila] PHP Fatal error:  Uncaught exception 'BCGParseException' with message 'No data has been entered.' in /home/hrbeacon/public_html/jpb/register/barcode/class/BCGcode39.barcode.php:148
+Stack trace:
+#0 /home/hrbeacon/public_html/jpb/register/barcode/class/BCGBarcode1D.php(135): BCGcode39->validate()
+#1 /home/hrbeacon/public_html/jpb/register/barcode/class/BCGcode39.barcode.php(91): BCGBarcode1D->parse('')
+#2 /home/hrbeacon/public_html/jpb/register/barcode/download.php(27): BCGcode39->parse(NULL)
+#3 {main}
+  thrown in /home/hrbeacon/public_html/jpb/register/barcode/class/BCGcode39.barcode.php on line 148

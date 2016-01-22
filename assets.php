@@ -40,6 +40,13 @@
                                 <table class='table responsive table-bordered table-condensed table-hover ' id='dataTables'>
                                     <thead>
                                         <tr>
+                                            <?php
+                                            if($_SESSION[WEBAPP]['user']['user_type']==1 || $_SESSION[WEBAPP]['user']['user_type']==2):
+                                            ?>
+                                                <th></th>
+                                            <?php
+                                            endif;
+                                            ?>
                                             <th>Asset Tag</th>
                                             <th>Serial Number</th>
                                             <th>Asset Name</th>
@@ -57,7 +64,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            if(empty($_GET['status'])){
+                                            if(empty($_GET['status']) || $_GET['status']=='All'){
                                                 $assets=$con->myQuery("SELECT asset_tag,serial_number,asset_name,model,asset_status,asset_status_label,location,category,eol,notes,order_number,check_out_date,expected_check_in_date,id,CONCAT(last_name,', ',first_name,' ',middle_name)as current_holder FROM qry_assets WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
                                             }
                                             else{
@@ -72,6 +79,15 @@
                                             foreach ($assets as $asset):
                                         ?>
                                             <tr>
+                                                <?php
+                                                if($_SESSION[WEBAPP]['user']['user_type']==1 || $_SESSION[WEBAPP]['user']['user_type']==2):
+                                                ?>
+                                                    <th>
+                                                        <a href='barcode/download.php?id=<?php echo $asset['id'] ?>' class='btn btn-default'><span class='fa fa-barcode'></span></a>
+                                                    </th>
+                                                <?php
+                                                endif
+                                                ?>
                                                 <?php
                                                     foreach ($asset as $key => $value):
                                                     if($key=='id'):
@@ -115,7 +131,7 @@
                                                         <td>
                                                             <?php
                                                                 if($asset['check_out_date']!="0000-00-00"){
-                                                                    echo htmlspecialchars($asset['current_holder']);
+                                                                    echo "Deployed (".htmlspecialchars($asset['current_holder']).")";
                                                                 }
                                                                 else{
                                                                     echo htmlspecialchars($value);

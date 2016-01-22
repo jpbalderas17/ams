@@ -41,6 +41,8 @@
 				$asset_tag=date("Ynd").$asset_id;
 
 				$con->myQuery("UPDATE assets SET asset_tag=? WHERE id=?",array($asset_tag,$asset_id));
+
+				$con->myQuery("INSERT INTO activities(admin_id,action,action_date,category_type_id,item_id) VALUES(?,'Created Asset',NOW(),1,?)",array($_SESSION[WEBAPP]['user']['id'],$asset_id));
 			}
 			else{
 				//Update

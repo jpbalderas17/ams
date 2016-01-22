@@ -112,5 +112,11 @@
 		}
 	}
 /* End BOOTSTRAP Helpers */
+
+/* SPECIFIC TO WEBAPP */
+function getDepriciation($purchase_date,$terms){
+	
+}
+/* END SPECIFIC TO WEBAPP */
 	$con=new myPDO('ams','root','');	
 ?>

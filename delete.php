@@ -17,12 +17,16 @@
 				$table="assets";
 				$page="assets.php";
 				break;
+			case 'am':
+				$table="asset_models";
+				$page="asset_models.php";
+				break;
 			case 'c':
 				$table="categories";
 				$page="categories.php";
 				break;
 			default:
-				# code...
+				redirect("index.php");
 				break;
 		}
 		$con->myQuery("UPDATE {$table} SET is_deleted=1 WHERE id=?",array($_GET['id']));

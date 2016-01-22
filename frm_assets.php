@@ -91,6 +91,12 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
+                                    <label class='col-sm-12 col-md-3 control-label'> Order Number</label>
+                                    <div class='col-sm-12 col-md-9'>
+                                        <input type='text' class='form-control' placeholder='Enter Order Number' name='order_number' value='<?php echo !empty($asset)?$asset['order_number']:"" ?>'>
+                                    </div>
+                                </div>
+                                <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Purchase Date</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <?php
@@ -105,12 +111,7 @@
                                         <input type='date' class='form-control' name='purchase_date'  value='<?php echo $purchase_date; ?>'>
                                     </div>
                                 </div>
-                                <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Order Number</label>
-                                    <div class='col-sm-12 col-md-9'>
-                                        <input type='text' class='form-control' placeholder='Enter Order Number' name='order_number' value='<?php echo !empty($asset)?$asset['order_number']:"" ?>'>
-                                    </div>
-                                </div>
+                                
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Purchase Cost</label>
                                     <div class='col-sm-12 col-md-9'>
