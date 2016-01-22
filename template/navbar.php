@@ -218,19 +218,22 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Reports<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Consumable Activity Report</a>
+                                    <a href="#">Asset Report</a>
                                 </li>
                                 <li>
                                     <a href="#">Asset Activity Report</a>
                                 </li>
                                 <li>
-                                    <a href="#">Depreciation Report</a>
-                                </li>
-                                <li>
                                     <a href="#">Asset Maintenance Report</a>
                                 </li>
                                 <li>
-                                    <a href="#">Asset Report</a>
+                                    <a href="#">Consumable Report</a>
+                                </li>
+                                <li>
+                                    <a href="#">Consumable Activity Report</a>
+                                </li>
+                                <li>
+                                    <a href="#">Depreciation Report</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
