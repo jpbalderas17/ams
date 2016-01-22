@@ -40,10 +40,17 @@
 				$asset_inputs['user_id']=$inputs['user_id'];
 				$asset_inputs['check_out_date']=$inputs['checkout_date'];
 				$asset_inputs['expected_check_in_date']=$inputs['expected_checkin_date'];
-				
+				$location_id=$con->myQuery("SELECT location_id FROM users WHERE id=?",array($_GET['user_id']))->fetchColumn();
+				if(empty($location_id)){
+					$asset_inputs['location_id']=0;
+				}
+				else
+				{
+					$asset_inputs['location_id']=$location_id;
+				}
 				#transaction here
 
-				$con->myQuery("UPDATE assets SET user_id=:user_id,asset_name=:asset_name,check_out_date=:check_out_date,expected_check_in_date=:expected_check_in_date WHERE id=:id",$asset_inputs);
+				$con->myQuery("UPDATE assets SET user_id=:user_id,asset_name=:asset_name,check_out_date=:check_out_date,expected_check_in_date=:expected_check_in_date,location_id=:location_id WHERE id=:id",$asset_inputs);
 
 				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
 				$activity_input['user_id']=$inputs['user_id'];
@@ -79,8 +86,16 @@
 				$asset_inputs['asset_name']=$inputs['asset_name'];
 				
 				#transaction here
+				$location_id=$_SESSION[WEBAPP]['user_id']['location_id'];
+				if(empty($location_id)){
+					$asset_inputs['location_id']=0;
+				}
+				else
+				{
+					$asset_inputs['location_id']=$location_id;
+				}
 
-				$con->myQuery("UPDATE assets SET user_id=0,asset_name=:asset_name,check_out_date='0000-00-00',expected_check_in_date='0000-00-00' WHERE id=:id",$asset_inputs);
+				$con->myQuery("UPDATE assets SET user_id=0,asset_name=:asset_name,check_out_date='0000-00-00',expected_check_in_date='0000-00-00',location_id=:location_id WHERE id=:id",$asset_inputs);
 
 				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
 				$activity_input['user_id']="NULL";

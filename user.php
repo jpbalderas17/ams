@@ -11,7 +11,6 @@
      require_once 'template/navbar.php';
 ?>
 </div>
-#This is a the quick brwon fox jumps over the lazy dog 
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">

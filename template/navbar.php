@@ -152,7 +152,7 @@
                         <li class="sidebar-search">
 
                             <div class="input-group custom-search-form">
-                                <!-- <form class='form' method='get' action='view_asset.php'> -->
+                                <form class='form' method='get' action='view_asset.php'>
                                     <div class='form-group'>
                                         <div class="input-group">
                                           <input type="text" class="form-control" placeholder="Enter Asset Tag" name='asset_tag' style=''>
@@ -161,7 +161,7 @@
                                           </span>
                                         </div>
                                     </div>
-                                <!-- </form> -->
+                                </form>
                             </div>
                             <!-- /input-group -->
                         </li>
@@ -218,7 +218,7 @@
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Reports<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Asset Report</a>
+                                    <a href="report_asset.php">Asset Report</a>
                                 </li>
                                 <li>
                                     <a href="#">Asset Activity Report</a>

@@ -3,6 +3,8 @@
     <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script src="js/datatables.buttons.js"></script>
+    <script src="js/datatables.buttons.print.js"></script>
 	<script src="bower_components/select2/js/select2.full.js" ></script>
 
     <!--<script src="bower_components/datatables-responsive/js/dataTables.responsive.js" ></script>-->

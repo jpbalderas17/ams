@@ -4,6 +4,9 @@
 		toLogin();
 		die();
 	}
+    if(empty($_GET['asset_tag']) && empty($_GET['id'])){
+        redirect("index.php");
+    }
     if(!empty($_GET['id'])){
         $asset=$con->myQuery("SELECT EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image FROM qry_assets WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($asset)){
@@ -15,14 +18,15 @@
     }
     elseif(!empty($_GET['asset_tag'])){
         $asset=$con->myQuery("SELECT EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image FROM qry_assets WHERE asset_tag=?",array($_GET['asset_tag']))->fetch(PDO::FETCH_ASSOC);
+        
         if(empty($asset)){
             //Alert("Invalid asset selected.");
-            die('assettag');
-            Modal("Invalid Asset Selected");
+            Modal("No Asset found.");
             redirect("assets.php");
             die();
         }
     }
+
 
     $asset_models=$con->myQuery("SELECT id,name FROM asset_models WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
     $asset_status_labels=$con->myQuery("SELECT id,name FROM asset_status_labels WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);

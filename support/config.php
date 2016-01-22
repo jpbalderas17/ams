@@ -114,8 +114,10 @@
 /* End BOOTSTRAP Helpers */
 
 /* SPECIFIC TO WEBAPP */
-function getDepriciation($purchase_date,$terms){
-	
+function getDepriciationDate($purchase_date,$terms){
+	$purchase_date=new DateTime($purchase_date);
+	$diff_terms=new DateInterval("P{$terms}M");
+	return date_add($purchase_date,$diff_terms);
 }
 /* END SPECIFIC TO WEBAPP */
 	$con=new myPDO('ams','root','');	

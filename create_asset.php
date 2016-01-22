@@ -21,6 +21,9 @@
 		if( empty($inputs['purchase_cost'])){
 			$inputs['purchase_cost']=0;
 		}
+		if( empty($inputs['purchase_date'])){
+			$errors.="Select a purchase date for the asset. <br/>";
+		}
 
 
 		if($errors!=""){
