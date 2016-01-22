@@ -55,10 +55,18 @@
                                             foreach ($assets as $asset):
                                         ?>
                                             <tr>
+                                                
                                                 <?php
                                                     foreach ($asset as $key => $value):
-                                                    if($key=='id'):
+                                                    if($key=='name'):
                                                 ?>
+                                                    <td>
+                                                        <a href='view_consumables.php?id=<?= $asset['id']?>'><?php echo htmlspecialchars($value)?></a>
+                                                    </td>
+                                                
+                                                <?php
+                                                    elseif($key=='id'):
+                                                ?>                                                                                                 
                                                     <td>
                                                         <a class='btn btn-sm btn-info' href='check_consumables.php?id=<?php echo $value;?>&type=out'><span class='fa fa-arrow-right'></span> Check Out</a>
                                                         <a class='btn btn-sm btn-warning' href='frm_consumables.php?id=<?php echo $value;?>'><span class='fa fa-pencil'></span></a>

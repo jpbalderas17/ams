@@ -11,7 +11,7 @@
      require_once 'template/navbar.php';
 ?>
 </div>
-#This is a the quick brwon fox jumps over the lazy dog 
+
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -40,9 +40,7 @@
                                 <table class='table responsive table-bordered table-condensed table-hover ' id='dataTables'>
                                     <thead>
                                         <tr>
-                                            <th>First Name</th>
-                                            <th>Middle Name</th>
-                                            <th>Last Name</th>
+                                            <th>Name</th>
                                             <th>Username</th>
                                             <th>Email</th>
                                             <th>Contact Number</th>
@@ -55,14 +53,21 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $users=$con->myQuery("SELECT first_name,middle_name,last_name,username,email,contact_no,employee_no,location,title,department,id FROM qry_users")->fetchAll(PDO::FETCH_ASSOC);
+                                            $users=$con->myQuery("SELECT CONCAT(first_name,' ',middle_name,' ',last_name) as name,username,email,contact_no,employee_no,location,title,department,id FROM qry_users")->fetchAll(PDO::FETCH_ASSOC);
 
                                             foreach ($users as $user):
                                         ?>
                                             <tr>
                                                 <?php
                                                     foreach ($user as $key => $value):
-                                                    if($key=='id'):
+                                                    if($key=='name'):
+                                                ?>
+                                                    <td>
+                                                        <a href='view_user.php?id=<?= $user['id']?>'><?php echo htmlspecialchars($value)?></a>
+                                                    </td>
+
+                                                <?php
+                                                    elseif($key=='id'):
                                                 ?>
                                                     <td>
                                                         <a class='btn btn-sm btn-warning' href='frm_users.php?id=<?php echo $value;?>'><span class='fa fa-pencil'></span></a>
