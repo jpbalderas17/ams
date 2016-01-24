@@ -144,6 +144,7 @@
                 </div>
             </div>
             <!-- /.row -->
+            <div id='123'></div>
 </div>
 <script>
     $(document).ready(function() {
@@ -152,9 +153,9 @@
                 "scrollX": true,
                 "bSort" : false,
                 dom: 'Bfrtip',
-                'buttons': [
-               'csv','print'
-                ]
+                buttons: [
+                'csv'
+                    ]
         });
     });
     function download_report(){

@@ -21,12 +21,15 @@
     <!-- <link href="bower_components/datatables-responsive/css/responsive.dataTables.css" rel="stylesheet"> -->
 
 	<link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="bower_components/datatables/media/css/buttons.bootstrap.min.css" rel="stylesheet" type="text/css">
+	
 	
 	</head>
 <body class='' style='' >
  <script src="bower_components/jquery/dist/jquery.min.js"></script>
  <!-- Bootstrap Core JavaScript -->
  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
     
     
 

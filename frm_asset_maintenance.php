@@ -64,7 +64,27 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Select Asset</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select name='asset_id' class='form-control' data-placeholder="Select Asset" <?php echo !(empty($maintenance))?"data-selected='".$maintenance['asset_id']."'":NULL ?>>    
+                                        <?php
+                                            if(!empty($_GET['view_id'])){
+                                                $view=$con->myQuery("SELECT COUNT(id) FROM assets WHERE id=?",array($_GET['view_id']))->fetch(PDO::FETCH_ASSOC);
+                                                if(!empty($view)){
+                                                    ?>
+                                                    <select name='asset_id' class='form-control' data-placeholder="Select Asset" <?php echo !(empty($maintenance))?"data-selected='".$_GET['view_id']."'":NULL ?> readonly>    
+
+                                                    <?php
+                                                }
+                                                else{
+                                                    ?>
+                                                        <select name='asset_id' class='form-control' data-placeholder="Select Asset" <?php echo !(empty($maintenance))?"data-selected='".$maintenance['asset_id']."'":NULL ?>>    
+                                                    <?php
+                                                }
+                                            }
+                                            else{
+                                                ?>
+                                                    <select name='asset_id' class='form-control' data-placeholder="Select Asset" <?php echo !(empty($maintenance))?"data-selected='".$maintenance['asset_id']."'":NULL ?>>    
+                                                <?php
+                                            }
+                                        ?>
                                         <?php
                                             echo makeOptions($assets_select);
                                         ?>

@@ -10,6 +10,9 @@
 	{
 		header("location:".$url);
 	}
+	function getFileExtension($filename){
+		return substr($filename, strrpos($filename,"."));
+	}
 // ENCRYPTOR
 	function encryptIt( $q ) {
 	    $cryptKey  = 'JPB0rGtIn5UB1xG03efyCp';
@@ -111,14 +114,20 @@
 			}
 		}
 	}
+	function createAlert($content='',$type='info')
+	{
+		echo "<div class='alert alert-{$type}' role='alert'>{$content}</div>";
+	}
 /* End BOOTSTRAP Helpers */
 
 /* SPECIFIC TO WEBAPP */
 function getDepriciationDate($purchase_date,$terms){
 	$purchase_date=new DateTime($purchase_date);
 	$diff_terms=new DateInterval("P{$terms}M");
-	return date_add($purchase_date,$diff_terms);
+	return date_format(date_add($purchase_date,$diff_terms),'Y-m-d');
 }
+
+
 /* END SPECIFIC TO WEBAPP */
 	$con=new myPDO('ams','root','');	
 ?>

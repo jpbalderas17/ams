@@ -45,7 +45,8 @@ class MyPDO extends PDO{
 				{
 					
 					if(!$stmt->execute($value)){
-						throw new Exception("Error Processing Request", 1);
+
+						throw new PDOException($stmt->errorInfo()[2], 1);
 						
 						//die("<hr/><b>There was an Error</b>");
 					}
