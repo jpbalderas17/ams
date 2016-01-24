@@ -75,13 +75,7 @@
                                     <div class='col-sm-12 col-md-9'>
                                         <input type='text' class='form-control' name='quantity' >                                        
                                     </div>
-                                </div>
-                                <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Checkout Date</label>
-                                    <div class='col-sm-12 col-md-9'>
-                                        <input type='date' name='checkout_date' class='form-control' value='<?php echo date("Y-m-d") ?>'>
-                                    </div>
-                                </div>                                
+                                </div>                             
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Checkout To</label>
                                     <div class='col-sm-12 col-md-9'>

@@ -4,7 +4,7 @@
 		toLogin();
 		die();
 	}
-	makeHead("Consumables");
+	makeHead("Consumables Report");
 ?>
 <div id='wrapper'>
 <?php
@@ -28,7 +28,7 @@
                     ?>
                     <div class='row'>
                         <div class='col-sm-12'>
-                                <a href='frm_consumables.php' class='btn btn-success pull-right'> <span class='fa fa-plus'></span> Create New</a>
+                                <a href='#' class='btn btn-success pull-right'> <span class='fa fa-plus'></span> Create New</a>
                         </div>
                     </div>
                     <br/>    
@@ -41,11 +41,7 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Order Number</th>
-                                            <th>Purchase Date</th>
-                                            <th>Purchase Cost</th>
-                                            <th>Quantity</th>
-                                            <th>Actions</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -58,14 +54,7 @@
                                                 
                                                 <?php
                                                     foreach ($asset as $key => $value):
-                                                    if($key=='name'):
-                                                ?>
-                                                    <td>
-                                                        <a href='view_consumables.php?id=<?= $asset['id']?>'><?php echo htmlspecialchars($value)?></a>
-                                                    </td>
-                                                
-                                                <?php
-                                                    elseif($key=='id'):
+                                                    if($key=='id'):
                                                 ?>                                                                                                 
                                                     <td>
                                                         <a class='btn btn-sm btn-info' href='check_consumables.php?id=<?php echo $value;?>&type=out'><span class='fa fa-arrow-right'></span> Check Out</a>

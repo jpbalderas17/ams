@@ -26,11 +26,6 @@
 				$error_msg.="Please select a user.<br/>";
 			}
 
-			if(empty($inputs['checkout_date'])){
-				$error_msg.="Please select checkout date.<br/>";
-			}
-
-
 			if(!empty($error_msg)){
 				Alert("You have the following errors: <br/>".$error_msg,"danger");
 				redirect("check_consumables.php?id=".$inputs['id']."&type=".$inputs['type']);
@@ -47,13 +42,12 @@
 				$consumable_inputs['name']=$inputs['name'];
 				//$qty['stock']=$_POST['quantity']-$inputs['quantity'];
 				$consumable_inputs['quantity']=$current_quantity-$inputs['quantity'];
-				$consumable_inputs['check_out_date']=$inputs['checkout_date'];
 				$consumable_inputs['user_id']=$inputs['user_id'];
 				//$consumable_inputs['notes']=$inputs['notes'];
 				
 				#transaction here
 
-				$con->myQuery("UPDATE consumables SET user_id=:user_id,name=:name,quantity=:quantity,check_out_date=:check_out_date WHERE id=:id",$consumable_inputs);
+				$con->myQuery("UPDATE consumables SET user_id=:user_id,name=:name,quantity=:quantity WHERE id=:id",$consumable_inputs);
 
 				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
 				$activity_input['user_id']=$inputs['user_id'];
