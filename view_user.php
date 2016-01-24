@@ -38,9 +38,10 @@
                         Alert();
                     ?>    
                     <div class='row'>
-                    	<div class='col-md-9'>          
+                    	<div class='col-md-9'> 
+                        <a href='user.php' class='btn btn-success pull-right'> <span class='fa fa-arrow-left'></span>Back</a>         
                             <div class='row'>
-                                <div class='col-xs-12'>
+                                <div class='col-xs-12'>                                    
                                     <strong>Employee Number: </strong>
                                     <em><?php echo htmlspecialchars($asset['employee_no'])?></em>
                                 </div>
@@ -99,13 +100,14 @@
                                                 else:
                                             ?>
                                                 <tr>
-                                                    <td colspan='5'>No Results.</td>
+                                                    <td colspan='3'>No Results.</td>
                                                 </tr>
                                             <?php
                                                 endif;
                                             ?>
                                         </tbody>
                                     </table>
+
 
 
                                     </br>
@@ -136,7 +138,7 @@
                                                 else:
                                             ?>
                                                 <tr>
-                                                    <td colspan='5'>No Results.</td>
+                                                    <td colspan='3'>No Results.</td>
                                                 </tr>
                                             <?php
                                                 endif;

@@ -9,7 +9,7 @@
 <div id='wrapper'>
 <?php
      require_once 'template/navbar.php';
-?>
+?>  
 </div>
 
 <div id="page-wrapper">
@@ -54,7 +54,7 @@
                                     <tbody>
                                         <?php
                                             $users=$con->myQuery("SELECT CONCAT(first_name,' ',middle_name,' ',last_name) as name,username,email,contact_no,employee_no,location,title,department,id FROM qry_users")->fetchAll(PDO::FETCH_ASSOC);
-
+                                        if(!empty($users)):
                                             foreach ($users as $user):
                                         ?>
                                             <tr>
@@ -88,7 +88,14 @@
                                             </tr>
                                         <?php
                                             endforeach;
+                                        else:                                                
                                         ?>
+                                            <tr>
+                                                    <td colspan='9'>No Results.</td>
+                                            </tr>
+                                            <?php
+                                                endif;
+                                            ?>
                                     </tbody>
                                 </table>
                             </div>

@@ -37,9 +37,10 @@
                 <div class='col-lg-12'>
                     <?php
                         Alert();
-                    ?>    
+                    ?>
                     <div class='row'>
-                    	<div class='col-md-9'>          
+                    	<div class='col-md-9'>
+                        <a href='user.php' class='btn btn-success pull-right'> <span class='fa fa-arrow-left'></span>Back</a>         
                             <div class='row'>
                                 <div class='col-xs-12'>
                                     <strong>Order Number: </strong>
@@ -54,6 +55,7 @@
                             </div>
                             <div class='row'>
                                 <div class='col-md-12'>
+                                </br>
                                     <h4>History</h4>
                                     <table class='table table-bordered table-condensed '>
                                         <thead>

@@ -44,19 +44,29 @@
 				$inputs=$_POST;
 				unset($inputs['id']);
 				//$inputs['name']=$_POST['name'];
-				$con->myQuery("INSERT INTO consumables(name,order_number,purchase_date,purchase_cost,quantity,category_id) VALUES(:name,:order_number,:purchase_date,:purchase_cost,:quantity,:category_type)",$inputs);
 					$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
 					$activity_input['user_id']=$_SESSION[WEBAPP]['user']['id'];
 					$activity_input['category_type_id']=2;
-
-				$con->myQuery("INSERT INTO activities(admin_id,user_id,action,action_date,category_type_id) VALUES(:admin_id,:user_id,'Consumable Created',NOW(),:category_type_id)",$activity_input);
+					$activity_input['item_id']=$_POST['id'];
+				//$con->myQuery("INSERT INTO consumables(user_id) VALUES(:user_id)",$activity_input);
+				$con->myQuery("INSERT INTO consumables(name,order_number,purchase_date,purchase_cost,quantity,category_id) VALUES(:name,:order_number,:purchase_date,:purchase_cost,:quantity,:category_type)",$inputs);
+				$con->myQuery("INSERT INTO activities(admin_id,user_id,action,action_date,category_type_id,item_id) VALUES(:admin_id,:user_id,'Consumable Created',NOW(),:category_type_id,:item_id)",$activity_input);
 				Alert("Save succesful","success");
 
 			}
 			else{				
 				//Update
+					$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
+					$activity_input['user_id']=$_SESSION[WEBAPP]['user']['id'];
+					$activity_input['category_type_id']=2;
+					$activity_input['item_id']=$_POST['id'];
+					//$activity_input['id']=$inputs['id'];
+				//$con->myQuery("UPDATE consumables SET user_id=:user_id WHERE id=:id",$activity_input);
 				$con->myQuery("UPDATE consumables SET name=:name,order_number=:order_number,purchase_date=:purchase_date,purchase_cost=:purchase_cost,quantity=:quantity,category_id=:category_type WHERE id=:id",$inputs);
+				$con->myQuery("INSERT INTO activities(admin_id,user_id,action,action_date,category_type_id,item_id) VALUES(:admin_id,:user_id,'Consumable Updated',NOW(),:category_type_id,:item_id)",$activity_input);
+				
 				Alert("Update succesful","success");
+
 			}
 
 			redirect("consumables.php");

@@ -227,10 +227,10 @@
                                     <a href="#">Asset Maintenance Report</a>
                                 </li>
                                 <li>
-                                    <a href="consumables_report">Consumable Report</a>
+                                    <a href="consumables_report.php">Consumable Report</a>
                                 </li>
                                 <li>
-                                    <a href="consumable_activity_report">Consumable Activity Report</a>
+                                    <a href="consumable_activity_report.php">Consumable Activity Report</a>
                                 </li>
                                 <li>
                                     <a href="#">Depreciation Report</a>
