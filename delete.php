@@ -11,6 +11,7 @@
 	}
 	else
 	{
+
 		$table="";
 		switch ($_GET['t']) {
 			case 'a':
@@ -28,6 +29,31 @@
 			case 'u':
 				$table="users";
 				$page="user.php";
+				break;
+			case 'dep':
+				$table="departments";
+				$page="departments.php";
+				break;
+			case 'depr':
+				$table="depreciations";
+				$page="depreciations.php";
+				break;
+			case 'asl':
+				$table="asset_status_labels";
+				$page="asset_status_labels.php";
+				break;
+			case 'l':
+				$table="locations";
+				$page="locations.php";
+				break;
+			case 'fu':
+				$table="files";
+				$page="assets.php";
+				if(!empty($_GET['a'])){
+					#asset_id
+					$page="view_asset.php?id={$_GET['a']}";
+				}
+				break;
 			default:
 				redirect("index.php");
 				break;

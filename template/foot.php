@@ -3,9 +3,9 @@
     <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-    <script src="js/datatables.buttons.js"></script>
+   <!--<script src="js/datatables.buttons.js"></script>-->
   
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.0/css/buttons.bootstrap.min.css"/>
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.0/css/buttons.bootstrap.min.css"/> -->
  
 <script type="text/javascript" src="bower_components/datatables/media/js/jszip.min.js"></script>
 <script type="text/javascript" src="bower_components/datatables/media/js/pdfmake.min.js"></script>

@@ -26,17 +26,6 @@
                     <?php
                         Alert();
                     ?>
-                    <div class='row'>
-                        <div class='col-sm-12'>
-                            <form method='get' action='download_excel.php' onclick='download_report(); return false;' id='csv_form'>
-                                <input type='hidden' name='report' value='report_asset'>
-                                <input type='hidden' name='filter' value='' id='filter_text'>
-                                <button type='submit' class='btn btn-info'><span class='fa fa-plus'></span> Download CSV</button>
-                            </form>
-                                
-                        </div>
-                    </div>
-                    <br/>    
 
                     <div class='panel panel-default'>
                         
@@ -53,13 +42,13 @@
                                             <th>Status</th>
                                             <th>Location</th>
                                             <th>Category</th>
-                                            <th>EOL</th>
+                                            <th class='date-td'>EOL</th>
                                             <th>Notes</th>
                                             <th>Order Number</th>
-                                            <th>Checkout Date</th>
-                                            <th>Expected Checkin Date</th>
-                                            <th>Purchase Date</th>
-                                            <th>Depreciation Date</th>
+                                            <th class='date-td'>Checkout Date</th>
+                                            <th class='date-td'>Expected Checkin Date</th>
+                                            <th class='date-td'>Purchase Date</th>
+                                            <th class='date-td'>Depreciation Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -82,7 +71,7 @@
                                             <tr>
                                                 <?php
                                                     foreach ($asset as $key => $value):
-                                                    if($key=="check_out_date" || $key=="expected_check_in_date" ):
+                                                    if($key=="check_out_date" || $key=="expected_check_in_date" || $key=="purchase_date"):
                                                 ?>
                                                     <td>
                                                         <?php
@@ -115,7 +104,7 @@
                                                 ?>
                                                         <td>
                                                             <?php
-                                                                echo date_format( getDepriciationDate($asset['purchase_date'],$value),"Y-m-d");
+                                                                echo date_format( new DateTime(getDepriciationDate($asset['purchase_date'],$value)),"Y-m-d");
                                                             ?>
                                                         </td>
                                                 <?php
@@ -151,17 +140,16 @@
         $('#dataTables').DataTable({
                  "scrollY": true,
                 "scrollX": true,
-                "bSort" : false,
                 dom: 'Bfrtip',
                 buttons: [
-                'csv'
+                    {
+                        extend:"csv",
+                        text:"<span class='fa fa-download'></span> Download CSV "
+                    }
                     ]
         });
     });
-    function download_report(){
-        $("#filter_text").val($(".dataTables_filter input").val());
-        $("#csv_form").submit();
-    }
+
     </script>
 <?php
     Modal();

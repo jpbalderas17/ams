@@ -69,7 +69,7 @@
                                                 $view=$con->myQuery("SELECT COUNT(id) FROM assets WHERE id=?",array($_GET['view_id']))->fetch(PDO::FETCH_ASSOC);
                                                 if(!empty($view)){
                                                     ?>
-                                                    <select name='asset_id' class='form-control' data-placeholder="Select Asset" <?php echo !(empty($maintenance))?"data-selected='".$_GET['view_id']."'":NULL ?> readonly>    
+                                                    <select name='asset_id' class='form-control' data-placeholder="Select Asset" <?php echo "data-selected='".$_GET['view_id']."'"?> >    
 
                                                     <?php
                                                 }
@@ -154,7 +154,17 @@
                                 </div>
                                 <div class='form-group'>
                                     <div class='col-sm-12 col-md-9 col-md-offset-3 '>
-                                        <a href='asset_maintenances.php' class='btn btn-default'>Cancel</a>
+                                        <?php
+                                            if(!empty($view)):
+                                        ?>
+                                            <a href='view_asset.php?id=<?php echo htmlspecialchars($_GET['view_id']);?>' class='btn btn-default'>Cancel</a>
+                                        <?php
+                                            else:
+                                        ?>
+                                            <a href='asset_maintenances.php' class='btn btn-default'>Cancel</a>
+                                        <?php
+                                            endif;
+                                        ?>
                                         <button type='submit' class='btn btn-success'> <span class='fa fa-check'></span> Save</button>
                                     </div>
                                     

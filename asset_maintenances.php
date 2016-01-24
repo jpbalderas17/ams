@@ -40,6 +40,7 @@
                                 <table class='table table-bordered table-condensed table-hover ' id='dataTables'>
                                     <thead>
                                         <tr>
+                                            <th>Asset Tag</th>
                                             <th>Asset Name</th>
                                             <th>Maintenance Type</th>
                                             <th>Title</th>
@@ -51,10 +52,11 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $categories=$con->myQuery("SELECT asset_maintenances.id,assets.asset_name,asset_maintenances.asset_id,asset_maintenance_types.name as maintenance_type,asset_maintenances.title,asset_maintenances.start_date,asset_maintenances.completion_date,asset_maintenances.cost FROM `asset_maintenances` JOIN asset_maintenance_types ON asset_maintenances.asset_maintenance_type_id=asset_maintenance_types.id JOIN assets ON assets.id=asset_maintenances.asset_id WHERE asset_maintenances.is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
+                                            $categories=$con->myQuery("SELECT asset_maintenances.id,assets.asset_tag,assets.asset_name,asset_maintenances.asset_id,asset_maintenance_types.name as maintenance_type,asset_maintenances.title,asset_maintenances.start_date,asset_maintenances.completion_date,asset_maintenances.cost FROM `asset_maintenances` JOIN asset_maintenance_types ON asset_maintenances.asset_maintenance_type_id=asset_maintenance_types.id JOIN assets ON assets.id=asset_maintenances.asset_id WHERE asset_maintenances.is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($categories as $category):
                                         ?>
                                             <tr>
+                                                <td><a href='view_asset.php?id=<?php echo $category['asset_id']; ?>'><?php echo htmlspecialchars($category['asset_tag'])?></a></td>
                                                 <td><?php echo htmlspecialchars($category['asset_name'])?></td>
                                                 <td><?php echo htmlspecialchars($category['maintenance_type'])?></td>
                                                 <td><?php echo htmlspecialchars($category['title'])?></td>

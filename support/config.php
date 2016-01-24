@@ -127,6 +127,13 @@ function getDepriciationDate($purchase_date,$terms){
 	return date_format(date_add($purchase_date,$diff_terms),'Y-m-d');
 }
 
+function AllowUser($user_type_id){
+	if(array_search($_SESSION[WEBAPP]['user']['user_type'], $user_type_id)!==FALSE){
+		return true;
+	}
+	return false;
+}
+
 
 /* END SPECIFIC TO WEBAPP */
 	$con=new myPDO('ams','root','');	

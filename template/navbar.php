@@ -93,22 +93,7 @@
                 <?php
                     endif;
                 ?>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>Welcome, <?php echo $_SESSION[WEBAPP]['user']['first_name']?>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <?php
+                 <?php
                     if($_SESSION[WEBAPP]['user']['user_type']==1):
                 ?>
                 <li class="dropdown">
@@ -124,7 +109,9 @@
                         </li>
                         <li><a href="departments.php"><i class="fa fa-building-o fa-fw"></i></i> Departments</a>
                         </li>
-                        <li><a href="deprecations.php"><i class="fa fa-arrow-down fa-fw"></i></i> Deprecations</a>
+                        <li><a href="depreciations.php"><i class="fa fa-arrow-down fa-fw"></i></i> Deprecations</a>
+                        </li>
+                        <li><a href="locations.php"><i class="fa fa-globe fa-fw"></i></i> Locations</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -132,6 +119,20 @@
                 <?php
                     endif;
                 ?>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>Welcome, <?php echo $_SESSION[WEBAPP]['user']['first_name']?>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="view_user.php?id=<?php echo $_SESSION[WEBAPP]['user']['id']?>"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+               
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
@@ -221,10 +222,10 @@
                                     <a href="report_asset.php">Asset Report</a>
                                 </li>
                                 <li>
-                                    <a href="#">Asset Activity Report</a>
+                                    <a href="report_asset_activity.php">Asset Activity Report</a>
                                 </li>
                                 <li>
-                                    <a href="#">Asset Maintenance Report</a>
+                                    <a href="report_asset_maintenance.php">Asset Maintenance Report</a>
                                 </li>
                                 <li>
                                     <a href="consumables_report">Consumable Report</a>
@@ -232,9 +233,9 @@
                                 <li>
                                     <a href="consumable_activity_report">Consumable Activity Report</a>
                                 </li>
-                                <li>
-                                    <a href="#">Depreciation Report</a>
-                                </li>
+                                <!-- <li>
+                                    <a href="report_asset_depreciation.php">Depreciation Report</a>
+                                </li> -->
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>

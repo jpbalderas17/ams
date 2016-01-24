@@ -51,10 +51,11 @@
 			}
 			else{				
 				//Update
-				$con->myQuery("UPDATE users SET user_type_id=:user_type_id,first_name=:name,middle_name=:middle_name,last_name=:last_name,username=:username,password=:password,email=:email,employee_no=:employee_no,contact_no=:contact_no,location_id=:location_id,title=:title,department_id=:department_id WHERE id=:id",$inputs);
+				
+				$con->myQuery("UPDATE users SET user_type_id=:user_type_id,first_name=:first_name,middle_name=:middle_name,last_name=:last_name,username=:username,password=:password,email=:email,employee_no=:employee_no,contact_no=:contact_no,location_id=:location_id,title=:title,department_id=:department_id WHERE id=:id",$inputs);
 				Alert("Update succesful","success");
 			}
-
+			
 			redirect("user.php");
 		}
 		die;

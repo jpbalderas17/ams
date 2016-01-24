@@ -31,7 +31,7 @@
 		move_uploaded_file($_FILES['file']['tmp_name'],"uploads/".$filename);
 		$con->myQuery("UPDATE files SET file_name=? WHERE id=?",array($filename,$file_id));
 		Alert("File Added","success");
-		redirect("view_assets.php?id=".$inputs['asset_id']);
+		redirect("view_asset.php?id=".$inputs['item_id']);
 		die();
 	}
 	else{

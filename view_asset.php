@@ -8,7 +8,7 @@
         redirect("index.php");
     }
     if(!empty($_GET['id'])){
-        $asset=$con->myQuery("SELECT EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image FROM qry_assets WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+        $asset=$con->myQuery("SELECT EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image,check_out_date,location,CONCAT(last_name,', ',first_name,' ',middle_name)as current_holder FROM qry_assets WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($asset)){
             //Alert("Invalid asset selected.");
             Modal("Invalid Asset Selected");
@@ -42,7 +42,39 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">View Asset <?php echo htmlspecialchars($asset['asset_name'])?> (<?php echo htmlspecialchars($asset['category'])?>)</h3>
+                    <h3 class="page-header">View Asset <?php echo htmlspecialchars($asset['asset_name'])?> (<?php echo htmlspecialchars($asset['category'])?>) 
+                            <?php
+                                if(AllowUser(array(1,2))):
+                            ?>  
+                                <div class="dropdown" style='display:inline'>
+                                  <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Actions
+                                    <span class="caret"></span>
+                                  </button>
+                                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="frm_assets.php?id=<?php echo $asset['id']?>">Edit Asset</a></li>
+                                    <li><a href="delete.php?id=<?php echo $asset['id']?>&t=a" onclick='return confirm("This asset will be deleted.")'>Delete Asset</a></li>
+                                    <li>
+                                        <?php
+                                            if($asset['asset_status']==4):
+                                            if(empty($asset['check_out_date']) || $asset['check_out_date']=="0000-00-00"):
+                                        ?>
+                                            <a class='' href='check_asset.php?id=<?php echo $asset['id'];?>&type=out'> Check Out Asset to User</a>
+                                        <?php
+                                            else:
+                                        ?>
+                                            <a class='' href='check_asset.php?id=<?php echo $asset['id'];?>&type=in'> Check In</a>
+                                        <?php
+                                            endif;
+                                            endif;
+                                        ?>
+                                    </li>
+                                  </ul>
+                                </div>
+                            <?php
+                                endif;
+                            ?>
+                    </h3>
                 </div>
 
                 <!-- /.col-lg-12 -->
@@ -55,7 +87,29 @@
                     ?>    
                     <div class='row'>
                     	<div class='col-md-9'>
-          
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <strong>Status: </strong>
+                                    <em>
+                                        <?php
+                                            if($asset['check_out_date']!="0000-00-00"){
+                                                echo "Deployed (".htmlspecialchars($asset['current_holder']).")";
+                                            }
+                                            else{
+                                                echo htmlspecialchars($asset['asset_status_label']);
+                                            }
+                                        ?>
+                                    </em>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-xs-12'>
+                                    <strong>Location: </strong>
+                                    <em>
+                                        <?php echo htmlspecialchars($asset['location'])?>
+                                    </em>
+                                </div>
+                            </div>
                             <div class='row'>
                                 <div class='col-xs-12'>
                                     <strong>Serial: </strong>
@@ -150,7 +204,7 @@
                                             endif;
                                         ?>
                                     <?php
-                                        $activities=$con->myQuery("SELECT files.id,image,notes,user_id,date_added,file_name,CONCAT(last_name,', ',first_name,' ',middle_name) as user FROM files  JOIN users ON files.user_id=users.id WHERE category_types=1 AND item_id=?",array($asset['id']))->fetchAll(PDO::FETCH_ASSOC);
+                                        $activities=$con->myQuery("SELECT files.id,image,notes,user_id,date_added,file_name,CONCAT(last_name,', ',first_name,' ',middle_name) as user FROM files  JOIN users ON files.user_id=users.id WHERE category_types=1 AND item_id=? AND files.is_deleted=0",array($asset['id']))->fetchAll(PDO::FETCH_ASSOC);
                                         if(!empty($activities)):
 
                                     ?>
@@ -173,7 +227,10 @@
                                                         <td><a href='uploads/<?php echo $activity['file_name'] ?>' download='<?php echo htmlspecialchars($activity['image']);?>'><?php echo htmlspecialchars($activity['image']);?></a></td>
                                                         <td><?php echo htmlspecialchars($activity['notes']);?></td>
                                                         <td><?php echo htmlspecialchars($activity['user']);?></td>
-                                                        <td><?php echo htmlspecialchars($activity['id']);?></td>
+                                                        <td>
+                                                        <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $activity['id']?>&t=fu&a=<?php echo $asset['id']?>' onclick='return confirm("This file will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                        <a href='uploads/<?php echo $activity['file_name'] ?>' class='btn btn-sm btn-default' download='<?php echo htmlspecialchars($activity['image']);?>'><span class='fa fa-download'></span></a>
+                                                        </td>
                                                     </tr>
                                             <?php
                                                     endforeach;
@@ -212,11 +269,11 @@
                                                     foreach ($activities as $activity):
                                             ?>
                                                     <tr>
-                                                        <td><?php echo $activity['action_date']?></td>
-                                                        <td><?php echo $activity['admin']?></td>
-                                                        <td><?php echo $activity['action']?></td>
-                                                        <td><?php echo $activity['user']?></td>
-                                                        <td><?php echo $activity['notes']?></td>
+                                                        <td><?php echo htmlspecialchars($activity['action_date'])?></td>
+                                                        <td><?php echo htmlspecialchars($activity['admin'])?></td>
+                                                        <td><?php echo htmlspecialchars($activity['action'])?></td>
+                                                        <td><?php echo htmlspecialchars($activity['user'])?></td>
+                                                        <td><?php echo htmlspecialchars($activity['notes'])?></td>
                                                     </tr>
                                             <?php
                                                     endforeach;
@@ -235,22 +292,27 @@
 
                             <div class='row'>
                                 <div class='col-md-12'>
-                                    <h4>Asset Maintenance</h4>
-                                    <?php
-                                        if($_SESSION[WEBAPP]['user']['user_type']==1)
+                                    <h4>Asset Maintenance <?php
+                                        if($_SESSION[WEBAPP]['user']['user_type']==1 || $_SESSION[WEBAPP]['user']['user_type']==2):
                                     ?>
+                                        <a href='frm_asset_maintenance.php?view_id=<?php echo $asset['id'] ?>' class='btn btn-sm btn-default'> Add New</a>
                                     <?php
-                                        $activities=$con->myQuery("SELECT asset_maintenances.id,assets.asset_name,asset_maintenances.asset_id,asset_maintenance_types.name as maintenance_type,asset_maintenances.title,asset_maintenances.start_date,asset_maintenances.completion_date,asset_maintenances.cost FROM `asset_maintenances` JOIN asset_maintenance_types ON asset_maintenances.asset_maintenance_type_id=asset_maintenance_types.id JOIN assets ON assets.id=asset_maintenances.asset_id WHERE asset_maintenances.is_deleted=0 AND asset_maintenances.asset_id=?",array($asset['id']))->fetchAll(PDO::FETCH_ASSOC);
+                                        endif;
+                                    ?></h4>
+
+                                    <?php
+                                        $activities=$con->myQuery("SELECT asset_maintenances.id,assets.asset_name,asset_maintenances.asset_id,asset_maintenance_types.name as maintenance_type,asset_maintenances.title,asset_maintenances.start_date,asset_maintenances.completion_date,asset_maintenances.cost,asset_maintenances.notes FROM `asset_maintenances` JOIN asset_maintenance_types ON asset_maintenances.asset_maintenance_type_id=asset_maintenance_types.id JOIN assets ON assets.id=asset_maintenances.asset_id WHERE asset_maintenances.is_deleted=0 AND asset_maintenances.asset_id=?",array($asset['id']))->fetchAll(PDO::FETCH_ASSOC);
                                         if(!empty($activities)):
 
                                     ?>
                                     <table class='table table-bordered table-condensed '>
                                         <thead>
                                             <tr>    
-                                                <td>Date</td>
-                                                <td>Admin</td>
-                                                <td>Actions</td>
-                                                <td>User</td>
+                                                <td>Maintenance Title</td>
+                                                <td>Maintenance Type</td>
+                                                <td>Maintenance Cost</td>
+                                                <td>Start Date</td>
+                                                <td>Completion Date</td>
                                                 <td>Notes</td>
                                             </tr>
                                         </thead>
@@ -259,11 +321,12 @@
                                                     foreach ($activities as $activity):
                                             ?>
                                                     <tr>
-                                                        <td><?php echo $activity['action_date']?></td>
-                                                        <td><?php echo $activity['admin']?></td>
-                                                        <td><?php echo $activity['action']?></td>
-                                                        <td><?php echo $activity['user']?></td>
-                                                        <td><?php echo $activity['notes']?></td>
+                                                        <td><?php echo htmlspecialchars($activity['title'])?></td>
+                                                        <td><?php echo htmlspecialchars($activity['maintenance_type'])?></td>
+                                                        <td><?php echo htmlspecialchars(number_format($activity['cost'],2))?> </td>
+                                                        <td><?php echo $activity['start_date']?></td>
+                                                        <td><?php echo $activity['completion_date']=="0000-00-00"?"":$activity['completion_date'];?></td>
+                                                        <td><?php echo htmlspecialchars($activity['notes'])?></td>
                                                     </tr>
                                             <?php
                                                     endforeach;
