@@ -14,7 +14,7 @@
             redirect("maintenance_types.php");
         }
     }
-	makeHead("Departments");
+	makeHead("Maintenance Types");
 ?>
 <div id='wrapper'>
 <?php
@@ -25,7 +25,7 @@
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"> Departments</h1>
+                    <h1 class="page-header"> Maintenance Types</h1>
                 </div>
 
                 <!-- /.col-lg-12 -->
@@ -62,7 +62,7 @@
                                 <table class='table table-bordered table-condensed table-hover ' id='dataTables'>
                                     <thead>
                                         <tr>
-                                            <th>Department Name</th>
+                                            <th>Maintenance Type</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -93,8 +93,6 @@
 <script>
     $(document).ready(function() {
         $('#dataTables').DataTable({
-                 "scrollY": true,
-                 "scrollX": true,
         });
     });
     </script>

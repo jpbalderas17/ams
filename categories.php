@@ -72,7 +72,7 @@
                                                 </td>
                                                 <td>
                                                     <a class='btn btn-sm btn-warning' href='frm_categories.php?id=<?php echo $category['id'];?>'><span class='fa fa-pencil'></span></a>
-                                                    <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=c' onclick='return confirm("This asset will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                    <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=c' onclick='return confirm("This category will be deleted.")'><span class='fa fa-trash'></span></a>
                                                 </td>
                                             </tr>
                                         <?php

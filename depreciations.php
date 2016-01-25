@@ -99,8 +99,6 @@
 <script>
     $(document).ready(function() {
         $('#dataTables').DataTable({
-                 "scrollY": true,
-                 "scrollX": true,
         });
     });
     </script>
