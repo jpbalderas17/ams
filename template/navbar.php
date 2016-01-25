@@ -84,7 +84,7 @@
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="frm_assets.php"><i class="fa fa-barcode fa-fw"></i> Asset</a>
                             </li>
-                            <li><a href="consumables.php"><i class="fa fa-tint fa-fw"></i> Consumable</a>
+                            <li><a href="frm_consumables.php"><i class="fa fa-tint fa-fw"></i> Consumable</a>
                             </li>
                             <?php
                                 if(AllowUser(array(1))):

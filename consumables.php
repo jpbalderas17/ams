@@ -4,6 +4,9 @@
 		toLogin();
 		die();
 	}
+    if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
 	makeHead("Consumables");
 ?>
 <div id='wrapper'>

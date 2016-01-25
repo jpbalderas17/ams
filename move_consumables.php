@@ -5,6 +5,9 @@
 		toLogin();
 		die();
 	}
+	if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
 	/*
 	if($_POST['type']<>"out" && $_POST['type']<>"in" || (empty($_POST['id']))){
 		redirect("assets.php");

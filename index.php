@@ -141,7 +141,7 @@
                                             ?>
                                                     <tr>
                                                 <td><?php echo htmlspecialchars($activity['action_date'])?></td>
-                                                <td><a href='view_activity.php?id=<?= $activity['item_id']?>'><?php echo htmlspecialchars($activity['asset_tag'])?></a></td>
+                                                <td><a href='view_asset.php?id=<?= $activity['item_id']?>'><?php echo htmlspecialchars($activity['asset_tag'])?></a></td>
                                                 <td><?php echo htmlspecialchars($activity['asset_name'])?></td>
                                                 <td><?php echo htmlspecialchars($activity['admin'])?></td>
                                                 <td><?php echo htmlspecialchars($activity['action'])?></td>
