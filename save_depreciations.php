@@ -23,7 +23,12 @@
 		if($errors!=""){
 
 			Alert("You the following errors: <br/>".$errors,"danger");
-			redirect("depreciations.php");
+			if(empty($inputs['id'])){
+				redirect("depreciations.php");
+			}
+			else{
+				redirect("depreciations.php?id=".urlencode($inputs['id']));
+			}
 			die;
 		}
 		else{

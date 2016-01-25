@@ -24,6 +24,10 @@
 			$errors.="Select a Category. <br/>";
 		}
 
+		if (empty($inputs['depreciation_id'])){
+			$errors.="Select a Depreciation. <br/>";
+		}
+
 		if($errors!=""){
 
 			Alert("You the following errors: <br/>".$errors,"danger");

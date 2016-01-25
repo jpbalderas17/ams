@@ -23,7 +23,12 @@
 		if($errors!=""){
 
 			Alert("You the following errors: <br/>".$errors,"danger");
-			redirect("frm_categories.php");
+			if(empty($inputs['id'])){
+				redirect("frm_categories.php");
+			}
+			else{
+				redirect("frm_categories.php?id=".urlencode($inputs['id']));
+			}
 			die;
 		}
 		else{

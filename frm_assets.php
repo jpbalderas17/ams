@@ -136,12 +136,20 @@
 
                                     </div>
                                 </div>
-                                <!-- <div class='form-group'>
+                                <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Image</label>
                                     <div class='col-sm-12 col-md-9'>
+                                        <?php
+                                            if(!empty($asset['image'])):
+                                        ?>
+                                        <img src='asset_images/<?php echo $asset['image'];?>' class='img-responsive'>
+                                        
+                                        <?php
+                                            endif;
+                                        ?>
                                         <input type='file' class='form-control' name='image'>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <div class='form-group'>
                                     <div class='col-sm-12 col-md-9 col-md-offset-3 '>

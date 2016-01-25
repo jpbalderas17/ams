@@ -8,7 +8,7 @@
         redirect("index.php");
     }
     if(!empty($_GET['id'])){
-        $asset=$con->myQuery("SELECT EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image,check_out_date,location,CONCAT(last_name,', ',first_name,' ',middle_name)as current_holder FROM qry_assets WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+        $asset=$con->myQuery("SELECT image,EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image,check_out_date,location,CONCAT(last_name,', ',first_name,' ',middle_name)as current_holder FROM qry_assets WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($asset)){
             //Alert("Invalid asset selected.");
             Modal("Invalid Asset Selected");
@@ -17,7 +17,7 @@
         }
     }
     elseif(!empty($_GET['asset_tag'])){
-        $asset=$con->myQuery("SELECT EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image FROM qry_assets WHERE asset_tag=?",array($_GET['asset_tag']))->fetch(PDO::FETCH_ASSOC);
+        $asset=$con->myQuery("SELECT image,EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image FROM qry_assets WHERE asset_tag=?",array($_GET['asset_tag']))->fetch(PDO::FETCH_ASSOC);
         
         if(empty($asset)){
             //Alert("Invalid asset selected.");
@@ -87,6 +87,19 @@
                     ?>    
                     <div class='row'>
                     	<div class='col-md-9'>
+                            <?php
+
+                                if(!empty($asset['image'])):
+                            ?>
+                                <div class='row'>
+                                    <div class='col-xs-12'>
+                                        <strong>Image: </strong>
+                                        <img src='asset_images/<?php echo $asset['image'];?>' class='img-responsive'>
+                                    </div>
+                                </div>
+                            <?php
+                                endif;
+                            ?>
                             <div class='row'>
                                 <div class='col-xs-12'>
                                     <strong>Status: </strong>
@@ -187,7 +200,7 @@
                                 <div class='col-md-12'>
                                     <h4>File Uploads</h4>
                                         <?php
-                                            if($_SESSION[WEBAPP]['user']['user_type_id']==1 || $_SESSION[WEBAPP]['user']['user_type_id']==2):
+                                            if($_SESSION[WEBAPP]['user']['user_type']==1 || $_SESSION[WEBAPP]['user']['user_type']==2):
                                         ?>
                                             <h5>Upload File</h5>
                                             <form class='form form-inline' enctype="multipart/form-data" action='file_upload.php' method='post'>

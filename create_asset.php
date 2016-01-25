@@ -24,12 +24,20 @@
 		if( empty($inputs['purchase_date'])){
 			$errors.="Select a purchase date for the asset. <br/>";
 		}
+		if( empty($inputs['location_id'])){
+			$errors.="Select a location. <br/>";
+		}
 
 
 		if($errors!=""){
 
 			Alert("You the following errors: <br/>".$errors,"danger");
-			redirect("frm_assets.php");
+			if(empty($inputs['id'])){
+				redirect("frm_assets.php");
+			}
+			else{
+				redirect("frm_assets.php?id=".urlencode($inputs['id']));
+			}
 			die;
 		}
 		else{
@@ -38,20 +46,40 @@
 				//Insert
 				unset($inputs['id']);
 				$asset_tag=date("Ynd");
+
 				$stmt=$con->myQuery("INSERT INTO assets(asset_model_id,asset_status_id,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,location_id) VALUES(:model_id,:asset_status_id,:serial_number,:asset_name,:purchase_date,:purchase_cost,:order_number,:notes,:location_id)",$inputs);
 
 				$asset_id=$con->lastInsertId();
 				$asset_tag=date("Ynd").$asset_id;
+				$file_sql="";
+				$insert=array('asset_tag'=>$asset_tag,'asset_id'=>$asset_id);
+				if(!empty($_FILES['image'])){
+					$filename=$asset_id.getFileExtension($_FILES['image']['name']);
+					move_uploaded_file($_FILES['image']['tmp_name'],"asset_images/".$filename);
+					$file_sql=",image=:image";
+					$insert['image']=$filename;
+				}
 
-				$con->myQuery("UPDATE assets SET asset_tag=? WHERE id=?",array($asset_tag,$asset_id));
+				$con->myQuery("UPDATE assets SET asset_tag=:asset_tag{$file_sql} WHERE id=:asset_id",$insert);
 
 				$con->myQuery("INSERT INTO activities(admin_id,action,action_date,category_type_id,item_id) VALUES(?,'Created Asset',NOW(),1,?)",array($_SESSION[WEBAPP]['user']['id'],$asset_id));
 			}
 			else{
 				//Update
-				$con->myQuery("UPDATE assets SET asset_model_id=:model_id,asset_status_id=:asset_status_id,serial_number=:serial_number,asset_name=:asset_name,purchase_date=:purchase_date,order_number=:order_number,purchase_cost=:purchase_cost,notes=:notes,location_id=:location_id WHERE id=:id",$inputs);
-			}
 
+				$file_sql="";
+				if(!empty($_FILES['image'])){
+					$filename=$inputs['id'].getFileExtension($_FILES['image']['name']);
+					move_uploaded_file($_FILES['image']['tmp_name'],"asset_images/".$filename);
+					$file_sql=",image=:image";
+					$inputs['image']=$filename;
+					// var_dump($inputs);
+				}
+
+				// echo "<br/>UPDATE assets SET asset_model_id=:model_id,asset_status_id=:asset_status_id,serial_number=:serial_number,asset_name=:asset_name,purchase_date=:purchase_date,order_number=:order_number,purchase_cost=:purchase_cost,notes=:notes,location_id=:location_id{$file_sql} WHERE id=:id";
+				$con->myQuery("UPDATE assets SET asset_model_id=:model_id,asset_status_id=:asset_status_id,serial_number=:serial_number,asset_name=:asset_name,purchase_date=:purchase_date,order_number=:order_number,purchase_cost=:purchase_cost,notes=:notes,location_id=:location_id{$file_sql} WHERE id=:id",$inputs);
+			}
+			// die();
 			Alert("Save succesful","success");
 			redirect("assets.php");
 		}

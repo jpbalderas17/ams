@@ -21,7 +21,12 @@
 		if($errors!=""){
 
 			Alert("You the following errors: <br/>".$errors,"danger");
-			redirect("locations.php");
+			if(empty($inputs['id'])){
+				redirect("locations.php");
+			}
+			else{
+				redirect("locations.php?id=".urlencode($inputs['id']));
+			}
 			die;
 		}
 		else{

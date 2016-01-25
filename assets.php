@@ -54,11 +54,11 @@
                                             <th>Status</th>
                                             <th>Location</th>
                                             <th>Category</th>
-                                            <th>EOL</th>
+                                            <th class='date-td'>EOL</th>
                                             <th>Notes</th>
                                             <th>Order Number</th>
-                                            <th>Checkout Date</th>
-                                            <th>Expected Checkin Date</th>
+                                            <th class='date-td'>Checkout Date</th>
+                                            <th class='date-td'>Expected Checkin Date</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>

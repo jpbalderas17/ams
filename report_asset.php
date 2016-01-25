@@ -104,6 +104,7 @@
                                                 ?>
                                                         <td>
                                                             <?php
+
                                                                 echo date_format( new DateTime(getDepriciationDate($asset['purchase_date'],$value)),"Y-m-d");
                                                             ?>
                                                         </td>

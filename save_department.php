@@ -20,7 +20,12 @@
 		if($errors!=""){
 
 			Alert("You the following errors: <br/>".$errors,"danger");
-			redirect("departments.php");
+			if(empty($inputs['id'])){
+				redirect("departments.php");
+			}
+			else{
+				redirect("departments.php?id=".urlencode($inputs['id']));
+			}
 			die;
 		}
 		else{

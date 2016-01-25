@@ -21,7 +21,12 @@
 		if($errors!=""){
 
 			Alert("You the following errors: <br/>".$errors,"danger");
-			redirect("asset_status_labels.php");
+			if(empty($inputs['id'])){
+				redirect("asset_status_labels.php");
+			}
+			else{
+				redirect("asset_status_labels.php?id=".urlencode($inputs['id']));
+			}
 			die;
 		}
 		else{

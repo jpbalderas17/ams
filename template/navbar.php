@@ -13,10 +13,11 @@
             <ul class="nav navbar-top-links navbar-right">
                 
                 <!-- /.dropdown -->
-                <li class="dropdown">
+                <!-- <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
+
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
                             <a href="#">
@@ -70,8 +71,8 @@
                             </a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-alerts -->
-                </li>
+                    
+                </li> -->
                 <!-- /.dropdown -->
                 <?php
                     if($_SESSION[WEBAPP]['user']['user_type']==1 || $_SESSION[WEBAPP]['user']['user_type']==2):
