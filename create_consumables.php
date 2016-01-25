@@ -42,14 +42,18 @@
 			if(empty($inputs['id'])){
 				//Insert
 				$inputs=$_POST;
+				
+				$inputs['name']=$_POST['name'];
 				unset($inputs['id']);
-				//$inputs['name']=$_POST['name'];
+
 				$con->myQuery("INSERT INTO consumables(name,order_number,purchase_date,purchase_cost,quantity,category_id) VALUES(:name,:order_number,:purchase_date,:purchase_cost,:quantity,:category_type)",$inputs);
 					$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
 					$activity_input['user_id']=$_SESSION[WEBAPP]['user']['id'];
 					$activity_input['category_type_id']=2;
-
-				$con->myQuery("INSERT INTO activities(admin_id,user_id,action,action_date,category_type_id) VALUES(:admin_id,:user_id,'Consumable Created',NOW(),:category_type_id)",$activity_input);
+					$activity_input['notes']="Quantity (".$inputs['quantity'].")";
+					$activity_input['item_id']=$con->lastInsertId();
+			
+				$con->myQuery("INSERT INTO activities(admin_id,user_id,action,action_date,category_type_id,item_id,notes) VALUES(:admin_id,:user_id,'Consumable Created',NOW(),:category_type_id,:item_id,:notes)",$activity_input);
 				Alert("Save succesful","success");
 
 			}

@@ -51,12 +51,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <tr>
+                                           
 
                                              <?php
-                                            $assets=$con->myQuery("SELECT action_date,(SELECT CONCAT(first_name,' ',middle_name,' ',last_name)  FROM users WHERE id=admin_id) AS admin,NAME, order_number,ACTION,(SELECT CONCAT(first_name,' ',middle_name,' ',last_name) FROM users WHERE id=c.user_id)AS USER,notes FROM consumables AS c LEFT JOIN activities AS a ON a.item_id=c.id WHERE category_type_id=2 and is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
+                                            $assets=$con->myQuery("SELECT action_date,(SELECT CONCAT(first_name,' ',middle_name,' ',last_name)  FROM users WHERE id=admin_id) AS admin,NAME, order_number,ACTION,(SELECT CONCAT(first_name,' ',middle_name,' ',last_name) FROM users WHERE id=a.user_id)AS USER,notes FROM consumables AS c LEFT JOIN activities AS a ON a.item_id=c.id WHERE category_type_id=2 and is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
                                             foreach ($assets as $asset):
-                                            ?>
+                                            ?> <tr>
                                                 <?php
                                                     foreach ($asset as $key => $value):
                                                 ?>

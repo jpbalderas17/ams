@@ -5,7 +5,7 @@
 		die();
 	}
     if(!empty($_GET['id'])){
-        $asset=$con->myQuery("SELECT id,name,purchase_date,order_number,purchase_cost,user_id  FROM consumables WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+        $asset=$con->myQuery("SELECT id,name,purchase_date,order_number,purchase_cost  FROM consumables WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($asset)){
             //Alert("Invalid asset selected.");
             Modal("Invalid Consumables Selected");
