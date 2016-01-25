@@ -120,6 +120,8 @@
                         </li>
                         <li><a href="locations.php"><i class="fa fa-globe fa-fw"></i></i> Locations</a>
                         </li>
+                        <li><a href="maintenance_types.php"><i class="fa fa-gear fa-fw"></i></i> Maintenance Types</a>
+                        </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>

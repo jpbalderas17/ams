@@ -37,6 +37,10 @@
 				$table="departments";
 				$page="departments.php";
 				break;
+			case 'mt':
+				$table="asset_maintenance_types";
+				$page="maintenance_types.php";
+				break;
 			case 'depr':
 				$table="depreciations";
 				$page="depreciations.php";
