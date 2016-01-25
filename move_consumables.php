@@ -38,9 +38,8 @@
 				#Validate if there is a selected user
 				$consumable_inputs['id']=$inputs['id'];
 				$current_quantity=$con->myQuery("SELECT quantity FROM consumables WHERE id=:id",$consumable_inputs)->fetchColumn();
-
+				
 				$consumable_inputs['name']=$inputs['name'];
-				//$qty['stock']=$_POST['quantity']-$inputs['quantity'];
 				$consumable_inputs['quantity']=$current_quantity-$inputs['quantity'];
 				$consumable_inputs['user_id']=$inputs['user_id'];
 				//$consumable_inputs['notes']=$inputs['notes'];
@@ -51,7 +50,7 @@
 
 				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
 				$activity_input['user_id']=$inputs['user_id'];
-				$activity_input['notes']=$inputs['notes'];
+				$activity_input['notes']='Quantity ('.$inputs['quantity'] .')'. ' ' . $inputs['notes'];
 				$activity_input['category_type_id']=2;
 				$activity_input['item_id']=$inputs['id'];
 

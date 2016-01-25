@@ -55,10 +55,34 @@
 			}
 			else{				
 				//Update
-				$con->myQuery("UPDATE consumables SET name=:name,order_number=:order_number,purchase_date=:purchase_date,purchase_cost=:purchase_cost,quantity=:quantity,category_id=:category_type WHERE id=:id",$inputs);
-				Alert("Update succesful","success");
-			}
+				$activity_input['item_id']=$inputs['id'];
+				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
+				$activity_input['user_id']=$_SESSION[WEBAPP]['user']['id'];
+				$activity_input['category_type_id']=2;
+				//$totalQty=$current_quantity-$inputs['quantity'];
+				$current_quantity=$con->myQuery("SELECT quantity FROM consumables WHERE id=:id",array('id'=>$inputs['id']))->fetchColumn();
 
+					if ($inputs['quantity'] > $current_quantity) {
+						$activity_input['notes']="Quantity (".($inputs['quantity']-$current_quantity).")";
+						// echo $inputs['quantity']." - ".$current_quantity." = ".($inputs['quantity']-$current_quantity);
+						
+						$con->myQuery("UPDATE consumables SET name=:name,order_number=:order_number,purchase_date=:purchase_date,purchase_cost=:purchase_cost,quantity=:quantity,category_id=:category_type WHERE id=:id",$inputs);
+						$con->myQuery("INSERT INTO activities(admin_id,user_id,action,action_date,category_type_id,item_id,notes) VALUES(:admin_id,:user_id,'Consumable Checkin',NOW(),:category_type_id,:item_id,:notes)",$activity_input);
+
+					}	
+					elseif ($inputs['quantity'] < $current_quantity) {
+						$activity_input['notes']="Quantity (".($current_quantity-$inputs['quantity']).")";
+						// echo $current_quantity." - ".$inputs['quantity']." = ".($current_quantity-$inputs['quantity']);
+
+						$con->myQuery("UPDATE consumables SET name=:name,order_number=:order_number,purchase_date=:purchase_date,purchase_cost=:purchase_cost,quantity=:quantity,category_id=:category_type WHERE id=:id",$inputs);
+						$con->myQuery("INSERT INTO activities(admin_id,user_id,action,action_date,category_type_id,item_id,notes) VALUES(:admin_id,:user_id,'Consumable Checkout',NOW(),:category_type_id,:item_id,:notes)",$activity_input);
+						
+					}
+					elseif ($inputs['quantity'] = $current_quantity) {
+						$con->myQuery("UPDATE consumables SET name=:name,order_number=:order_number,purchase_date=:purchase_date,purchase_cost=:purchase_cost,quantity=:quantity,category_id=:category_type WHERE id=:id",$inputs);
+						Alert("Update succesful","success");
+					}
+			}
 			redirect("consumables.php");
 		}
 		die;
