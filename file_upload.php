@@ -7,7 +7,9 @@
 	}
 	// var_dump($_POST);
 	// var_dump($_FILES);
-
+if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
 	if(!empty($_POST)){
 		if(empty($_POST['asset_id'])){
 			redirect("index.php");

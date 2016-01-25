@@ -4,6 +4,9 @@
 		toLogin();
 		die();
 	}
+	if(!AllowUser(array(1))){
+        redirect("index.php");
+    }
     if(!empty($_GET['id'])){
         $department=$con->myQuery("SELECT id,asset_status_id,name FROM asset_status_labels WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($department)){

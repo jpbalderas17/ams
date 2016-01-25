@@ -4,6 +4,11 @@
         toLogin();
         die();
     }
+
+if(!AllowUser(array(1))){
+        redirect("index.php");
+    }
+
     if(!empty($_GET['id'])){
         $asset=$con->myQuery("SELECT id,user_type_id,first_name,middle_name,last_name,username,password,email,contact_no,employee_no,location_id,title,department_id from users WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($asset)){

@@ -4,6 +4,9 @@
 		toLogin();
 		die();
 	}
+    if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
     if(empty($_GET['id']) || empty($_GET['type'])){
         redirect("assets.php");
         die();

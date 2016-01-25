@@ -4,6 +4,9 @@
 		toLogin();
 		die();
 	}
+    if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
     if(empty($_GET['asset_tag']) && empty($_GET['id'])){
         redirect("index.php");
     }

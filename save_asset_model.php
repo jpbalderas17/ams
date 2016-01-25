@@ -1,6 +1,10 @@
 <?php
 	require_once 'support/config.php';
 	
+	if(!AllowUser(array(1,2))){
+		redirect("index.php");
+	}
+
 	if(!isLoggedIn()){
 		toLogin();
 		die();

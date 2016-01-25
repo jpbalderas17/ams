@@ -4,6 +4,9 @@
 		toLogin();
 		die();
 	}
+    if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
     if(!empty($_GET['id'])){
         $asset_model=$con->myQuery("SELECT id,name,manufacturer_id,category_id,image,model_no,EOL,depreciation_id FROM asset_models WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($asset_model)){

@@ -4,6 +4,9 @@
 		toLogin();
 		die();
 	}
+    if(!AllowUser(array(1,2,3))){
+        redirect("index.php");
+    }
 	makeHead("Asset Reports");
 ?>
 <div id='wrapper'>

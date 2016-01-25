@@ -4,6 +4,9 @@
 		toLogin();
 		die();
 	}
+    if(!AllowUser(array(1))){
+        redirect("index.php");
+    }
     if(!empty($_GET['id'])){
         $department=$con->myQuery("SELECT id,name,address FROM locations WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($department)){

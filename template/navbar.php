@@ -84,10 +84,16 @@
                         <ul class="dropdown-menu dropdown-user">
                             <li><a href="frm_assets.php"><i class="fa fa-barcode fa-fw"></i> Asset</a>
                             </li>
-                            <li><a href="#"><i class="fa fa-tint fa-fw"></i> Consumable</a>
+                            <li><a href="consumables.php"><i class="fa fa-tint fa-fw"></i> Consumable</a>
                             </li>
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User</a>
+                            <?php
+                                if(AllowUser(array(1))):
+                            ?>
+                            <li><a href="frm_users.php"><i class="fa fa-user fa-fw"></i> User</a>
                             </li>
+                            <?php
+                                endif;
+                            ?>
                         </ul>
                         <!-- /.dropdown-create new -->
                     </li>

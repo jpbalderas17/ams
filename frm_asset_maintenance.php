@@ -4,6 +4,9 @@
 		toLogin();
 		die();
 	}
+    if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
     if(!empty($_GET['id'])){
     	$maintenance=$con->myQuery("SELECT id,asset_id,asset_maintenance_type_id,title,start_date,completion_date,cost,notes FROM asset_maintenances WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($maintenance)){

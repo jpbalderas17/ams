@@ -4,6 +4,10 @@
 		toLogin();
 		die();
 	}
+
+    if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
     if(!empty($_GET['id'])){
         $category=$con->myQuery("SELECT categories.id,categories.name,category_types.name as asset_type,category_type_id FROM `categories` JOIN category_types ON categories.category_type_id=category_types.id WHERE categories.id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($category)){

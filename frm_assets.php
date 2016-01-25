@@ -4,6 +4,10 @@
 		toLogin();
 		die();
 	}
+    if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
+
     if(!empty($_GET['id'])){
         $asset=$con->myQuery("SELECT id,asset_model_id,asset_status_id,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,location_id,image FROM assets WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($asset)){
@@ -143,7 +147,7 @@
                                             if(!empty($asset['image'])):
                                         ?>
                                         <img src='asset_images/<?php echo $asset['image'];?>' class='img-responsive'>
-                                        
+
                                         <?php
                                             endif;
                                         ?>

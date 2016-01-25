@@ -6,6 +6,9 @@
 		die();
 	}
 
+if(!AllowUser(array(1,2))){
+		redirect("index.php");
+	}
 	if(!empty($_POST)){
 		//Validate form inputs
 		$inputs=$_POST;
