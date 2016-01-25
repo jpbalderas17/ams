@@ -120,7 +120,7 @@
                                                         <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $value?>&t=a' onclick='return confirm("This asset will be deleted.")'><span class='fa fa-trash'></span></a>
                                                     </td>
                                                 <?php
-                                                    elseif($key=="check_out_date" || $key=="expected_check_in_date" ):
+                                                    elseif($key=="check_out_date" || $key=="expected_check_in_date" || $key=="EOL"):
                                                 ?>
                                                     <td>
                                                         <?php
@@ -129,6 +129,7 @@
                                                             }
                                                         ?>
                                                     </td>
+
                                                 <?php
                                                     elseif($key=="asset_tag"):
                                                 ?>

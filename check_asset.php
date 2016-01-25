@@ -16,10 +16,13 @@
         case 'out':
             # code...
             $type="Checkout";
+            $asset_filter=" AND user_id=0 ";
             break;
         case 'in':
             # code...
             $type="Checkin";
+            $asset_filter=" AND user_id<>0 ";
+
             break;
         default:
             redirect("assets.php");
@@ -27,7 +30,8 @@
     }
     #Validate if assets can be checkedin or checkedout
     if(!empty($_GET['id'])){
-        $asset=$con->myQuery("SELECT id,model,asset_tag,serial_number,asset_name,image FROM qry_assets WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
+
+        $asset=$con->myQuery("SELECT id,model,asset_tag,serial_number,asset_name,image FROM qry_assets WHERE id=? {$asset_filter}",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($asset)){
             //Alert("Invalid asset selected.");
             Modal("Invalid Asset Selected");

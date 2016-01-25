@@ -56,7 +56,7 @@ if(!AllowUser(array(1,2))){
 				$asset_tag=date("Ynd").$asset_id;
 				$file_sql="";
 				$insert=array('asset_tag'=>$asset_tag,'asset_id'=>$asset_id);
-				if(!empty($_FILES['image'])){
+				if(!empty($_FILES['image']['name'])){
 					$filename=$asset_id.getFileExtension($_FILES['image']['name']);
 					move_uploaded_file($_FILES['image']['tmp_name'],"asset_images/".$filename);
 					$file_sql=",image=:image";
@@ -71,7 +71,7 @@ if(!AllowUser(array(1,2))){
 				//Update
 
 				$file_sql="";
-				if(!empty($_FILES['image'])){
+				if(!empty($_FILES['image']['name'])){
 					$filename=$inputs['id'].getFileExtension($_FILES['image']['name']);
 					move_uploaded_file($_FILES['image']['tmp_name'],"asset_images/".$filename);
 					$file_sql=",image=:image";

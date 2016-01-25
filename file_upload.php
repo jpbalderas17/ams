@@ -16,7 +16,7 @@ if(!AllowUser(array(1,2))){
 			die();
 		}
 
-		if(empty($_FILES['file'])){
+		if(empty($_FILES['file']['name'])){
 			Alert("No file selected.","danger");
 			redirect("view_assets.php?id=".urlencode($_POST['asset_id']));
 			die();

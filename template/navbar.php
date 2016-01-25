@@ -126,6 +126,7 @@
                     <!-- /.dropdown-user -->
                 </li>
                 <?php
+                    
                     endif;
                 ?>
                 <li class="dropdown">
