@@ -4,6 +4,9 @@
         toLogin();
         die();
     }
+    if(!AllowUser(array(1,2))){
+        redirect("index.php");
+    }
     makeHead("View Users");
 ?>
 <div id='wrapper'>
@@ -71,7 +74,7 @@
                                                 ?>
                                                     <td>
                                                         <a class='btn btn-sm btn-warning' href='frm_users.php?id=<?php echo $value;?>'><span class='fa fa-pencil'></span></a>
-                                                        <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $value?>&t=u' onclick='return confirm("This consumable will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                        <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $value?>&t=u' onclick='return confirm("This user will be deleted.")'><span class='fa fa-trash'></span></a>
                                                     </td>
                                                 <?php
                                                     else:

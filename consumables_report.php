@@ -4,7 +4,7 @@
         toLogin();
         die();
     }
-    if(!AllowUser(array(1,2,3))){
+    if(!AllowUser(array(1,2))){
         redirect("index.php");
     }
     makeHead("Consumable Reports");
@@ -33,7 +33,8 @@
                         <div class='col-sm-12'>
                                 
                         </div>
-                    </div> 
+                    </div>
+                    <br/>    
 
                     <div class='panel panel-default'>
                         
@@ -67,7 +68,7 @@
                                                 <?php
                                                     elseif($key=='id'):
                                                 ?>  
-
+                                                    
                                                 <?php
                                                     else:
                                                 ?>                                                    

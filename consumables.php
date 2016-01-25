@@ -71,10 +71,26 @@
                                                     elseif($key=='id'):
                                                 ?>                                                                                                 
                                                     <td>
+                                                        <?php
+                                                        $current_quantity=$con->myQuery("SELECT quantity FROM consumables WHERE id=:id",array('id'=>$asset['id']))->fetchColumn();
+                                                        if ($current_quantity==0){
+                                                        ?>
+                                                            <button class='btn btn-sm btn-info disabled'><span class='fa fa-arrow-right'></span> Check Out</button>
+                                                            
+                                                            <a class='btn btn-sm btn-warning' href='frm_consumables.php?id=<?php echo $value;?>'><span class='fa fa-pencil'></span></a>
+                                                            <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $value?>&t=c' onclick='return confirm("This consumable will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                        
+                                                        <?php
+                                                        }
+                                                        else{
+                                                        ?>
                                                         <a class='btn btn-sm btn-info' href='check_consumables.php?id=<?php echo $value;?>&type=out'><span class='fa fa-arrow-right'></span> Check Out</a>
                                                         <a class='btn btn-sm btn-warning' href='frm_consumables.php?id=<?php echo $value;?>'><span class='fa fa-pencil'></span></a>
                                                         <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $value?>&t=c' onclick='return confirm("This consumable will be deleted.")'><span class='fa fa-trash'></span></a>
-                                                                                                            </td>
+                                                         <?php                                                   
+                                                        }
+                                                        ?>
+                                                        </td>
                                                 <?php
                                                     else:
                                                 ?>

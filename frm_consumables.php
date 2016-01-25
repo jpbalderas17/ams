@@ -60,11 +60,19 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Category Type*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control' name='category_type' data-placeholder='Select a Category' <?php echo!(empty($asset))?"data-selected='".$asset['category_id']."'":NULL ?>>
-                                            <?php
-                                            echo makeOptions($category_type);
-                                            ?>
-                                        </select>
+
+                                    <div class='row'>
+                                            <div class='col-sm-11'>
+                                                <select class='form-control' name='category_type' data-placeholder='Select a Category' <?php echo!(empty($asset))?"data-selected='".$asset['category_id']."'":NULL ?>>
+                                                    <?php
+                                                        echo makeOptions($category_type);
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class='col-ms-1'>
+                                                <a href='frm_categories.php' class='btn btn-sm btn-success'><span class='fa fa-plus'></span></a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class='form-group'>
