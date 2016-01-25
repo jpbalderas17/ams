@@ -23,7 +23,7 @@ if(!AllowUser(array(1,2))){
 
 		if($errors!=""){
 
-			Alert("You the following errors: <br/>".$errors,"danger");
+			Alert("You have the following errors: <br/>".$errors,"danger");
 			if(empty($inputs['id'])){
 				redirect("departments.php");
 			}
@@ -46,6 +46,7 @@ if(!AllowUser(array(1,2))){
 
 			Alert("Save succesful","success");
 			redirect("departments.php");
+			die();
 		}
 		
 	}

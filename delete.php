@@ -53,6 +53,10 @@
 				$table="locations";
 				$page="locations.php";
 				break;
+			case 'man':
+				$table="manufacturers";
+				$page="manufacturers.php";
+				break;
 			case 'fu':
 				$table="files";
 				$page="assets.php";

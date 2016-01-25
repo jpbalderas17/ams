@@ -62,7 +62,7 @@
                                             <th>Order Number</th>
                                             <th class='date-td'>Checkout Date</th>
                                             <th class='date-td'>Expected Checkin Date</th>
-                                            <th>Actions</th>
+                                            <th style='min-width:150px'>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>

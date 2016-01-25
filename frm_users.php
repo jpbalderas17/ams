@@ -48,7 +48,7 @@ if(!AllowUser(array(1))){
                             <form class='form-horizontal' method='POST' action='create_users.php' enctype="multipart/form-data">
                                 <input type='hidden' name='id' value='<?php echo !empty($asset)?$asset['id']:""?>'>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> User Type</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> User Type*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <select class='form-control' name='user_type_id' data-placeholder='Select User Type' <?php echo!(empty($asset))?"data-selected='".$asset['user_type_id']."'":NULL ?>>
                                             <?php
@@ -58,37 +58,37 @@ if(!AllowUser(array(1))){
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> First name</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> First name*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <input type='text' class='form-control' placeholder='Enter First Name' name='first_name' value='<?php echo !empty($asset)?$asset['first_name']:"" ?>'>
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Middle name</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Middle name*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <input type='text' class='form-control' placeholder='Enter Middle Name' name='middle_name' value='<?php echo !empty($asset)?$asset['middle_name']:"" ?>'>
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Last name</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Last name*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <input type='text' class='form-control' placeholder='Enter Last Name' name='last_name' value='<?php echo !empty($asset)?$asset['last_name']:"" ?>'>
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Username</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Username*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <input type='text' class='form-control' placeholder='Enter Username' name='username' value='<?php echo !empty($asset)?$asset['username']:"" ?>'>
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Password</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Password*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <input type='password' class='form-control' placeholder='Enter Password' name='password' value='<?php echo !empty($asset)?$asset['password']:"" ?>'>
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Email Address</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Email Address*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <input type='text' class='form-control' placeholder='Enter Email Address' name='email' value='<?php echo !empty($asset)?$asset['email']:"" ?>'>
                                     </div>
@@ -108,11 +108,19 @@ if(!AllowUser(array(1))){
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Department</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control' name='department_id' data-placeholder='Select Department' <?php echo!(empty($asset))?"data-selected='".$asset['department_id']."'":NULL ?>>
-                                            <?php
-                                            echo makeOptions($department);
-                                            ?>
-                                        </select>
+                                        <div class='row'>
+                                            <div class='col-sm-11'>
+                                                <select class='form-control' name='department_id' data-placeholder='Select Department' <?php echo!(empty($asset))?"data-selected='".$asset['department_id']."'":NULL ?>>
+                                                    <?php
+                                                    echo makeOptions($department);
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class='col-ms-1'>
+                                                <a href='departments.php' class='btn btn-sm btn-success'><span class='fa fa-plus'></span></a>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class='form-group'>
@@ -124,11 +132,19 @@ if(!AllowUser(array(1))){
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Location</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control' name='location_id' data-placeholder='Select Location' <?php echo!(empty($asset))?"data-selected='".$asset['location_id']."'":NULL ?>>
-                                            <?php
-                                            echo makeOptions($location);
-                                            ?>
-                                        </select>
+                                        <div class='row'>
+                                            <div class='col-sm-11'>
+                                                <select class='form-control' name='location_id' data-placeholder='Select Location' <?php echo!(empty($asset))?"data-selected='".$asset['location_id']."'":NULL ?>>
+                                                    <?php
+                                                    echo makeOptions($location);
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class='col-ms-1'>
+                                                <a href='locations.php' class='btn btn-sm btn-success'><span class='fa fa-plus'></span></a>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
                                 </div>                                
                                 <div class='form-group'>

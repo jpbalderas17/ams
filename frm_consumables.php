@@ -46,19 +46,19 @@
                     		<form class='form-horizontal' method='POST' action='create_consumables.php' enctype="multipart/form-data">
                     			<input type='hidden' name='id' value='<?php echo !empty($asset)?$asset['id']:""?>'>
                                 <div class='form-group'>
-                    				<label class='col-sm-12 col-md-3 control-label'> Name</label>
+                    				<label class='col-sm-12 col-md-3 control-label'> Name*</label>
                     				<div class='col-sm-12 col-md-9'>
                     					<input type='text' class='form-control' placeholder='Enter Consumable Name' name='name' value='<?php echo !empty($asset)?$asset['name']:"" ?>'>
                     				</div>
                     			</div>
                                 <div class='form-group'>
-                    				<label class='col-sm-12 col-md-3 control-label'> Order Number</label>
+                    				<label class='col-sm-12 col-md-3 control-label'> Order Number*</label>
                     				<div class='col-sm-12 col-md-9'>
                     					<input type='text' class='form-control' placeholder='Enter Order Number' name='order_number' value='<?php echo !empty($asset)?$asset['order_number']:"" ?>'>
                     				</div>
                     			</div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Category Type</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Category Type*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <select class='form-control' name='category_type' data-placeholder='Select a Category' <?php echo!(empty($asset))?"data-selected='".$asset['category_id']."'":NULL ?>>
                                             <?php
@@ -68,7 +68,7 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Purchase Date</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Purchase Date*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <?php
                                         $purchase_date="";
@@ -83,13 +83,13 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Purchase Cost</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Purchase Cost*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <input type='text' class='form-control' placeholder='Enter Purchase Cost' name='purchase_cost' value='<?php echo !empty($asset)?$asset['purchase_cost']:"" ?>''>
+                                        <input type='text' class='form-control' placeholder='Enter Purchase Cost' name='purchase_cost' value='<?php echo !empty($asset)?$asset['purchase_cost']:"" ?>'>
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Quantity</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Quantity*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <input type='text' class='form-control' placeholder='Enter quantity' name='quantity' value='<?php echo !empty($asset)?$asset['quantity']:"" ?>'>
                                     </div>

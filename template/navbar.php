@@ -86,6 +86,7 @@
                             </li>
                             <li><a href="frm_consumables.php"><i class="fa fa-tint fa-fw"></i> Consumable</a>
                             </li>
+
                             <?php
                                 if(AllowUser(array(1))):
                             ?>
@@ -122,11 +123,13 @@
                         </li>
                         <li><a href="maintenance_types.php"><i class="fa fa-gear fa-fw"></i></i> Maintenance Types</a>
                         </li>
+                        <li><a href="manufacturers.php"><i class="fa fa-gear fa-fw"></i></i> Manufacturers</a>
+                        </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
                 <?php
-                    
+
                     endif;
                 ?>
                 <li class="dropdown">
@@ -183,7 +186,7 @@
                                         <a href="assets.php?status=Deployed">Deployed</a>
                                     </li>
                             	<?php
-                            		$navbar_asset_statuses=$con->myQuery("SELECT name FROM asset_status_labels ORDER BY name")->fetchAll(PDO::FETCH_ASSOC);
+                            		$navbar_asset_statuses=$con->myQuery("SELECT name FROM asset_status_labels WHERE is_deleted=0 ORDER BY name ")->fetchAll(PDO::FETCH_ASSOC);
                             		foreach ($navbar_asset_statuses as  $navbar_asset):
                             	?>
                             		<li>

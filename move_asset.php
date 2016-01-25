@@ -144,7 +144,7 @@
 
 		if($errors!=""){
 
-			Alert("You the following errors: <br/>".$errors,"danger");
+			Alert("You have the following errors: <br/>".$errors,"danger");
 			redirect("frm_assets.php");
 			die;
 		}

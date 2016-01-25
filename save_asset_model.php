@@ -34,7 +34,7 @@
 
 		if($errors!=""){
 
-			Alert("You the following errors: <br/>".$errors,"danger");
+			Alert("You have the following errors: <br/>".$errors,"danger");
 			if(empty($inputs['id'])){
 				redirect("frm_asset_models.php");
 			}

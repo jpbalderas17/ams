@@ -24,7 +24,7 @@ if(!AllowUser(array(1))){
 
 		if($errors!=""){
 
-			Alert("You the following errors: <br/>".$errors,"danger");
+			Alert("You have the following errors: <br/>".$errors,"danger");
 			if(empty($inputs['id'])){
 				redirect("asset_status_labels.php");
 			}

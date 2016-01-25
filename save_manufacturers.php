@@ -16,7 +16,7 @@ if(!AllowUser(array(1,2))){
 
 		$errors="";
 		if (empty($inputs['name'])){
-			$errors.="Enter a Maintenance Type. <br/>";
+			$errors.="Enter a manufacturer name. <br/>";
 		}
 
 
@@ -25,10 +25,10 @@ if(!AllowUser(array(1,2))){
 
 			Alert("You have the following errors: <br/>".$errors,"danger");
 			if(empty($inputs['id'])){
-				redirect("maintenance_types.php");
+				redirect("manufacturers.php");
 			}
 			else{
-				redirect("maintenance_types.php?id=".urlencode($inputs['id']));
+				redirect("manufacturers.php?id=".urlencode($inputs['id']));
 			}
 			die;
 		}
@@ -37,15 +37,15 @@ if(!AllowUser(array(1,2))){
 			if(empty($inputs['id'])){
 				//Insert
 				unset($inputs['id']);
-				$con->myQuery("INSERT INTO asset_maintenance_types(name) VALUES(:name)",$inputs);
+				$con->myQuery("INSERT INTO manufacturers(name) VALUES(:name)",$inputs);
 			}
 			else{
 				//Update
-				$con->myQuery("UPDATE asset_maintenance_types SET name=:name WHERE id=:id",$inputs);
+				$con->myQuery("UPDATE manufacturers SET name=:name WHERE id=:id",$inputs);
 			}
 
 			Alert("Save succesful","success");
-			redirect("maintenance_types.php");
+			redirect("manufacturers.php");
 			die();
 		}
 		

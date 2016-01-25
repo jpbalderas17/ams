@@ -17,9 +17,9 @@
         }
     }
 
-    $manufacturers=$con->myQuery("SELECT id,name FROM manufacturers")->fetchAll(PDO::FETCH_ASSOC);
+    $manufacturers=$con->myQuery("SELECT id,name FROM manufacturers WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
     $categories=$con->myQuery("SELECT id,name FROM categories WHERE is_deleted=0 AND category_type_id=1")->fetchAll(PDO::FETCH_ASSOC);
-    $depreciations=$con->myQuery("SELECT id,name FROM depreciations")->fetchAll(PDO::FETCH_ASSOC);
+    $depreciations=$con->myQuery("SELECT id,name FROM depreciations WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
                     						
 	makeHead("Asset Models");
 ?>
@@ -48,7 +48,7 @@
                                 <input type='hidden' name='id' value='<?php echo !empty($asset_model)?$asset_model['id']:""?>'>
 
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Name</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Name*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <input type='text' class='form-control' name='model_name' placeholder='Enter Model Name' value='<?php echo !empty($asset_model)?$asset_model['name']:"" ?>'>
                                     </div>
@@ -60,23 +60,39 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                    				<label class='col-sm-12 col-md-3 control-label'> Manufacturer</label>
+                    				<label class='col-sm-12 col-md-3 control-label'> Manufacturer*</label>
                     				<div class='col-sm-12 col-md-9'>
-                    					<select class='form-control' name='manufacturer_id' data-placeholder="Select a Manufacturer" <?php echo!(empty($asset_model))?"data-selected='".$asset_model['manufacturer_id']."'":NULL ?>>
-                    						<?php
-                    							echo makeOptions($manufacturers);
-                    						?>
-                    					</select>
+                                        <div class='row'>
+                                            <div class='col-sm-11'>
+                                                <select class='form-control' name='manufacturer_id' data-placeholder="Select a Manufacturer" <?php echo!(empty($asset_model))?"data-selected='".$asset_model['manufacturer_id']."'":NULL ?>>
+                                                    <?php
+                                                        echo makeOptions($manufacturers);
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class='col-ms-1'>
+                                                <a href='manufacturers.php' class='btn btn-sm btn-success'><span class='fa fa-plus'></span></a>
+                                            </div>
+                                        </div>
+                    					
                     				</div>
                     			</div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Category</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Category*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control' name='category_id' data-placeholder="Select a Category" <?php echo!(empty($asset_model))?"data-selected='".$asset_model['category_id']."'":NULL ?>>
-                                            <?php
-                                                echo makeOptions($categories);
-                                            ?>
-                                        </select>
+                                        <div class='row'>
+                                            <div class='col-sm-11'>
+                                                <select class='form-control' name='category_id' data-placeholder="Select a Category" <?php echo!(empty($asset_model))?"data-selected='".$asset_model['category_id']."'":NULL ?>>
+                                                    <?php
+                                                        echo makeOptions($categories);
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class='col-ms-1'>
+                                                <a href='categories.php' class='btn btn-sm btn-success'><span class='fa fa-plus'></span></a>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class='form-group'>
@@ -95,13 +111,22 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Depreciation</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Depreciation*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control' name='depreciation_id' data-placeholder="Select a Depreciation" <?php echo!(empty($asset_model))?"data-selected='".$asset_model['depreciation_id']."'":NULL ?>>
-                                            <?php
-                                                echo makeOptions($depreciations);
-                                            ?>
-                                        </select>
+                                        
+                                        <div class='row'>
+                                            <div class='col-sm-11'>
+                                                <select class='form-control' name='depreciation_id' data-placeholder="Select a Depreciation" <?php echo!(empty($asset_model))?"data-selected='".$asset_model['depreciation_id']."'":NULL ?>>
+                                                    <?php
+                                                        echo makeOptions($depreciations);
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class='col-ms-1'>
+                                                <a href='depreciations.php' class='btn btn-sm btn-success'><span class='fa fa-plus'></span></a>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 

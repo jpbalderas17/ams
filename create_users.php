@@ -22,8 +22,8 @@ if(!AllowUser(array(1))){
 		if (empty($_POST['middle_name'])){
 			$errors.="Enter middle name. <br/>";
 		}
-		if (empty($_POST['first_name'])){
-			$errors.="Enter first name. <br/>";
+		if (empty($_POST['last_name'])){
+			$errors.="Enter last name. <br/>";
 		}
 		if (empty($_POST['username'])){
 			$errors.="Enter username. <br/>";

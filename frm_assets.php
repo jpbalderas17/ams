@@ -63,23 +63,53 @@
                                     //var_dump(!(empty($asset))?"data-selected='".$asset['asset_model_id']."'":NULL );
                                 ?>
                                 <div class='form-group'>
-                    				<label class='col-sm-12 col-md-3 control-label'> Model</label>
+                    				<label class='col-sm-12 col-md-3 control-label'> Model*</label>
                     				<div class='col-sm-12 col-md-9'>
-                    					<select class='form-control' name='model_id' data-placeholder="Select a Model" <?php echo!(empty($asset))?"data-selected='".$asset['asset_model_id']."'":NULL ?>>
-                    						<?php
-                    							echo makeOptions($asset_models);
-                    						?>
-                    					</select>
+                    					
+                                        <div class='row'>
+                                            <div class='col-sm-11'>
+                                                <select class='form-control' name='model_id' data-placeholder="Select a Model" <?php echo!(empty($asset))?"data-selected='".$asset['asset_model_id']."'":NULL ?>>
+                                                    <?php
+                                                        echo makeOptions($asset_models);
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class='col-ms-1'>
+                                                <a href='frm_asset_models.php' class='btn btn-sm btn-success'><span class='fa fa-plus'></span></a>
+                                            </div>
+                                        </div>
                     				</div>
+
                     			</div>
                     			<div class='form-group'>
-                    				<label class='col-sm-12 col-md-3 control-label'> Status</label>
+                    				<label class='col-sm-12 col-md-3 control-label'> Status*</label>
                     				<div class='col-sm-12 col-md-9'>
-                    					<select class='form-control' name='asset_status_id' data-placeholder="Select Asset Status" <?php echo !(empty($asset))?"data-selected='".$asset['asset_status_id']."'":NULL ?>>
-                    						<?php
-                    							echo makeOptions($asset_status_labels);
-                    						?>
-                    					</select>
+                                        <?php
+                                            if(AllowUser(array(1))):
+                                        ?>
+                                        <div class='row'>
+                                            <div class='col-sm-11'>
+                                                <select class='form-control' name='asset_status_id' data-placeholder="Select Asset Status" <?php echo !(empty($asset))?"data-selected='".$asset['asset_status_id']."'":NULL ?>>
+                                                    <?php
+                                                        echo makeOptions($asset_status_labels);
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class='col-ms-1'>
+                                                <a href='asset_status_labels.php' class='btn btn-sm btn-success'><span class='fa fa-plus'></span></a>
+                                            </div>
+                                        </div>
+                    					<?php
+                                            else:
+                                        ?>
+                                            <select class='form-control' name='asset_status_id' data-placeholder="Select Asset Status" <?php echo !(empty($asset))?"data-selected='".$asset['asset_status_id']."'":NULL ?>>
+                                                    <?php
+                                                        echo makeOptions($asset_status_labels);
+                                                    ?>
+                                                </select>
+                                        <?php
+                                            endif;
+                                        ?>
                     				</div>
                     			</div>
                                 <div class='form-group'>
@@ -101,7 +131,7 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Purchase Date</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Purchase Date*</label>
                                     <div class='col-sm-12 col-md-9'>
                                         <?php
                                         $purchase_date="";
@@ -130,13 +160,21 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Default Location</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Default Location*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select name='location_id' class='form-control' data-placeholder="Select Default Location" <?php echo !(empty($asset))?"data-selected='".$asset['location_id']."'":NULL ?>>    
-                                        <?php
-                                            echo makeOptions($locations);
-                                        ?>
-                                        </select>
+                                        <div class='row'>
+                                            <div class='col-sm-11'>
+                                                <select name='location_id' class='form-control' data-placeholder="Select Default Location" <?php echo !(empty($asset))?"data-selected='".$asset['location_id']."'":NULL ?>>    
+                                                <?php
+                                                    echo makeOptions($locations);
+                                                ?>
+                                                </select>
+                                            </div>
+                                            <div class='col-ms-1'>
+                                                <a href='locations.php' class='btn btn-sm btn-success'><span class='fa fa-plus'></span></a>
+                                            </div>
+                                        </div>
+                                        
 
                                     </div>
                                 </div>
