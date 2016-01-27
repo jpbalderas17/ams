@@ -74,7 +74,7 @@
                                             <tr>
                                                 <?php
                                                     foreach ($asset as $key => $value):
-                                                    if($key=="check_out_date" || $key=="expected_check_in_date" || $key=="purchase_date"):
+                                                    if($key=="check_out_date" || $key=="expected_check_in_date" || $key=="purchase_date" || $key=="EOL"):
                                                 ?>
                                                     <td>
                                                         <?php
@@ -107,8 +107,10 @@
                                                 ?>
                                                         <td>
                                                             <?php
+                                                                if(!empty($value)){
 
                                                                 echo date_format( new DateTime(getDepriciationDate($asset['purchase_date'],$value)),"Y-m-d");
+                                                                }
                                                             ?>
                                                         </td>
                                                 <?php

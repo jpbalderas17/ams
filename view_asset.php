@@ -20,7 +20,7 @@
         }
     }
     elseif(!empty($_GET['asset_tag'])){
-        $asset=$con->myQuery("SELECT image,EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image FROM qry_assets WHERE asset_tag=?",array($_GET['asset_tag']))->fetch(PDO::FETCH_ASSOC);
+        $asset=$con->myQuery("SELECT image,EOL,id,manufacturer,depreciation_term,depreciation_name,model,asset_status_label,asset_status,category,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,image,check_out_date,location,CONCAT(last_name,', ',first_name,' ',middle_name)as current_holder FROM qry_assets WHERE asset_tag=?",array($_GET['asset_tag']))->fetch(PDO::FETCH_ASSOC);
         
         if(empty($asset)){
             //Alert("Invalid asset selected.");
@@ -169,7 +169,7 @@
                                 </div>
                             </div>
                             <?php
-                                if(!empty($asset['purchase_date']) && $asset['purchase_date']!="0000-00-00"):
+                                if(!empty($asset['purchase_date']) && $asset['purchase_date']!="0000-00-00" && !empty($asset['depreciation_term'])):
                             ?>
                             <div class='row'>
                                 <div class='col-xs-12'>
@@ -192,6 +192,9 @@
                             <?php
                                 endif;
                             ?>
+                            <?php
+                                if($asset['EOL']!="0000-00-00"):
+                            ?>
                             <div class='row'>
                                 <div class='col-xs-12'>
                                     <strong>EOL: </strong>
@@ -199,6 +202,9 @@
                                     <?php echo htmlspecialchars($asset['EOL'])?>
                                 </div>
                             </div>
+                            <?php
+                                endif;
+                            ?>
                             <div class='row'>
                                 <div class='col-md-12'>
                                     <h4>File Uploads</h4>

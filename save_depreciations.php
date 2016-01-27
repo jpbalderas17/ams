@@ -20,7 +20,8 @@
 		}
 
 		if (empty($inputs['terms'])){
-			$errors.="Enter number of terms. <br/>";
+			// $errors.="Enter number of terms. <br/>";
+			$inputs['terms']=0;
 		}
 
 

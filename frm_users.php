@@ -19,9 +19,9 @@ if(!AllowUser(array(1))){
         }
     }
     
-    $department=$con->myQuery("SELECT id,name FROM departments")->fetchAll(PDO::FETCH_ASSOC);
-    $location=$con->myQuery("SELECT id,name FROM locations")->fetchAll(PDO::FETCH_ASSOC);
-    $user_type=$con->myQuery("SELECT id,name FROM user_types")->fetchAll(PDO::FETCH_ASSOC);                                      
+    $department=$con->myQuery("SELECT id,name FROM departments WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
+    $location=$con->myQuery("SELECT id,name FROM locations WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
+    $user_type=$con->myQuery("SELECT id,name FROM user_types WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);                                      
     makeHead("Users");
 ?>
 <div id='wrapper'>
