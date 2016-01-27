@@ -41,15 +41,14 @@
 				#Validate if there is a selected user
 				$consumable_inputs['id']=$inputs['id'];
 				$current_quantity=$con->myQuery("SELECT quantity FROM consumables WHERE id=:id",$consumable_inputs)->fetchColumn();
-				
 				$consumable_inputs['name']=$inputs['name'];
 				$consumable_inputs['quantity']=$current_quantity-$inputs['quantity'];
-				$consumable_inputs['user_id']=$inputs['user_id'];
+				//$consumable_inputs['user_id']=$inputs['user_id'];
 				//$consumable_inputs['notes']=$inputs['notes'];
-				
+				//var_dump($consumable_inputs);
 				#transaction here
 
-				$con->myQuery("UPDATE consumables SET user_id=:user_id,name=:name,quantity=:quantity WHERE id=:id",$consumable_inputs);
+				$con->myQuery("UPDATE consumables SET name=:name,quantity=:quantity WHERE id=:id",$consumable_inputs);
 
 				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
 				$activity_input['user_id']=$inputs['user_id'];
@@ -58,7 +57,8 @@
 				$activity_input['item_id']=$inputs['id'];
 
 				$con->myQuery("INSERT INTO activities(admin_id,user_id,action,notes,action_date,category_type_id,item_id) VALUES(:admin_id,:user_id,'Consumable Checkout',:notes,NOW(),:category_type_id,:item_id)",$activity_input);
-				
+				Alert("Consumable checked out.","success");
+				redirect("consumables.php");
 				#end of transaction 
 			}
 			break;
@@ -105,8 +105,7 @@
 			redirect("consumables.php");
 			break;
 	}
-	Alert("Consumable checked out.","success");
-	redirect("consumables.php");
+	
 	die;
 	if(!empty($_POST)){
 		//Validate form inputs

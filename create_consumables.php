@@ -29,7 +29,8 @@ if(!AllowUser(array(1,2))){
 			$errors.="Enter purchase cost. <br/>";
 		}
 		if (empty($_POST['quantity'])){
-			$errors.="Enter quantity of order. <br/>";
+			$_POST['quantity']=0;
+			//$errors.="Enter quantity of order. <br/>";
 		}
 
 
