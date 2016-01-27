@@ -219,7 +219,7 @@
                             <a href="consumables.php"><i class="fa fa-tint fa-fw"></i> Consumables</a>
                         </li>
                         <li>
-                            <a href="user.php"><i class="fa fa-edit fa-fw"></i> People</a>
+                            <a href="user.php"><i class="fa fa-user fa-fw"></i> People</a>
                         </li>
                         <?php
                             endif;
