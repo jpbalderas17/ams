@@ -62,7 +62,8 @@
                                                     if($key=='name'):
                                                 ?>
                                                     <td>
-                                                        <a href='view_consumables.php?id=<?= $asset['id']?>'><?php echo htmlspecialchars($value)?></a>
+                                                        <!-- <a href='view_consumables.php?id=<?= $asset['id']?>'><?php echo htmlspecialchars($value)?></a> -->
+                                                        <?php echo htmlspecialchars($value)?>
                                                     </td>
                                                 <?php
                                                     elseif($key=='id'):

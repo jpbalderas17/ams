@@ -57,7 +57,7 @@
                                             foreach ($assets as $asset):
                                         ?>
                                             <tr>
-                                                <td><a href='view_asset.php?id=<?= $asset['item_id']?>'><?php echo htmlspecialchars($asset['asset_tag'])?></a></td>
+                                                <td><?php echo htmlspecialchars($asset['asset_tag'])?></td>
                                                 <td><?php echo htmlspecialchars($asset['asset_name'])?></td>
                                                 <td><?php echo htmlspecialchars($asset['title'])?></td>
                                                 <td><?php echo htmlspecialchars($asset['maintenance_type'])?></td>
