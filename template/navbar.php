@@ -169,7 +169,7 @@
                                 <form class='form' method='get' action='view_asset.php'>
                                     <div class='form-group'>
                                         <div class="input-group">
-                                          <input type="text" class="form-control" placeholder="Enter Asset Tag" name='asset_tag' style=''>
+                                          <input type="text" class="form-control" placeholder="Enter Asset Tag" name='asset_tag' style='' required>
                                           <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit">&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;</button>
                                           </span>
@@ -218,9 +218,15 @@
                         <li>
                             <a href="consumables.php"><i class="fa fa-tint fa-fw"></i> Consumables</a>
                         </li>
+                        <?php
+                            if(AllowUser(array(1))):
+                        ?>
                         <li>
                             <a href="user.php"><i class="fa fa-user fa-fw"></i> People</a>
                         </li>
+                        <?php
+                            endif;
+                        ?>
                         <?php
                             endif;
                         ?>

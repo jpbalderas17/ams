@@ -44,7 +44,8 @@
 			}
 			else{
 				//Update
-				$con->myQuery("UPDATE categories SET name=:name,category_type_id:category_type_id WHERE category.id=:id",$inputs);
+				
+				$con->myQuery("UPDATE categories SET name=:name,category_type_id=:category_type_id WHERE id=:id",$inputs);
 			}
 
 			Alert("Save succesful","success");

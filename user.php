@@ -4,7 +4,7 @@
         toLogin();
         die();
     }
-    if(!AllowUser(array(1,2))){
+    if(!AllowUser(array(1))){
         redirect("index.php");
     }
     makeHead("View Users");

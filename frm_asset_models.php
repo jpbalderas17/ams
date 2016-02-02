@@ -132,7 +132,7 @@
                                 
                                 <div class='form-group'>
                                     <div class='col-sm-12 col-md-9 col-md-offset-3 '>
-                                        <a href='assets.php' class='btn btn-default'>Cancel</a>
+                                        <a href='asset_models.php' class='btn btn-default'>Cancel</a>
                                         <button type='submit' class='btn btn-success'> <span class='fa fa-check'></span> Save</button>
                                     </div>
                                     

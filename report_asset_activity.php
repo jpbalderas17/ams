@@ -57,7 +57,7 @@
                                         ?>
                                             <tr>
                                                 <td><?php echo htmlspecialchars($asset['action_date'])?></td>
-                                                <td><a href='view_asset.php?id=<?= $asset['item_id']?>'><?php echo htmlspecialchars($asset['asset_tag'])?></a></td>
+                                                <td><?php echo htmlspecialchars($asset['asset_tag'])?></td>
                                                 <td><?php echo htmlspecialchars($asset['asset_name'])?></td>
                                                 <td><?php echo htmlspecialchars($asset['admin'])?></td>
                                                 <td><?php echo htmlspecialchars($asset['action'])?></td>

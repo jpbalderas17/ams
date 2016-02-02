@@ -87,7 +87,7 @@
                                                     elseif($key=="asset_tag"):
                                                 ?>
                                                     <td>
-                                                        <a href='view_asset.php?id=<?= $asset['id']?>'><?php echo htmlspecialchars($value)?></a>
+                                                        <?php echo htmlspecialchars($value)?>
                                                     </td>
                                                 <?php
                                                     elseif($key=="asset_status_label"):
