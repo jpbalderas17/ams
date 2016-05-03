@@ -81,7 +81,7 @@
     $(document).ready(function() {
         $('#dataTables').DataTable({
                  "scrollY":"400px",
-                 "scrollX": true,
+                 //"scrollX": true,
         });
     });
     </script>

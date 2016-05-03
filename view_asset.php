@@ -110,6 +110,16 @@
                         ?>
                         <div class='row'>
                             <div class='col-xs-12'>
+                                <strong>Asset Tag: </strong>
+                                <em>
+                                    <?php
+                                        echo htmlspecialchars($asset['asset_tag']);
+                                    ?>
+                                </em>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-xs-12'>
                                 <strong>Status: </strong>
                                 <em>
                                     <?php

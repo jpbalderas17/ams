@@ -38,6 +38,9 @@
 	require_once("template/sidebar.php");
 ?>
 <div class='content-wrapper'>
+    <div class='content-header'>
+        <h1 class="page-header text-center text-green">Consumable Form</h1>
+    </div>
     <section class='content'>
         <div class="row">
             <div class='col-lg-12'>
@@ -46,12 +49,7 @@
                 ?>    
                 <div class='row'>
                     <div class='col-sm-12 col-md-8 col-md-offset-2'>
-                        <div class='box box-primary'>
-                        <div class='box-header'>
-                            <h1 class="">Consumable Form</h1>
-                        </div>
-                       <div class='box-body'>
-                        <form class='form-horizontal' method='POST' action='create_consumables.php' enctype="multipart/form-data" onsubmit='return validate(this)'>
+                      <form class='form-horizontal' method='POST' action='create_consumables.php' enctype="multipart/form-data" onsubmit='return validate(this)'>
                             <input type='hidden' name='id' value='<?php echo !empty($asset)?$asset['id']:""?>'>
                             <div class='form-group'>
                                 <label class='col-sm-12 col-md-3 control-label'> Name*</label>
@@ -116,8 +114,6 @@
                             </div>
                             
                         </form>
-                        </div>
-                        </div>
                     </div>
                 </div>
 
@@ -155,7 +151,7 @@
         return false;
     }
 
-    return false;
+    // return false;
     return true;
   }
 </script>

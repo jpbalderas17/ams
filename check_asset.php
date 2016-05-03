@@ -44,29 +44,23 @@
     $asset_status_labels=$con->myQuery("SELECT id,name FROM asset_status_labels WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
     $users=$con->myQuery("SELECT id,CONCAT(last_name,', ',first_name,' ',middle_name,' (',email,')') as display_name FROM users WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
                     						
-	makeHead("Item ".$type);
+	makeHead("Asset ".$type);
 ?>
 <?php
 	 require_once("template/header.php");
 	require_once("template/sidebar.php");
 ?>
 <div class='content-wrapper'>
-
+    <div class='content-header'>
+        <h1 class='page-header text-center text-green'>Asset <?php echo $type;?></h1>
+    </div>
     <section class='content'>
         <div class="row">
                 <div class='col-lg-12'>
                     <?php
                         Alert();
                     ?>    
-                    <div class='box box-primary'>
-                        <div class='box-header'>
-                            <h1>Item <?php echo $type;?></h1>
-                        </div>
-                        <div class='box-body'>
-                            
-                        
-                    <div class='row'>
-                        <div class='col-sm-12 col-md-8 col-md-offset-2'>
+                    <div class='col-sm-12 col-md-8 col-md-offset-2'>
                             <form class='form-horizontal' method='POST' action='move_asset.php' enctype="multipart/form-data">
                                 <input type='hidden' name='id' value='<?php echo $asset['id']?>'>
                                 <input type='hidden' name='type' value='<?php echo $_GET['type']?>'>
@@ -77,9 +71,9 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Asset Name</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Asset Name *</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <input type='text' class='form-control' name='asset_name' value='<?php echo !empty($asset)?$asset['asset_name']:"" ?>' >
+                                        <input type='text' class='form-control' name='asset_name' value='<?php echo !empty($asset)?$asset['asset_name']:"" ?>' required>
                                     </div>
                                 </div>
                                 <?php
@@ -92,9 +86,9 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Checkout To</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Checkout To*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control select2' name='user_id' data-placeholder="Select User" >
+                                        <select class='form-control select2' name='user_id' data-placeholder="Select User" required>
                                             <?php
                                                 echo makeOptions($users);
                                             ?>
@@ -102,24 +96,24 @@
                                     </div>
                                 </div>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Checkout Date</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Checkout Date*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <input type='date' name='checkout_date' class='form-control' value='<?php echo date("Y-m-d") ?>'>
+                                        <input type='text' name='checkout_date' id='checkout_date' class='form-control date_picker' value='<?php echo date("Y-m-d") ?>' required>
                                     </div>
                                 </div>
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Expected Checkin Date</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <input type='date' name='expected_checkin_date' class='form-control' value=''>
+                                        <input type='text' name='expected_checkin_date' id='expected_checkin_date' class='form-control date_picker' value=''>
                                     </div>
                                 </div>
                                 <?php
                                     elseif($type=="Checkin"):
                                 ?>
                                 <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Status</label>
+                                    <label class='col-sm-12 col-md-3 control-label'> Status*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control select2' name='asset_status_id' data-placeholder="Select Asset Status" <?php echo !(empty($asset))?"data-selected='".$asset['asset_status_id']."'":NULL ?>>
+                                        <select class='form-control select2' name='asset_status_id' data-placeholder="Select Asset Status" <?php echo !(empty($asset))?"data-selected='".$asset['asset_status_id']."'":NULL ?> required>
                                             <?php
                                                 echo makeOptions($asset_status_labels);
                                             ?>
@@ -145,9 +139,6 @@
                                 
                             </form>
                         </div>
-                    </div>
-                        </div>
-                    </div>
                 </div>
             </div>
     </section>

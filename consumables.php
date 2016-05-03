@@ -106,7 +106,7 @@
         $('#dataTables').DataTable({
                 "scrollY":"400px",
                 "scrollX": true,
-                "width":1000
+                // "width":1000
         });
     });
     </script>

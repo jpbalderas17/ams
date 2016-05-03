@@ -57,6 +57,9 @@
 	require_once("template/sidebar.php");
 ?>
 <div class='content-wrapper'>
+    <div class='content-header'>
+        <h1 class='page-header text-center text-green'>Consumable Checkout</h1>
+    </div>
     <section class='content'>
         <div class="row">
                 <div class='col-lg-12'>
@@ -65,10 +68,7 @@
                     ?>    
                     <div class='row'>
                         <div class='col-sm-12 col-md-8 col-md-offset-2'>
-                            <div class='box box-primary'>
-                                <div class='box-header'><h1>Consumable Checkout</h1></div>
-                                <div class='box-body'>                        
-                                    <form class='form-horizontal' method='POST' action='move_consumables.php' enctype="multipart/form-data">
+                           <form class='form-horizontal' method='POST' action='move_consumables.php' enctype="multipart/form-data">
                                         <input type='hidden' name='id' value='<?php echo $asset['id']?>'>
                                         <input type='hidden' name='type' value='<?php echo $_GET['type']?>'>
                                         <div class='form-group'>
@@ -108,8 +108,6 @@
                                         </div>
                                         
                                     </form>
-                                </div>
-                            </div>
                         </div>
                     </div>
 

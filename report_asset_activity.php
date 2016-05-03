@@ -84,7 +84,7 @@
                                                 $date_filter.=" AND action_date <= '".date_format($date_end,'Y-m-d')."'";
                                             }
 
-                                            $asset_sql="SELECT action_date,activities.item_id,assets.asset_tag,assets.asset_name,(SELECT CONCAT(last_name,', ',first_name,' ',middle_name)  FROM users WHERe id=admin_id)as admin,(SELECT CONCAT(last_name,', ',first_name,' ',middle_name)  FROM users WHERe id=activities.user_id)as user,action,activities.notes FROM activities JOIN assets ON assets.id=activities.item_id WHERE category_type_id=1 {$date_filter} ORDER BY activities.action_date";
+                                            $asset_sql="SELECT DATE_FORMAT(action_date,'%m/%d/%Y')as action_date,activities.item_id,assets.asset_tag,assets.asset_name,(SELECT CONCAT(last_name,', ',first_name,' ',middle_name)  FROM users WHERe id=admin_id)as admin,(SELECT CONCAT(last_name,', ',first_name,' ',middle_name)  FROM users WHERe id=activities.user_id)as user,action,activities.notes FROM activities JOIN assets ON assets.id=activities.item_id WHERE category_type_id=1 {$date_filter} ORDER BY activities.action_date";
                                             $assets=$con->myQuery($asset_sql)->fetchAll(PDO::FETCH_ASSOC);
 
                                             foreach ($assets as $asset):

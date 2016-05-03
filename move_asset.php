@@ -23,7 +23,7 @@
 				$error_msg.="Select a user.<br/>";
 			}
 
-			if(empty($inputs['checkout_date'])){
+			if(empty($inputs['checkout_date']) || $inputs['checkout_date']=="mm/dd/yyyy" ){
 				$error_msg.="Select checkout date.<br/>";
 			}
 

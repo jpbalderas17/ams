@@ -37,7 +37,7 @@
 
                     <div class='panel panel-default'>
                         
-                        <div class='panel-body ' >
+                        <div class='panel-body table-responsive' >
                             
                                 <table class='table table-bordered table-condensed table-hover ' id='dataTables'>
                                     <thead>
@@ -92,7 +92,6 @@
     $(document).ready(function() {
         $('#dataTables').DataTable({
                 "scrollY":"400px",
-                 "scrollX": true,
                  "language": {
                     "zeroRecords": "Cagegories not found"
                 }
