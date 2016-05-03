@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	date_default_timezone_set("Asia/Manila");
 	define("WEBAPP", 'Asset Management System');
 	//$_SESSION[WEBAPP]=array();
 	function __autoload($class)
@@ -10,8 +11,25 @@
 	{
 		header("location:".$url);
 	}
+
+	function jsredirect($url)
+	{
+		echo "<script>window.history.back()</script>";
+		echo "<a href='{$url}'>Click here if you are not redirected.</a>";
+	}
+
 	function getFileExtension($filename){
 		return substr($filename, strrpos($filename,"."));
+	}
+
+	function format_date($date_string)
+	{
+		$date=new DateTime($date_string);
+		return $date->format("Y-m-d");
+	}
+	function inputmask_format_date($date_string){
+		$date=new DateTime($date_string);
+		return $date->format("m/d/Y");	
 	}
 // ENCRYPTOR
 	function encryptIt( $q ) {
@@ -41,7 +59,7 @@
 	{
 		if(empty($url))
 		{
-			Alert('Please Log in to Continue');
+			Alert('Please Log in to Continue',"danger");
 			header("location: frmlogin.php");
 		}
 		else{
@@ -122,9 +140,10 @@
 
 /* SPECIFIC TO WEBAPP */
 function getDepriciationDate($purchase_date,$terms){
+	
 	$purchase_date=new DateTime($purchase_date);
 	$diff_terms=new DateInterval("P{$terms}M");
-	return date_format(date_add($purchase_date,$diff_terms),'Y-m-d');
+	return date_format(date_add($purchase_date,$diff_terms),'m/d/Y');
 }
 
 function AllowUser($user_type_id){
@@ -134,7 +153,64 @@ function AllowUser($user_type_id){
 	return false;
 }
 
+function refresh_activity($user_id)
+{
+	global $con;
+	$con->myQuery("UPDATE users SET last_activity=NOW() WHERE id=?",array($user_id));
+}
+function is_active($user_id)
+{
+	global $con;
+	$last_activity=$con->myQuery("SELECT last_activity FROM users  WHERE id=?",array($user_id))->fetchColumn();
+	$inactive_time=60*3;
+	// echo strtotime($last_activity)."<br/>";
+	// echo time();
+	if(time()-strtotime($last_activity) > $inactive_time){
+		return false;
+	}
+
+	return true;
+}
+
+function user_is_active($user_id)
+{
+	global $con;
+	$last_activity=$con->myQuery("SELECT is_active FROM users  WHERE id=?",array($user_id))->fetchColumn();
+	if(!empty($last_activity)){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
 
 /* END SPECIFIC TO WEBAPP */
+
 	$con=new myPDO('ams','root','');	
+	if(isLoggedIn()){
+		if(!user_is_active($_SESSION[WEBAPP]['user']['id'])){
+			refresh_activity($_SESSION[WEBAPP]['user']['id']);
+			session_destroy();
+			session_start();
+			Alert("Your account has been deactivated.","danger");
+			redirect('frmlogin.php');
+			die;
+		}
+		if(is_active($_SESSION[WEBAPP]['user']['id'])){
+
+			refresh_activity($_SESSION[WEBAPP]['user']['id']);
+		}
+		else{
+			//echo 'You have been inactive.';
+			// die;
+			refresh_activity($_SESSION[WEBAPP]['user']['id']);
+			// die;
+			$con->myQuery("UPDATE users SET is_login=0 WHERE id=?",array($_SESSION[WEBAPP]['user']['id']));
+			session_destroy();
+			session_start();
+			Alert("You have been inactive for 3 minutes and have been logged out.","danger");
+			redirect('frmlogin.php');
+			die;
+		}
+	}
 ?>

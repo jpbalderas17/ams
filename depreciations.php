@@ -16,22 +16,16 @@
     }
 	makeHead("Depreciations");
 ?>
-<div id='wrapper'>
 <?php
-	 require_once 'template/navbar.php';
+	 require_once("template/header.php");
+	require_once("template/sidebar.php");
 ?>
-</div>
-
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"> Depreciations</h1>
-                </div>
-
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
+<div class='content-wrapper'>
+    <div class='content-header'>
+        <h1 class='page-header text-center text-green'>Depreciations</h1>
+    </div>
+    <section class='content'>
+        <div class="row">
                 <div class='col-lg-12'>
                     <?php
                         Alert();
@@ -39,18 +33,25 @@
                     <div class='row'>
                         <div class='col-sm-12'>
                             <div class='align-center'>
-                            <form class='form-inline' method='POST' action='save_depreciations.php'>
+                            <form class='form-horizontal' method='POST' action='save_depreciations.php'>
+
                                 <input type='hidden' name='id' value='<?php echo !empty($department)?$department['id']:""?>'>
                                 
                                 <div class='form-group'>
-                                    <label class=' control-label'> Department Name</label>
-                                    <input type='text' class='form-control' name='name' placeholder='Enter Department Name' value='<?php echo !empty($department)?$department['name']:"" ?>'>
+                                    <label class=' control-label col-md-2'> Depreciation Name</label>
+                                    <div class='col-md-3'>
+                                        <input type='text' class='form-control' name='name' placeholder='Enter Depreciation Name' value='<?php echo !empty($department)?$department['name']:"" ?>'>
+                                    </div>
 
-                                    <label class=' control-label'> Terms</label>
-                                    <input type='text' class='form-control' name='terms' placeholder='Enter Terms' value='<?php echo !empty($department)?$department['terms']:"" ?>'>
-
-                                        <a href='depreciations.php' class='btn btn-default'>Cancel</a>
-                                        <button type='submit' class='btn btn-success'> <span class='fa fa-check'></span> Save</button>
+                                    <label class=' control-label col-md-2'> Terms(Months)</label>
+                                    <div class='col-md-3'>
+                                        <input type='text' class='form-control unsigned_integer' name='terms' placeholder='Enter Terms (Months)' value='<?php echo !empty($department)?$department['terms']:"" ?>'>
+                                    </div>
+                                    <div class='col-md-2'>
+                                        
+                                        <a href='depreciations.php' class='btn btn-flat btn-default'>Cancel</a>
+                                        <button type='submit' class='btn btn-flat btn-success'> <span class='fa fa-check'></span> Save</button>
+                                    </div>
                                 </div>
 
                             </form>
@@ -68,7 +69,7 @@
                                         <tr>
                                             <th>Depreciation Name</th>
                                             <th>Terms</th>
-                                            <th>Actions</th>
+                                            <th style='max-width: 60px;width: 60px'>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -80,8 +81,8 @@
                                                 <td><?php echo htmlspecialchars($category['name'])?></td>
                                                 <td><?php echo htmlspecialchars($category['terms'])?></td>
                                                 <td>
-                                                    <a class='btn btn-sm btn-warning' href='depreciations.php?id=<?php echo $category['id'];?>'><span class='fa fa-pencil'></span></a>
-                                                    <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=depr' onclick='return confirm("This depreciation will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                    <a class='btn btn-flat btn-sm btn-success' href='depreciations.php?id=<?php echo $category['id'];?>'><span class='fa fa-pencil'></span></a>
+                                                    <a class='btn btn-flat btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=depr' onclick='return confirm("Are you sure you want to delete this depreciation?")'><span class='fa fa-trash'></span></a>
                                                 </td>
                                             </tr>
                                         <?php
@@ -94,11 +95,12 @@
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
+    </section>
 </div>
 <script>
     $(document).ready(function() {
         $('#dataTables').DataTable({
+            "scrollY":"400px"
         });
     });
     </script>

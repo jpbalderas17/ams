@@ -46,34 +46,34 @@
                     						
 	makeHead("Item ".$type);
 ?>
-<div id='wrapper'>
 <?php
-	 require_once 'template/navbar.php';
+	 require_once("template/header.php");
+	require_once("template/sidebar.php");
 ?>
-</div>
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Item <?php echo $type;?></h1>
-                </div>
+<div class='content-wrapper'>
 
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
+    <section class='content'>
+        <div class="row">
                 <div class='col-lg-12'>
                     <?php
                         Alert();
                     ?>    
+                    <div class='box box-primary'>
+                        <div class='box-header'>
+                            <h1>Item <?php echo $type;?></h1>
+                        </div>
+                        <div class='box-body'>
+                            
+                        
                     <div class='row'>
-                    	<div class='col-sm-12 col-md-8 col-md-offset-2'>
-                    		<form class='form-horizontal' method='POST' action='move_asset.php' enctype="multipart/form-data">
+                        <div class='col-sm-12 col-md-8 col-md-offset-2'>
+                            <form class='form-horizontal' method='POST' action='move_asset.php' enctype="multipart/form-data">
                                 <input type='hidden' name='id' value='<?php echo $asset['id']?>'>
                                 <input type='hidden' name='type' value='<?php echo $_GET['type']?>'>
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Asset Tag</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <input type='text' class='form-control' value='<?php echo !empty($asset)?$asset['serial_number']:"" ?>' readonly>
+                                        <input type='text' class='form-control' value='<?php echo !empty($asset)?$asset['asset_tag']:"" ?>' readonly>
                                     </div>
                                 </div>
                                 <div class='form-group'>
@@ -94,7 +94,7 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Checkout To</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control' name='user_id' data-placeholder="Select User" >
+                                        <select class='form-control select2' name='user_id' data-placeholder="Select User" >
                                             <?php
                                                 echo makeOptions($users);
                                             ?>
@@ -119,7 +119,7 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Status</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control' name='asset_status_id' data-placeholder="Select Asset Status" <?php echo !(empty($asset))?"data-selected='".$asset['asset_status_id']."'":NULL ?>>
+                                        <select class='form-control select2' name='asset_status_id' data-placeholder="Select Asset Status" <?php echo !(empty($asset))?"data-selected='".$asset['asset_status_id']."'":NULL ?>>
                                             <?php
                                                 echo makeOptions($asset_status_labels);
                                             ?>
@@ -137,18 +137,31 @@
                                 </div>
                                 <div class='form-group'>
                                     <div class='col-sm-12 col-md-9 col-md-offset-3 '>
-                                        <a href='assets.php' class='btn btn-default'>Cancel</a>
-                                        <button type='submit' class='btn btn-success'> <span class='fa fa-check'></span> Save</button>
+                                        <a href='assets.php' class='btn btn-flat btn-default'>Cancel</a>
+                                        <button type='submit' class='btn btn-flat btn-success'> <span class='fa fa-check'></span> Save</button>
                                     </div>
                                     
                                 </div>
-                    			
-                    		</form>
-                    	</div>
+                                
+                            </form>
+                        </div>
                     </div>
-
+                        </div>
+                    </div>
                 </div>
             </div>
+    </section>
+</div>
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header"></h1>
+                </div>
+
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            
             <!-- /.row -->
 </div>
 <?php

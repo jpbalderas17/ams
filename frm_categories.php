@@ -22,65 +22,67 @@
                     						
 	makeHead("Categories");
 ?>
-<div id='wrapper'>
-<?php
-	 require_once 'template/navbar.php';
-?>
-</div>
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Category Form</h1>
-                </div>
 
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
+<?php
+	 require_once("template/header.php");
+	require_once("template/sidebar.php");
+?>
+
+  <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1 class='page-header text-center text-green'>
+            Categories
+          </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
             <div class="row">
                 <div class='col-lg-12'>
                     <?php
                         Alert();
-                    ?>    
-                    <div class='row'>
-                    	<div class='col-sm-12 col-md-8 col-md-offset-2'>
-                    		<form class='form-horizontal' method='POST' action='save_category.php'>
-                                <input type='hidden' name='id' value='<?php echo !empty($category)?$category['id']:""?>'>
-                    			
-                                <div class='form-group'>
-                                    <label class='col-sm-12 col-md-3 control-label'> Category Name</label>
-                                    <div class='col-sm-12 col-md-9'>
-                                        <input type='text' class='form-control' name='name' placeholder='Enter Category Name' value='<?php echo !empty($category)?$category['name']:"" ?>'>
+                    ?>
+                                            <div class='row'>
+                            <div class='col-sm-12 col-md-8 col-md-offset-2'>
+                                <form class='form-horizontal' method='POST' action='save_category.php'>
+                                    <input type='hidden' name='id' value='<?php echo !empty($category)?$category['id']:""?>'>
+                                    
+                                    <div class='form-group'>
+                                        <label class='col-sm-12 col-md-3 control-label'> Category Name</label>
+                                        <div class='col-sm-12 col-md-9'>
+                                            <input type='text' class='form-control' name='name' placeholder='Enter Category Name' value='<?php echo !empty($category)?$category['name']:"" ?>' required>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class='form-group'>
-                    				<label class='col-sm-12 col-md-3 control-label'> Category Type</label>
-                    				<div class='col-sm-12 col-md-9'>
-                    					<select class='form-control' name='category_type_id' data-placeholder="Select a Category" <?php echo!(empty($category))?"data-selected='".$category['category_type_id']."'":NULL ?>>
-                    						<?php
-                    							echo makeOptions($category_types);
-                    						?>
-                    					</select>
-                    				</div>
-                    			</div>
-                                
-
-                                <div class='form-group'>
-                                    <div class='col-sm-12 col-md-9 col-md-offset-3 '>
-                                        <a href='assets.php' class='btn btn-default'>Cancel</a>
-                                        <button type='submit' class='btn btn-success'> <span class='fa fa-check'></span> Save</button>
+                                    <div class='form-group'>
+                                        <label class='col-sm-12 col-md-3 control-label'> Category Type</label>
+                                        <div class='col-sm-12 col-md-9'>
+                                            <select class='form-control' name='category_type_id' data-placeholder="Select a Category" <?php echo!(empty($category))?"data-selected='".$category['category_type_id']."'":NULL ?> required>
+                                                <?php
+                                                    echo makeOptions($category_types);
+                                                ?>
+                                            </select>
+                                        </div>
                                     </div>
                                     
-                                </div>
-                    			
-                    		</form>
-                    	</div>
-                    </div>
+
+                                    <div class='form-group'>
+                                        <div class='col-sm-12 col-md-9 col-md-offset-3 '>
+                                            <a href='categories.php' class='btn btn-flat btn-default' onclick="return confirm('<?php echo !empty($category)?'Are you sure you want to cancel the modification of the category?':'Are you sure you want to cancel the creation of the new category?';?>')">Cancel</a>
+                                            <button type='submit' class='btn btn-flat btn-success'> <span class='fa fa-check'></span> Save</button>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
 
                 </div>
             </div>
-            <!-- /.row -->
-</div>
+        </section><!-- /.content -->
+  </div>
 <?php
 Modal();
 ?>

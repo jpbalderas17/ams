@@ -17,22 +17,18 @@
     $asset_statuses=$con->myQuery("SELECT id,name FROM asset_statuses")->fetchAll(PDO::FETCH_ASSOC);
 	makeHead("Asset Status Labels");
 ?>
-<div id='wrapper'>
 <?php
-	 require_once 'template/navbar.php';
+	 require_once("template/header.php");
+	require_once("template/sidebar.php");
 ?>
-</div>
-
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"> Asset Status Labels</h1>
-                </div>
-
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
+<div class='content-wrapper'>
+    <div class='content-header'>
+        <h1 class='page-header text-center text-green'>
+            Asset Status Labels
+        </h1>
+    </div>
+    <section class='content'>
+        <div class="row">
                 <div class='col-lg-12'>
                     <?php
                         Alert();
@@ -40,24 +36,29 @@
                     <div class='row'>
                         <div class='col-sm-12'>
                             <div class='align-center'>
-                            <form class='form-inline' method='POST' action='save_status_labels.php'>
+                            <form class='form-horizontal' method='POST' action='save_status_labels.php'>
                                 <input type='hidden' name='id' value='<?php echo !empty($department)?$department['id']:""?>'>
                                 
                                 <div class='form-group'>
-                                    <label class=' control-label'> Status Label</label>
-                                        <input type='text' class='form-control' name='name' placeholder='Enter Status Label' value='<?php echo !empty($department)?$department['name']:"" ?>' required>
-                                    	<label class=' control-label'> Status Type:</label>
-                                        
-                                        <div class='form-group'>
-                                    	<select class='form-control' name='asset_status_id'  data-placeholder="Select a Status" <?php echo!(empty($department))?"data-selected='".$department['asset_status_id']."'":NULL ?> required>
-                                        <?php
-                                        	echo makeOptions($asset_statuses);
-                                        ?>
-                                        </select>
+                                    <label class=' control-label col-md-2'> Status Label</label>
+                                        <div class='col-md-3'>
+                                            <input type='text' class='form-control ' name='name' placeholder='Enter Status Label' value='<?php echo !empty($department)?$department['name']:"" ?>' required>
                                         </div>
-                                        <a href='asset_status_labels.php' class='btn btn-default'>Cancel</a>
-                                        <button type='submit' class='btn btn-success'> <span class='fa fa-check'></span> Save</button>
+                                        <label class=' control-label col-md-2'> Status Type:</label>
+                                        <div class='col-md-3'>
+                                            <select class='form-control' name='asset_status_id'  style='width:100%' data-placeholder="Select a Status" <?php echo!(empty($department))?"data-selected='".$department['asset_status_id']."'":NULL ?> required>
+                                            <?php
+                                                echo makeOptions($asset_statuses);
+                                            ?>
+                                            </select>
+                                        </div>
+                                    
+                                        <div class='col-md-2'>
+                                        <a href='asset_status_labels.php' class='btn btn-flat btn-default' onclick="return confirm('<?php echo !empty($department)?'Are you sure you want to cancel the modification of the asset label?':'Are you sure you want to cancel the creation of the new asset label?';?>')">Cancel</a>
+                                        <button type='submit' class='btn btn-flat btn-success'> <span class='fa fa-check'></span> Save</button>
+                                        </div>
                                 </div>
+                                        
 
                             </form>
                             </div>
@@ -72,9 +73,9 @@
                                 <table class='table table-bordered table-condensed table-hover ' id='dataTables'>
                                     <thead>
                                         <tr>
-                                            <th>Label Name</th>
-                                            <th>Label Status</th>
-                                            <th>Actions</th>
+                                            <th class='text-center'>Label Name</th>
+                                            <th class='text-center'>Label Status</th>
+                                            <th class='text-center' style='max-width: 60px;width:60px'>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,8 +87,8 @@
                                                 <td><?php echo htmlspecialchars($category['name'])?></td>
                                                 <td><?php echo htmlspecialchars($category['status'])?></td>
                                                 <td>
-                                                    <a class='btn btn-sm btn-warning' href='asset_status_labels.php?id=<?php echo $category['id'];?>'><span class='fa fa-pencil'></span></a>
-                                                    <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=asl' onclick='return confirm("This label will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                    <a class='btn btn-flat btn-sm btn-success' href='asset_status_labels.php?id=<?php echo $category['id'];?>' ><span class='fa fa-pencil'></span></a>
+                                                    <a class='btn btn-flat btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=asl' onclick='return confirm("Are you sure you want to delete this asset label?")'><span class='fa fa-trash'></span></a>
                                                 </td>
                                             </tr>
                                         <?php
@@ -100,13 +101,16 @@
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
+    </section>
 </div>
+
 <script>
     $(document).ready(function() {
         $('#dataTables').DataTable({
-                 "scrollY": true,
-                 "scrollX": true,
+            "scrollY":"400px",
+            "language": {
+                    "zeroRecords": "Asset label not found"
+                }
         });
     });
     </script>

@@ -16,7 +16,7 @@
 	if(!empty($_POST)){
 		//Validate form inputs
 		$inputs=$_POST;
-
+		$inputs=array_map('trim', $inputs);
 		$errors="";
 		if (empty($inputs['name'])){
 			$errors.="Enter location name. <br/>";

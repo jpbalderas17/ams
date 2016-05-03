@@ -11,38 +11,95 @@ if(!AllowUser(array(1))){
 	if(!empty($_POST)){
 		//Validate form inputs
 		$inputs=$_POST;
-
+		$inputs=array_map('trim', $inputs);
+		$inputs['contact_no']=str_replace("_", "", $inputs['contact_no']);
 		$errors="";
-		if (empty($_POST['user_type_id'])){
+
+		if (empty($inputs['user_type_id'])){
 			$errors.="Select user type. <br/>";
 		}
-		if (empty($_POST['first_name'])){
+		if (empty($inputs['first_name'])){
 			$errors.="Enter first name. <br/>";
 		}
-		if (empty($_POST['middle_name'])){
+		if (empty($inputs['middle_name'])){
 			$errors.="Enter middle name. <br/>";
 		}
-		if (empty($_POST['last_name'])){
+		if (empty($inputs['last_name'])){
 			$errors.="Enter last name. <br/>";
 		}
-		if (empty($_POST['username'])){
+		if (empty($inputs['username'])){
 			$errors.="Enter username. <br/>";
 		}
-		if (empty($_POST['password'])){
+		if (empty($inputs['password'])){
 			$errors.="Enter password. <br/>";	
 		}
-		if (empty($_POST['email'])){
+		else{
+			$password_regex="/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/";
+			preg_match($password_regex, $inputs['password'], $is_valid, PREG_OFFSET_CAPTURE);
+			if(!empty($is_valid)){
+				$errors.="Password should contain the ff:<br/>";
+				$errors.="One Integer<br>";
+				$errors.="One character<br>";
+				$errors.="One Uppercase character<br>";
+				$errors.="One Special Character<br>";
+			}
+			// var_dump($is_valid);
+		}
+		// die;
+		if (empty($inputs['email'])){
 			$errors.="Enter email address. <br/>";
+		}
+		if (empty($inputs['employee_no'])){
+			$errors.="Enter employee number. <br/>";
+		}
+
+		if (empty($inputs['title'])){
+			$errors.="Enter position. <br/>";
+		}
+		else{
+
+		}
+
+		if (empty($inputs['contact_no'])){
+			$errors.="Enter contact no. <br/>";
+		}
+		else{
+			if(strlen($inputs['contact_no'])!=11){
+				$errors.="Invalid contact no.<br/>";
+			}
+		}
+
+		if (empty($inputs['department_id'])){
+			$errors.="Select Department. <br/>";
+		}
+
+		$uname=$con->myQuery("SELECT id,lcase(username) FROM users WHERE is_deleted=0 and username=?",array(strtolower($inputs['username'])))->fetch(PDO::FETCH_ASSOC);
+
+		if(!empty($uname)){
+			if(empty($inputs['id'])){
+				$errors.="Entered Username is not available.";
+			}
+			elseif(!empty($inputs['id']) && $uname['id']<>$inputs['id']){
+				$errors.="Entered Username is not available.";
+			}
 		}
 
 		if($errors!=""){
 
+			$_SESSION[WEBAPP]['frm_inputs']=$inputs;
+
 			Alert("You have the following errors: <br/>".$errors,"danger");
-			redirect("frm_users.php");
+			if(empty($inputs['id'])){
+				redirect("frm_users.php");
+			}
+			else{
+				redirect("frm_users.php?id=".urlencode($inputs['id']));
+			}
 			die;
 		}
 		else{
 			//IF id exists update ELSE insert
+			$inputs['password']=encryptIt($inputs['password']);
 			if(empty($inputs['id'])){
 				//Insert
 				$inputs=$_POST;
@@ -53,10 +110,11 @@ if(!AllowUser(array(1))){
 			}
 			else{				
 				//Update
-				$con->myQuery("UPDATE users SET user_type_id=:user_type_id,first_name=:name,middle_name=:middle_name,last_name=:last_name,username=:username,password=:password,email=:email,employee_no=:employee_no,contact_no=:contact_no,location_id=:location_id,title=:title,department_id=:department_id WHERE id=:id",$inputs);
+				
+				$con->myQuery("UPDATE users SET user_type_id=:user_type_id,first_name=:first_name,middle_name=:middle_name,last_name=:last_name,username=:username,password=:password,email=:email,employee_no=:employee_no,contact_no=:contact_no,location_id=:location_id,title=:title,department_id=:department_id WHERE id=:id",$inputs);
 				Alert("Update succesful","success");
 			}
-
+			
 			redirect("user.php");
 		}
 		die;

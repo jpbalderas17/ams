@@ -6,11 +6,10 @@
 	}
 	makeHead("Asset Reports");
 ?>
-<div id='wrapper'>
 <?php
-	 require_once 'template/navbar.php';
+	 require_once("template/header.php");
+	require_once("template/sidebar.php");
 ?>
-</div>
 
 <div id="page-wrapper">
             <div class="row">
@@ -138,7 +137,7 @@
 <script>
     $(document).ready(function() {
         $('#dataTables').DataTable({
-                 "scrollY": true,
+                "scrollY":"400px",
                 "scrollX": true,
                 dom: 'Bfrtip',
                 buttons: [

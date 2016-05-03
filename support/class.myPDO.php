@@ -37,17 +37,21 @@ class MyPDO extends PDO{
 		{
 			try {
 				$stmt=$this->prepare($sqlStmt);
+
 				if($value==NULL)
 				{
-					$stmt->execute();
-				}
-				else
-				{
-					
 					if(!$stmt->execute($value)){
 
 						throw new PDOException($stmt->errorInfo()[2], 1);
-						
+						//die("<hr/><b>There was an Error</b>");
+					}
+				}
+				else
+				{
+					$value=array_map('trim',$value);
+					if(!$stmt->execute($value)){
+
+						throw new PDOException($stmt->errorInfo()[2], 1);
 						//die("<hr/><b>There was an Error</b>");
 					}
 				}

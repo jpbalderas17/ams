@@ -1,37 +1,43 @@
 <?php
-	require_once 'support/config.php';
-	makeHead('Login');
+	require_once("support/config.php");
+
+  if(isLoggedIn()){
+    redirect("index.php");
+    die();
+  }
+
+	makeHead("Login");
 ?>
- <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-            	
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Please Log In</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form" method="post" action='logingin.php'>
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="username" type="text" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <button type='submit' class="btn btn-lg btn-success btn-block">Login</a>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-                <?php
-					Alert();
-				?>
-            </div>
-        </div>
-</div><!-- /container -->
+    <div class="login-box">
+      <div class='login-box-header bg-green'><h4>SGTSI ASSET Management System</h4></div>
+      <div class="login-box-body">
+        <?php
+          Alert();
+        ?>
+        <h4 class="login-box-msg text-green">Login to your Account</h4>
+        <form action="logingin.php" method="post">
+          <div class="form-group has-feedback">
+            <span class="glyphicon glyphicon-user form-control-feedback" style='left:0px'></span>
+            <input type="text" class="form-control" placeholder="Username" name='username' autofocus="" style="padding-left: 42.5px;padding-right: 0px" required="">
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" placeholder="Password" name='password' style="padding-left: 42.5px;padding-right: 0px" required="">
+            <span class="glyphicon glyphicon-lock form-control-feedback" style='left:0px'></span>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <button type="submit" class="btn btn-success btn-block btn-flat">Login</button>
+              <br/>
+              <a href='forgot_password.php'>Forgot Password</a>
+            </div><!-- /.col -->
+          </div>
+        </form>
+
+
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
 
 <?php
+  Modal();
 	makeFoot();
 ?>

@@ -13,22 +13,14 @@
     }
 	makeHead("Manufacturers");
 ?>
-<div id='wrapper'>
 <?php
-	 require_once 'template/navbar.php';
+	 require_once("template/header.php");
+	require_once("template/sidebar.php");
 ?>
-</div>
-
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"> Manufacturers</h1>
-                </div>
-
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
+<div class='content-wrapper'>
+    <h1 class="page-header text-center text-green"> Manufacturers</h1>
+    <section class='content'>
+      <div class="row">
                 <div class='col-lg-12'>
                     <?php
                         Alert();
@@ -41,9 +33,9 @@
                                 
                                 <div class='form-group'>
                                     <label class=' control-label'> Manufacturer Name</label>
-                                        <input type='text' class='form-control' name='name' placeholder='Enter Manufacturer Name' value='<?php echo !empty($department)?$department['name']:"" ?>'>
-                                        <a href='departments.php' class='btn btn-default'>Cancel</a>
-                                        <button type='submit' class='btn btn-success'> <span class='fa fa-check'></span> Save</button>
+                                        <input type='text' class='form-control' name='name' placeholder='Enter Manufacturer Name' value='<?php echo !empty($department)?$department['name']:"" ?>' required>
+                                        <a href='manufacturers.php' class='btn btn-flat btn-default' onclick="return confirm('<?php echo !empty($category)?'Are you sure you want to cancel the modification of this manufacturer?':'Are you sure you want to cancel the creation of the new manufacturer?';?>')">Cancel</a>
+                                        <button type='submit' class='btn btn-flat btn-success'> <span class='fa fa-check'></span> Save</button>
                                 </div>
 
                             </form>
@@ -60,7 +52,7 @@
                                     <thead>
                                         <tr>
                                             <th>Manufacturer </th>
-                                            <th>Actions</th>
+                                            <th style='max-width:60px;width:60px'>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -71,8 +63,8 @@
                                             <tr>
                                                 <td><?php echo htmlspecialchars($category['name'])?></td>
                                                 <td>
-                                                    <a class='btn btn-sm btn-warning' href='manufacturers.php?id=<?php echo $category['id'];?>'><span class='fa fa-pencil'></span></a>
-                                                    <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=man' onclick='return confirm("This manufacturer will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                    <a class='btn btn-flat btn-sm btn-success' href='manufacturers.php?id=<?php echo $category['id'];?>' ><span class='fa fa-pencil'></span></a>
+                                                    <a class='btn btn-flat btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=man' onclick='return confirm("Are you sure you want to delete this manufacturer?")'><span class='fa fa-trash'></span></a>
                                                 </td>
                                             </tr>
                                         <?php
@@ -84,13 +76,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- /.row -->
+            </div>  
+    </section>
+    
 </div>
 <script>
     $(document).ready(function() {
         $('#dataTables').DataTable({
-                 
+            "scrollY":"400px",
+            "language": {
+            "zeroRecords": "Manufacturer not found"
+            }
         });
     });
     </script>

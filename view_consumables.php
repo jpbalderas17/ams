@@ -22,27 +22,24 @@
                     						
 	makeHead("Consumables");
 ?>
-<div id='wrapper'>
 <?php
-	 require_once 'template/navbar.php';
+	 require_once("template/header.php");
+	require_once("template/sidebar.php");
 ?>
-</div>
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="page-header"><?php echo htmlspecialchars($asset['name'])?> Consumable</h3>
-                </div>
-
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
+<div class='content-wrapper'>
+    <div class='content-header'>
+        <h1 class='page-header text-center text-green'>
+            <?php echo htmlspecialchars($asset['name'])?> Consumable
+        </h1>
+    </div>
+    <section class='content'>
+        <div class="row">
                 <div class='col-lg-12'>
                     <?php
                         Alert();
                     ?>    
                     <div class='row'>
-                    	<div class='col-md-9'>          
+                        <div class='col-md-12'>          
                             <div class='row'>
                                 <div class='col-xs-12'>
                                     <strong>Order Number: </strong>
@@ -70,7 +67,7 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $activities=$con->myQuery("SELECT action_date,(SELECT CONCAT(first_name,' ',middle_name,' ',last_name)  FROM users WHERe id=admin_id)as admin,action,(SELECT CONCAT(first_name,' ',middle_name,' ',last_name)  FROM users WHERe id=user_id)as user,notes FROM activities WHERE category_type_id=2 AND item_id=?",array($asset['id']))->fetchAll(PDO::FETCH_ASSOC);
+                                            $activities=$con->myQuery("SELECT DATE_FORMAT(action_date,'%m/%d/%Y') as action_date,(SELECT CONCAT(first_name,' ',middle_name,' ',last_name)  FROM users WHERe id=admin_id)as admin,action,(SELECT CONCAT(first_name,' ',middle_name,' ',last_name)  FROM users WHERe id=user_id)as user,notes FROM activities WHERE category_type_id=2 AND item_id=? ORDER BY action_date DESC",array($asset['id']))->fetchAll(PDO::FETCH_ASSOC);
                                                 if(!empty($activities)):
                                                     foreach ($activities as $activity):
                                             ?>
@@ -101,7 +98,7 @@
 
                 </div>
             </div>
-            <!-- /.row -->
+    </section>
 </div>
 <?php
 Modal();

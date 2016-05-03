@@ -11,31 +11,46 @@ if(!AllowUser(array(1,2))){
 	if(!empty($_POST)){
 		//Validate form inputs
 		$inputs=$_POST;
+		// var_dump($inputs);
 
+		$inputs=array_map('trim',$_POST);
+		$inputs['purchase_cost']=floatval($inputs['purchase_cost']);
+		$inputs['quantity']=intval($inputs['quantity']);
+		
+		// var_dump($inputs);
+		// die;
 		$errors="";
-		if (empty($_POST['name'])){
+		if (empty($inputs['name'])){
 			$errors.="Enter consumable name. <br/>";
 		}
-		if (empty($_POST['order_number'])){
+		if (empty($inputs['order_number'])){
 			$errors.="Enter order number. <br/>";
 		}
-		if (empty($_POST['category_type'])){
+		if (empty($inputs['category_type'])){
 			$errors.="Select category type. <br/>";
 		}
-		if (empty($_POST['purchase_date'])){
+		if (empty($inputs['purchase_date']) || $inputs['purchase_date']=="mm/dd/yyyy"){
 			$errors.="Provide Purchase Date. <br/>";
 		}
-		if (empty($_POST['purchase_cost'])){
+		else{
+			$inputs['purchase_date']=format_date($inputs['purchase_date']);
+		}
+		if (empty($inputs['purchase_cost'])){
 			$errors.="Enter purchase cost. <br/>";
 		}
-		if (empty($_POST['quantity'])){
-			$_POST['quantity']=0;
-			//$errors.="Enter quantity of order. <br/>";
+
+		if (empty(intval($inputs['quantity']))){
+			$inputs['quantity']=0;
+			if(empty($inputs['id'])){
+				$errors.="Invalid quantity. <br/>";
+			}
 		}
 
 
 		if($errors!=""){
-
+			$_SESSION[WEBAPP]['frm_inputs']=$inputs;
+			// var_dump($_SESSION[WEBAPP]['frm_inputs']);
+			// die;
 			Alert("You have the following errors: <br/>".$errors,"danger");
 			redirect("frm_consumables.php?id=".$inputs['id']);
 			die;
@@ -44,9 +59,9 @@ if(!AllowUser(array(1,2))){
 			//IF id exists update ELSE insert
 			if(empty($inputs['id'])){
 				//Insert
-				$inputs=$_POST;
+				//$inputs=$_POST;
 				
-				$inputs['name']=$_POST['name'];
+				//$inputs['name']=$_POST['name'];
 				unset($inputs['id']);
 
 				$con->myQuery("INSERT INTO consumables(name,order_number,purchase_date,purchase_cost,quantity,category_id) VALUES(:name,:order_number,:purchase_date,:purchase_cost,:quantity,:category_type)",$inputs);

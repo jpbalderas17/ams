@@ -14,6 +14,7 @@ if(!AllowUser(array(1,2))){
 		//Validate form inputs
 		$inputs=$_POST;
 
+		$inputs=array_map('trim', $inputs);
 		$errors="";
 		if (empty($inputs['name'])){
 			$errors.="Enter a manufacturer name. <br/>";

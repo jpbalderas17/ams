@@ -15,14 +15,24 @@
 	*/
 	
 	$inputs=$_POST;
+	array_map('trim', $inputs);
 
+	// var_dump($inputs);
+	// die;
+	$quantity=$con->myQuery("SELECT quantity FROM consumables WHERE id=?",array($inputs['id']))->fetchColumn();
 	switch ($inputs['type']) {
 		case 'out':
 			# Checkout
 			# Validate input
+		// var_dump($inputs);
 			$error_msg="";
 			if(empty($inputs['quantity'])){
 				$error_msg.="Please provide quantity.<br/>";
+			}
+			else{
+				if($inputs['quantity']>$quantity){
+					$error_msg.="Consumable has insufficient quantity.<br/> Only ({$quantity}) remaining.";
+				}
 			}
 
 			if(empty($inputs['user_id'])){
@@ -30,6 +40,8 @@
 			}
 
 			if(!empty($error_msg)){
+				$_SESSION[WEBAPP]['frm_inputs']=$inputs;
+				// var_dump($inputs);
 				Alert("You have the following errors: <br/>".$error_msg,"danger");
 				redirect("check_consumables.php?id=".$inputs['id']."&type=".$inputs['type']);
 				die;

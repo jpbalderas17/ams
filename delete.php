@@ -20,6 +20,9 @@
 			case 'a':
 				$table="assets";
 				$page="assets.php";
+				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
+				$activity_input['item_id']=$_GET['id'];
+				$con->myQuery("INSERT INTO activities(admin_id,action,action_date,category_type_id,item_id) VALUES(:admin_id,'Deleted Asset',NOW(),1,:item_id)",$activity_input);
 				break;
 			case 'am':
 				$table="asset_models";

@@ -99,8 +99,11 @@
 				{
 					$asset_inputs['location_id']=$location_id;
 				}
-
-				$con->myQuery("UPDATE assets SET user_id=0,asset_name=:asset_name,check_out_date='0000-00-00',expected_check_in_date='0000-00-00',location_id=:location_id WHERE id=:id",$asset_inputs);
+				// var_dump($_POST);
+				// var_dump($asset_inputs);
+				$asset_inputs['asset_status_id']=$_POST['asset_status_id'];
+				// die;
+				$con->myQuery("UPDATE assets SET asset_status_id=:asset_status_id,user_id=0,asset_name=:asset_name,check_out_date='0000-00-00',expected_check_in_date='0000-00-00',location_id=:location_id WHERE id=:id",$asset_inputs);
 
 				$activity_input['admin_id']=$_SESSION[WEBAPP]['user']['id'];
 				$activity_input['user_id']="NULL";
@@ -109,7 +112,7 @@
 				$activity_input['item_id']=$inputs['id'];
 
 				// echo "INSERT INTO activities(admin_id,user_id,action,notes,action_date,category_type_id,item_id) VALUES({$activity_input['admin_id']},{$activity_input['user_id']},'Asset Checkin',{$activity_input['notes']},NOW(),{$activity_input['category_type_id']},{$activity_input['item_id']})";
-
+				// die;
 				$con->myQuery("INSERT INTO activities(admin_id,user_id,action,notes,action_date,category_type_id,item_id) VALUES(:admin_id,:user_id,'Asset Checkin',:notes,NOW(),:category_type_id,:item_id)",$activity_input);
 				
 				#end of transaction 

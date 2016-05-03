@@ -13,11 +13,16 @@
 	if(!empty($_POST)){
 		//Validate form inputs
 		$inputs=$_POST;
+		$inputs=array_map("trim", $inputs);
 
 		$errors="";
 		
 		if (empty($inputs['model_name'])){
 			$errors.="Enter Model Name. <br/>";
+		}
+
+		if (empty($inputs['model_no'])){
+			$errors.="Enter Model Number. <br/>";
 		}
 
 		if (empty($inputs['manufacturer_id'])){
@@ -32,8 +37,18 @@
 			$errors.="Select a Depreciation. <br/>";
 		}
 
+		if (empty($inputs['EOL']) || $inputs['EOL']=="mm/dd/yyyy"){
+			$errors.="Enter End of Life. <br/>";
+		}
+		else{
+			$inputs['EOL']=format_date($inputs['EOL']);
+		}
+		// var_dump($inputs);
+		// die;
 		if($errors!=""){
-
+			$_SESSION[WEBAPP]['frm_inputs']=$inputs;
+			$_SESSION[WEBAPP]['frm_inputs']['name']=$inputs['model_name'];
+			unset($_SESSION[WEBAPP]['frm_inputs']['model_name']);
 			Alert("You have the following errors: <br/>".$errors,"danger");
 			if(empty($inputs['id'])){
 				redirect("frm_asset_models.php");

@@ -21,27 +21,33 @@
                     						
 	makeHead("Users");
 ?>
-<div id='wrapper'>
 <?php
-	 require_once 'template/navbar.php';
+	require_once("template/header.php");
+	require_once("template/sidebar.php");
 ?>
-</div>
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="page-header"><?php echo htmlspecialchars($asset['name'])?></h3>
+<div class='content-wrapper'>
+    <section class='content'>
+        <div class="row">
+            <div class="col-lg-12">
+                    <h3 class="page-header text-center text-green"><?php echo htmlspecialchars($asset['name'])?></h3>
                 </div>
-
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            <div class="row">
                 <div class='col-lg-12'>
                     <?php
                         Alert();
                     ?>    
                     <div class='row'>
-                    	<div class='col-md-9'>          
+                            <div class='col-md-12'>
+                            <?php
+                                if($_SESSION[WEBAPP]['user']['id']==$asset['id']):
+                            ?>
+                            <div class='row'>
+                                <div class='col-md-12'>
+                                <a href='change_secret_password.php' class='btn btn-success btn-flat'>Change Secret Password</a>
+                                </div>
+                            </div>
+                            <?php
+                                endif;
+                            ?>
                             <div class='row'>
                                 <div class='col-xs-12'>
                                     <strong>Employee Number: </strong>
@@ -77,33 +83,31 @@
                                     </br></br>
                                     <!--FOR CONSUMABLES-->
                                     <h4>Consumables</h4>
-                                    <table class='table table-bordered table-condensed '>
+                                    <table class='table table-bordered table-condensed ' id='consumables'>
                                         <thead>
                                             <tr>    
-                                                <td>Name</td>
                                                 <td>Date</td>
+                                                <td>Name</td>
                                                 <td>Actions</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $consumables=$con->myQuery("SELECT NAME,action_date,ACTION FROM vw_user WHERE category_type_id=2 AND user_id=?",array($_GET['id']))->fetchAll(PDO::FETCH_ASSOC);
+                                            $consumables=$con->myQuery("SELECT NAME,DATE_FORMAT(action_date,'%m/%d/%Y')as action_date,ACTION FROM vw_user WHERE category_type_id=2 AND user_id=? ORDER BY action_date DESC",array($_GET['id']))->fetchAll(PDO::FETCH_ASSOC);
                                                if(!empty($consumables)):
 
                                                     foreach ($consumables as $consumable):
                                             ?>
                                                     <tr>
-                                                        <td><?php echo $consumable['NAME']?></td>
                                                         <td><?php echo $consumable['action_date']?></td>
+                                                        <td><?php echo $consumable['NAME']?></td>
                                                         <td><?php echo $consumable['ACTION']?></td>
                                                     </tr>
                                             <?php
                                                     endforeach;
                                                 else:
                                             ?>
-                                                <tr>
-                                                    <td colspan='5'>No Results.</td>
-                                                </tr>
+                                                
                                             <?php
                                                 endif;
                                             ?>
@@ -115,33 +119,31 @@
                                     </br>
                                     <!--FOR ASSETS-->
                                     <h4>Assets</h4>
-                                    <table class='table table-bordered table-condensed '>
+                                    <table class='table table-bordered table-condensed ' id='assets'>
                                         <thead>
                                             <tr>    
-                                                <td>Name</td>
                                                 <td>Date</td>
+                                                <td>Name</td>
                                                 <td>Actions</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $consumables=$con->myQuery("SELECT NAME,action_date,ACTION FROM vw_asset WHERE category_type_id=1 AND user_id=?",array($_GET['id']))->fetchAll(PDO::FETCH_ASSOC);
+                                            $consumables=$con->myQuery("SELECT NAME,DATE_FORMAT(action_date,'%m/%d/%Y')as action_date,ACTION FROM vw_asset WHERE category_type_id=1 AND user_id=? ORDER BY action_date DESC",array($_GET['id']))->fetchAll(PDO::FETCH_ASSOC);
                                                if(!empty($consumables)):
 
                                                     foreach ($consumables as $consumable):
                                             ?>
                                                     <tr>
-                                                        <td><?php echo $consumable['NAME']?></td>
                                                         <td><?php echo $consumable['action_date']?></td>
+                                                        <td><?php echo $consumable['NAME']?></td>
                                                         <td><?php echo $consumable['ACTION']?></td>
                                                     </tr>
                                             <?php
                                                     endforeach;
                                                 else:
                                             ?>
-                                                <tr>
-                                                    <td colspan='5'>No Results.</td>
-                                                </tr>
+                                                
                                             <?php
                                                 endif;
                                             ?>
@@ -152,16 +154,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class='col-md-3'></div>
+                        
+
                     </div>
 
                 </div>
             </div>
-            <!-- /.row -->
+    </section>
 </div>
+
 <?php
 Modal();
 ?>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#assets").DataTable({
+            "scrollX":"true"
+        });
+        $("#consumables").DataTable({
+               "scrollX":"true"
+        });
+    });
+</script>
 <?php
 	makeFoot();
 ?>

@@ -48,41 +48,14 @@ $code->addLabel($labe);
 // $code->parse('4124');
 
 }catch(Exception $exception){
-	var_dump($exception);
+//	var_dump($exception);
 }
 $drawing = new BCGDrawing('', $colorBack);
 //$drawing->setFilename('./test.png');
 $drawing->setBarcode($code);
 $drawing->draw();
 header('Content-Disposition: attachment; filename="'.$asset['asset_tag'].'.png"');
+// header('Content-Type: image/png');
 $drawing->finish(BCGDrawing::IMG_FORMAT_PNG);
 
 die();
-$stmt=$con->prepare("SELECT code,name FROM employees WHERE code=?");
-$stmt->execute(array($_GET['code']));
-$employee=$stmt->fetch(PDO::FETCH_ASSOC);
-
-
-
-
-die;
-
-$emp_codes=array('11506025','19810002','11404011','11105007','10907001','19411001','11302006');
-$count=0;
-
-foreach($emp_codes as $number){
-$code = new BCGcode39(); // Or another class name from the manual
-$code->setScale(2); // Resolution
-$code->setThickness(30); // Thickness
-$code->setForegroundColor($colorFont); // Color of bars
-$code->setBackgroundColor($colorBack); // Color of spaces
-$code->setFont($font); // Font (or 0)
-$code->parse($number);
-$drawing = new BCGDrawing('', $colorBack);
-//$drawing->setFilename($count.'.png');
-$drawing->setBarcode($code);
-$drawing->draw();
-
-$drawing->finish(BCGDrawing::IMG_FORMAT_PNG);
-$count++;
-}

@@ -9,21 +9,21 @@
     }
 	makeHead("Assets");
 ?>
-<div id='wrapper'>
 <?php
-	 require_once 'template/navbar.php';
+	 require_once("template/header.php");
+	require_once("template/sidebar.php");
 ?>
-</div>
 
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Deleted Assets</h1>
-                </div>
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1 class='page-header text-center text-green'>
+            Deleted Assets
+          </h1>
+        </section>
 
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
+        <!-- Main content -->
+        <section class="content">
             <div class="row">
                 <div class='col-lg-12'>
                     <?php
@@ -118,12 +118,13 @@
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
-</div>
+        </section><!-- /.content -->
+  </div>
+
 <script>
     $(document).ready(function() {
         $('#dataTables').DataTable({
-                 "scrollY": true,
+                 "scrollY":"400px",
                 "scrollX": true
         });
     });

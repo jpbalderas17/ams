@@ -12,7 +12,7 @@
 	if(!empty($_POST)){
 		//Validate form inputs
 		$inputs=$_POST;
-		
+		$inputs=array_map("trim", $inputs);
 		$errors="";
 		if (empty($inputs['asset_id'])){
 			$errors.="Select an asset. <br/>";
@@ -24,12 +24,23 @@
 		if (empty($inputs['title'])){
 			$errors.="Enter maintenance title. <br/>";
 		}
-		if (empty($inputs['start_date'])){
+		if (empty($inputs['start_date']) || $inputs['start_date']=="mm/dd/yyyy"){
 			$errors.="Select start date. <br/>";
 		}
+		else{
+			$inputs['start_date']=format_date($inputs['start_date']);
+		}
 
+		if(!empty($inputs['completion_date']) && $inputs['completion_date']!='mm/dd/yyyy'){
+			$inputs['completion_date']=format_date($inputs['completion_date']);
+		}
+// var_dump($inputs);
+// die;
 
 		if($errors!=""){
+			$_SESSION[WEBAPP]['frm_inputs']=$inputs;
+			// $_SESSION[WEBAPP]['frm_inputs']['asset_model_id']=$inputs['model_id'];
+			// unset($_SESSION[WEBAPP]['frm_inputs']['model_id']);
 
 			Alert("You have the following errors: <br/>".$errors,"danger");
 			if(empty($inputs['id'])){

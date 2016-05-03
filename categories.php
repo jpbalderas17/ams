@@ -9,21 +9,20 @@
     }
 	makeHead("Categories");
 ?>
-<div id='wrapper'>
 <?php
-	 require_once 'template/navbar.php';
+	 require_once("template/header.php");
+	require_once("template/sidebar.php");
 ?>
-</div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1 class='page-header text-center text-green'>
+            Categories
+          </h1>
+        </section>
 
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"> Categories</h1>
-                </div>
-
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
+        <!-- Main content -->
+        <section class="content">
             <div class="row">
                 <div class='col-lg-12'>
                     <?php
@@ -31,7 +30,7 @@
                     ?>
                     <div class='row'>
                         <div class='col-sm-12'>
-                                <a href='frm_categories.php' class='btn btn-success pull-right'> <span class='fa fa-plus'></span> Create New</a>
+                                <a href='frm_categories.php' class='btn btn-success btn-flat pull-right'> <span class='fa fa-plus'></span> Create New</a>
                         </div>
                     </div>
                     <br/>    
@@ -46,7 +45,7 @@
                                             <th>Category Name</th>
                                             <th>Type</th>
                                             <th>Assets</th>
-                                            <th>Actions</th>
+                                            <th style='max-width: 60px;width:60px'>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -71,8 +70,8 @@
                                                     ?>
                                                 </td>
                                                 <td>
-                                                    <a class='btn btn-sm btn-warning' href='frm_categories.php?id=<?php echo $category['id'];?>'><span class='fa fa-pencil'></span></a>
-                                                    <a class='btn btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=c' onclick='return confirm("This category will be deleted.")'><span class='fa fa-trash'></span></a>
+                                                    <a class='btn btn-flat btn-sm btn-success' href='frm_categories.php?id=<?php echo $category['id'];?>' ><span class='fa fa-pencil'></span></a>
+                                                    <a class='btn btn-flat btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=c' onclick='return confirm("This category will be deleted.")'><span class='fa fa-trash'></span></a>
                                                 </td>
                                             </tr>
                                         <?php
@@ -85,13 +84,18 @@
                     </div>
                 </div>
             </div>
-            <!-- /.row -->
-</div>
+        </section><!-- /.content -->
+  </div>
+
+
 <script>
     $(document).ready(function() {
         $('#dataTables').DataTable({
-                 "scrollY": true,
+                "scrollY":"400px",
                  "scrollX": true,
+                 "language": {
+                    "zeroRecords": "Cagegories not found"
+                }
         });
     });
     </script>

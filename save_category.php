@@ -13,7 +13,7 @@
 	if(!empty($_POST)){
 		//Validate form inputs
 		$inputs=$_POST;
-
+		$inputs=array_map('trim', $inputs);
 		$errors="";
 		if (empty($inputs['category_type_id'])){
 			$errors.="Select a category type. <br/>";

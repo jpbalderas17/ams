@@ -13,6 +13,7 @@ if(!AllowUser(array(1,2))){
 		//Validate form inputs
 		$inputs=$_POST;
 
+		$inputs=array_map('trim', $inputs);
 		$errors="";
 		if (empty($inputs['model_id'])){
 			$errors.="Select a model. <br/>";
@@ -21,18 +22,35 @@ if(!AllowUser(array(1,2))){
 			$errors.="Select a status for the asset. <br/>";
 		}
 
+		if (empty($inputs['serial_number'])){
+			$errors.="Enter serial number for the asset. <br/>";
+		}
+
+		if (empty($inputs['asset_name'])){
+			$errors.="Enter asset name. <br/>";
+		}
+
+		if (empty($inputs['order_number'])){
+			$errors.="Enter order number. <br/>";
+		}
+
 		if( empty($inputs['purchase_cost'])){
 			$inputs['purchase_cost']=0;
 		}
-		if( empty($inputs['purchase_date'])){
+		if( empty($inputs['purchase_date']) || $inputs['purchase_date']=="mm/dd/yyyy"){
 			$errors.="Select a purchase date for the asset. <br/>";
+		}
+		else{
+			$inputs['purchase_date']=format_date($inputs['purchase_date']);
 		}
 		if( empty($inputs['location_id'])){
 			$errors.="Select a location. <br/>";
 		}
 
-
 		if($errors!=""){
+			$_SESSION[WEBAPP]['frm_inputs']=$inputs;
+			$_SESSION[WEBAPP]['frm_inputs']['asset_model_id']=$inputs['model_id'];
+			unset($_SESSION[WEBAPP]['frm_inputs']['model_id']);
 
 			Alert("You have the following errors: <br/>".$errors,"danger");
 			if(empty($inputs['id'])){
