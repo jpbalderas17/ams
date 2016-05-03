@@ -3,9 +3,13 @@
         <section class="sidebar">
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
+            <li class="<?php echo (substr($_SERVER['PHP_SELF'],strrpos($_SERVER['PHP_SELF'], "/")+1))=="frm_change_pass.php"?"active":"";?>">
+              <a href="frm_change_pass.php">
+                <i class="fa fa-key"></i> <span>Change Password</span>
+              </a>
+            </li>
             <li class="<?php echo (substr($_SERVER['PHP_SELF'],strrpos($_SERVER['PHP_SELF'], "/")+1))=="index.php"?"active":"";?>">
               <a href="index.php">
-              
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
