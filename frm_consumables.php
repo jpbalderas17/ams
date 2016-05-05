@@ -24,6 +24,7 @@
             $old_asset=$asset;
         }
         $asset=$_SESSION[WEBAPP]['frm_inputs'];
+        $asset['category_id']=$asset['category_type'];
         if(!empty($old_asset)){
             $asset['id']=$old_asset['id'];
         }
@@ -60,7 +61,7 @@
                             <div class='form-group'>
                                 <label class='col-sm-12 col-md-3 control-label'> Order Number*</label>
                                 <div class='col-sm-12 col-md-9'>
-                                    <input type='text' class='form-control' placeholder='Enter Order Number' name='order_number' value='<?php echo !empty($asset)?$asset['order_number']:"" ?>' required>
+                                    <input type='text' class='form-control numeric' placeholder='Enter Order Number' name='order_number' value='<?php echo !empty($asset)?$asset['order_number']:"" ?>' required>
                                 </div>
                             </div>
                             <div class='form-group'>

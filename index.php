@@ -178,10 +178,9 @@
 
             ?>
             <div class='row'>
-                        <div class='col-md-9'>          
-                          <div class='box box-primary'>
-                            <div class='box-body'>
-                            <div class='row'>
+                        <div class='col-md-12'>          
+                         
+                         <div class='row'>
                                 <div class='col-md-12'>
                                 <a href='change_secret_password.php' class='btn btn-success btn-flat'>Change Secret Password</a>
                                 </div>
@@ -293,13 +292,9 @@
 
 
                                 </div>
-                            </div>
-                            </div>
-                            
-                          </div>
-                            
+                            </div>   
                         </div>
-                        <div class='col-md-3'></div>
+                        
                     </div>
             <?php
                 endif;
@@ -308,5 +303,6 @@
   </div>
 
 <?php
+    Modal();
 	makeFoot();
 ?>

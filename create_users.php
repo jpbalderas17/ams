@@ -42,13 +42,23 @@ if(!AllowUser(array(1))){
 				$errors.="One character<br>";
 				$errors.="One Uppercase character<br>";
 				$errors.="One Special Character<br>";
+				$inputs['password']=encryptIt($inputs['password']);
 			}
+			unset($is_valid);
 			// var_dump($is_valid);
 		}
 		// die;
 		if (empty($inputs['email'])){
 			$errors.="Enter email address. <br/>";
 		}
+		else{
+			if (!filter_var($inputs['email'], FILTER_VALIDATE_EMAIL)) {
+			    // invalid emailaddress
+				$errors.="Invalid email adress.<br/>";
+				// die('error');
+			}
+		}
+		// die;
 		if (empty($inputs['employee_no'])){
 			$errors.="Enter employee number. <br/>";
 		}

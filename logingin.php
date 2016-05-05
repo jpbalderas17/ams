@@ -1,5 +1,7 @@
 <?php
 	require_once 'support/config.php';
+	// var_dump($_POST);
+	// die;
 	if(!empty($_POST)){
 
 		$user=$con->myQuery("SELECT first_name,middle_name,last_name,id,location_id,user_type_id as user_type,location_id,is_login,is_active,password_question  FROM users WHERE BINARY username=? AND BINARY password=? AND is_deleted=0",array($_POST['username'],encryptIt($_POST['password'])))->fetch(PDO::FETCH_ASSOC);

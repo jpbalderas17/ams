@@ -18,7 +18,7 @@
         <form action="logingin.php" method="post">
           <div class="form-group has-feedback">
             <span class="glyphicon glyphicon-user form-control-feedback" style='left:0px'></span>
-            <input type="text" class="form-control" placeholder="Username" name='username' autofocus="" style="padding-left: 42.5px;padding-right: 0px" required="">
+            <input type="text" class="form-control " placeholder="Username" name='username' autofocus="" style="padding-left: 42.5px;padding-right: 0px" required="">
           </div>
           <div class="form-group has-feedback">
             <input type="password" class="form-control" placeholder="Password" name='password' style="padding-left: 42.5px;padding-right: 0px" required="">

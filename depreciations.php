@@ -49,7 +49,7 @@
                                     </div>
                                     <div class='col-md-2'>
                                         
-                                        <a href='depreciations.php' class='btn btn-flat btn-default'>Cancel</a>
+                                        <a href='depreciations.php' class='btn btn-flat btn-default' onclick='return confirm("<?php echo !empty($department)?"Are you sure you want to cancel modification of this depreciation?":"Are you sure you want to cancel creation of the new depreciation?"?>")'>Cancel</a>
                                         <button type='submit' class='btn btn-flat btn-success'> <span class='fa fa-check'></span> Save</button>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                                                 <td><?php echo htmlspecialchars($category['name'])?></td>
                                                 <td><?php echo htmlspecialchars($category['terms'])?></td>
                                                 <td>
-                                                    <a class='btn btn-flat btn-sm btn-success' href='depreciations.php?id=<?php echo $category['id'];?>'><span class='fa fa-pencil'></span></a>
+                                                    <a class='btn btn-flat btn-sm btn-success' href='depreciations.php?id=<?php echo $category['id'];?>' ><span class='fa fa-pencil'></span></a>
                                                     <a class='btn btn-flat btn-sm btn-danger' href='delete.php?id=<?php echo $category['id']?>&t=depr' onclick='return confirm("Are you sure you want to delete this depreciation?")'><span class='fa fa-trash'></span></a>
                                                 </td>
                                             </tr>

@@ -54,7 +54,7 @@
 			$inputs['password']=encryptIt($inputs['password']);
 			//var_dump($inputs);
 			//die();
-			$con->myQuery("UPDATE users SET password=? WHERE employee_id=? ",array($inputs['password'],$_SESSION[WEBAPP]['user']['id']));
+			$con->myQuery("UPDATE users SET password=? WHERE id=? ",array($inputs['password'],$_SESSION[WEBAPP]['user']['id']));
 
 			// die;
 			Alert("Save succesful","success");

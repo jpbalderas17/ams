@@ -26,9 +26,43 @@
 			if(empty($inputs['checkout_date']) || $inputs['checkout_date']=="mm/dd/yyyy" ){
 				$error_msg.="Select checkout date.<br/>";
 			}
+			else{
+				try {
+					$checkout_date=format_date($inputs['checkout_date']);
+					
+				} catch (Exception $e) {
+					$error_msg.="Invalid checkout date entered.<br/>";
+				}
+				if(!empty($checkout_date)){
+					$inputs['checkout_date']=$checkout_date;
+				}
+				else{
+					$inputs['checkout_date']="";
+				}
+				// die;
+			}
 
+			if(!empty($inputs['expected_checkin_date']) ){
+				// var_dump($inputs['expected_checkin_date']);
+				try {
+					$expected_checkin_date=format_date($inputs['expected_checkin_date']);
+					
+				} catch (Exception $e) {
+					$error_msg.="Invalid expected check in date entered.<br/>";
+				}
+				if(!empty($expected_checkin_date)){
+					$inputs['expected_checkin_date']=$expected_checkin_date;
+				}
+				else{
+					$inputs['expected_checkin_date']="";
+				}
+			}
 
+			// var_dump($inputs);
+			// var_dump($error_msg);
+			// die;
 			if(!empty($error_msg)){
+				$_SESSION[WEBAPP]['frm_inputs']=$inputs;
 				Alert("You have the following errors: <br/>".$error_msg,"danger");
 				redirect("check_asset.php?id=".$inputs['id']."&type=".$inputs['type']);
 				die;

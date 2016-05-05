@@ -41,7 +41,19 @@ if(!AllowUser(array(1,2))){
 			$errors.="Select a purchase date for the asset. <br/>";
 		}
 		else{
-			$inputs['purchase_date']=format_date($inputs['purchase_date']);
+			try {
+				$purchase_date=format_date($inputs['purchase_date']);
+				
+			} catch (Exception $e) {
+				$errors.="Invalid purchase date entered.";
+			}
+			if(!empty($purchase_date)){
+				$inputs['purchase_date']=$purchase_date;
+			}
+			else{
+				$inputs['purchase_date']="";
+			}
+			// die;
 		}
 		if( empty($inputs['location_id'])){
 			$errors.="Select a location. <br/>";

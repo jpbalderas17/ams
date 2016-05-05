@@ -81,17 +81,24 @@ endif;
         $(".date_picker").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
         // $(".currency").inputmask("numeric", {"allowPlus":false,"allowMinus":false,"decimalProtect":false});
         $(".currency").inputmask("currency");
+        $('.numeric').inputmask('Regex', { 
+            regex: "^[0-9]+"
+        });
         $(".unsigned_integer").inputmask("unsigned_integer");
 
         $('.date_picker').datepicker();  
 
         //Time picker
-        $('.time_picker').timepicker();  
+        $('.time_picker').timepicker({minuteStep:1});  
     	//Date range picker
         $('.date_range').daterangepicker();
         //Date range picker with time picker
         $('.date_time_range').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
     	});
+
+        $(".bootstrap-timepicker-hour").addClass("numeric");
+        $(".bootstrap-timepicker-minute").addClass("numeric");
+        
 
         $('.date_time_picker').datetimepicker();
         $('.date_time_picker').each(function(index,element){

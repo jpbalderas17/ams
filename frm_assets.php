@@ -8,6 +8,7 @@
         redirect("index.php");
     }
 
+
     if(!empty($_GET['id'])){
         $asset=$con->myQuery("SELECT id,asset_model_id,asset_status_id,asset_tag,serial_number,asset_name,purchase_date,purchase_cost,order_number,notes,location_id,image FROM assets WHERE id=?",array($_GET['id']))->fetch(PDO::FETCH_ASSOC);
         if(empty($asset)){
@@ -135,7 +136,7 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Order Number*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <input type='text' class='form-control' placeholder='Enter Order Number' name='order_number' value='<?php echo !empty($asset)?$asset['order_number']:"" ?>' required>
+                                        <input type='text' class='form-control numeric' placeholder='Enter Order Number' name='order_number' value='<?php echo !empty($asset)?$asset['order_number']:"" ?>' required>
                                     </div>
                                 </div>
                                 <div class='form-group'>

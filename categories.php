@@ -93,7 +93,7 @@
         $('#dataTables').DataTable({
                 "scrollY":"400px",
                  "language": {
-                    "zeroRecords": "Cagegories not found"
+                    "zeroRecords": "Categories not found"
                 }
         });
     });

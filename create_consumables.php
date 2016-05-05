@@ -33,7 +33,18 @@ if(!AllowUser(array(1,2))){
 			$errors.="Provide Purchase Date. <br/>";
 		}
 		else{
-			$inputs['purchase_date']=format_date($inputs['purchase_date']);
+			try {
+				$purchase_date=format_date($inputs['purchase_date']);
+				
+			} catch (Exception $e) {
+				$errors.="Invalid purchase date entered.";
+			}
+			if(!empty($purchase_date)){
+				$inputs['purchase_date']=$purchase_date;
+			}
+			else{
+				$inputs['purchase_date']="";
+			}
 		}
 		if (empty($inputs['purchase_cost'])){
 			$errors.="Enter purchase cost. <br/>";

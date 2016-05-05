@@ -40,6 +40,10 @@
         }
     }
 
+    if(!empty($_SESSION[WEBAPP]['frm_inputs'])){
+       $inputs=$_SESSION[WEBAPP]['frm_inputs'];
+       $asset['asset_name']=$inputs['asset_name'];
+    }
 
     $asset_status_labels=$con->myQuery("SELECT id,name FROM asset_status_labels WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
     $users=$con->myQuery("SELECT id,CONCAT(last_name,', ',first_name,' ',middle_name,' (',email,')') as display_name FROM users WHERE is_deleted=0")->fetchAll(PDO::FETCH_ASSOC);
@@ -59,6 +63,7 @@
                 <div class='col-lg-12'>
                     <?php
                         Alert();
+                        // var_dump($_SESSION[WEBAPP]['frm_inputs']);
                     ?>    
                     <div class='col-sm-12 col-md-8 col-md-offset-2'>
                             <form class='form-horizontal' method='POST' action='move_asset.php' enctype="multipart/form-data">
@@ -88,7 +93,7 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Checkout To*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control select2' name='user_id' data-placeholder="Select User" required>
+                                        <select class='form-control select2' name='user_id' data-placeholder="Select User" <?php echo !(empty($inputs))?"data-selected='".$inputs['user_id']."'":NULL ?> required>
                                             <?php
                                                 echo makeOptions($users);
                                             ?>
@@ -98,13 +103,13 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Checkout Date*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <input type='text' name='checkout_date' id='checkout_date' class='form-control date_picker' value='<?php echo date("Y-m-d") ?>' required>
+                                        <input type='text' name='checkout_date' id='checkout_date' class='form-control date_picker' value='<?php echo !empty($inputs)?inputmask_format_date($inputs['checkout_date']):date("m/d/Y") ?>' required>
                                     </div>
                                 </div>
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Expected Checkin Date</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <input type='text' name='expected_checkin_date' id='expected_checkin_date' class='form-control date_picker' value=''>
+                                        <input type='text' name='expected_checkin_date' id='expected_checkin_date' class='form-control date_picker' value='<?php echo !empty($inputs)?$inputs['expected_checkin_date']:"" ?>'>
                                     </div>
                                 </div>
                                 <?php
@@ -113,7 +118,7 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Status*</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <select class='form-control select2' name='asset_status_id' data-placeholder="Select Asset Status" <?php echo !(empty($asset))?"data-selected='".$asset['asset_status_id']."'":NULL ?> required>
+                                        <select class='form-control select2' name='asset_status_id' data-placeholder="Select Asset Status" <?php echo !(empty($inputs))?"data-selected='".$inputs['asset_status_id']."'":NULL ?> required>
                                             <?php
                                                 echo makeOptions($asset_status_labels);
                                             ?>
@@ -126,7 +131,7 @@
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Notes</label>
                                     <div class='col-sm-12 col-md-9'>
-                                        <textarea class='form-control' name='notes' value='<?php echo !empty($asset)?$asset['notes']:"" ?>'></textarea>
+                                        <textarea class='form-control' name='notes' value='<?php echo !empty($inputs)?$inputs['notes']:"" ?>'></textarea>
                                     </div>
                                 </div>
                                 <div class='form-group'>
@@ -143,19 +148,13 @@
             </div>
     </section>
 </div>
-<div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"></h1>
-                </div>
 
-                <!-- /.col-lg-12 -->
-            </div>
-            <!-- /.row -->
-            
-            <!-- /.row -->
-</div>
 <?php
+// var_dump($asset);
+// die;
+if(!empty($_SESSION[WEBAPP]['frm_inputs'])){
+    // unset($_SESSION[WEBAPP]['frm_inputs']);
+}
 Modal();
 ?>
 <?php
