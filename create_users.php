@@ -42,8 +42,8 @@ if(!AllowUser(array(1))){
 				$errors.="One character<br>";
 				$errors.="One Uppercase character<br>";
 				$errors.="One Special Character<br>";
-				$inputs['password']=encryptIt($inputs['password']);
 			}
+			
 			unset($is_valid);
 			// var_dump($is_valid);
 		}
@@ -95,7 +95,7 @@ if(!AllowUser(array(1))){
 		}
 
 		if($errors!=""){
-
+			$inputs['password']=encryptIt($inputs['password']);
 			$_SESSION[WEBAPP]['frm_inputs']=$inputs;
 
 			Alert("You have the following errors: <br/>".$errors,"danger");

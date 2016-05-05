@@ -97,6 +97,7 @@ if(!AllowUser(array(1))){
                                 <div class='form-group'>
                                     <label class='col-sm-12 col-md-3 control-label'> Email Address*</label>
                                     <div class='col-sm-12 col-md-9'>
+
                                         <input type='email' class='form-control' placeholder='Enter Email Address' name='email' value='<?php echo !empty($asset)?$asset['email']:"" ?>' required>
                                     </div>
                                 </div>
